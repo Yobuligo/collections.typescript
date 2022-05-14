@@ -10,7 +10,7 @@ export class MutableCollection<T>
     this._size++;
   }
 
-  addAll(elements: T[]): void {
+  addAll(...elements: T[]): void {
     this.elements.push(...elements);
     this._size += elements.length;
   }

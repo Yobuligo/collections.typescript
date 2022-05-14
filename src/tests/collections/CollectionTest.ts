@@ -1,7 +1,7 @@
 import { assert, expect } from "chai";
-import { Collection } from "../src/collections/Collection";
-import { IndexOutOfBoundsException } from "../src/exceptions/IndexOutOfBoundsException";
-import { NoSuchElementException } from "../src/exceptions/NoSuchElementException";
+import { Collection } from "../../main/collections/Collection";
+import { IndexOutOfBoundsException } from "../../main/exceptions/IndexOutOfBoundsException";
+import { NoSuchElementException } from "../../main/exceptions/NoSuchElementException";
 
 describe("Collection", () => {
   it("Size empty list", () => {

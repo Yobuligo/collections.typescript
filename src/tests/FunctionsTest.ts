@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { listOf } from "../src/Functions";
+import { listOf } from "../main/Functions";
 
 describe("Function", () => {
   it("listOf empty", () => {

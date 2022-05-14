@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var chai_1 = require("chai");
-var Collection_1 = require("../src/collections/Collection");
-var IndexOutOfBoundsException_1 = require("../src/exceptions/IndexOutOfBoundsException");
-var NoSuchElementException_1 = require("../src/exceptions/NoSuchElementException");
+var Collection_1 = require("../../main/collections/Collection");
+var IndexOutOfBoundsException_1 = require("../../main/exceptions/IndexOutOfBoundsException");
+var NoSuchElementException_1 = require("../../main/exceptions/NoSuchElementException");
 describe("Collection", function () {
     it("Size empty list", function () {
         (0, chai_1.expect)(new Collection_1.Collection().size).equals(0);
