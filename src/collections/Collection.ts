@@ -1,9 +1,8 @@
 import { IndexOutOfBoundsException } from "../exceptions/IndexOutOfBoundsException";
 import { NoSuchElementException } from "../exceptions/NoSuchElementException";
-import { TIndex } from "../Types";
 import { ICollection } from "./ICollection";
 
-export class Collection<T> implements ICollection<T> {
+export class Collection<T> implements ICollection<T, number> {
   protected _size: number;
   protected elements: T[] = [];
   readonly lastIndex: number;
@@ -39,7 +38,7 @@ export class Collection<T> implements ICollection<T> {
     return true;
   }
 
-  elementAt(index: TIndex): T {
+  elementAt(index: number): T {
     if (this.isEmpty() || this.elements[index] === undefined) {
       throw new IndexOutOfBoundsException(
         `Empty list does not contain element at index ${index}`
@@ -48,14 +47,14 @@ export class Collection<T> implements ICollection<T> {
     return this.elements[index];
   }
 
-  elementAtOrNull(index: number): T | null {
+  elementAtOrNull(index: number): T {
     if (this.isEmpty() || this.elements[index] === undefined) {
       return null;
     }
     return this.elements[index];
   }
 
-  filter(block: (element: T) => boolean): ICollection<T> {
+  filter(block: (element: T) => boolean): ICollection<T, number> {
     let resultList: T[] = [];
     for (const object of this.elements) {
       if (block(object)) {
@@ -65,7 +64,7 @@ export class Collection<T> implements ICollection<T> {
     return new Collection(...resultList);
   }
 
-  find(block: (element: T) => boolean): T | null {
+  find(block: (element: T) => boolean): T {
     for (const object of this.elements) {
       if (block(object)) {
         return object;
@@ -81,7 +80,7 @@ export class Collection<T> implements ICollection<T> {
     return this.elements[0];
   }
 
-  firstOrNull(): T | null {
+  firstOrNull(): T {
     if (this.isEmpty()) {
       return null;
     } else {
@@ -89,7 +88,7 @@ export class Collection<T> implements ICollection<T> {
     }
   }
 
-  forEach(block: (element: T) => any | null): T | null {
+  forEach(block: (element: T) => any): T {
     for (const object of this.elements) {
       const result = block(object);
       if (result != null) {
@@ -126,14 +125,14 @@ export class Collection<T> implements ICollection<T> {
     return this.elements[this.elements.length - 1];
   }
 
-  lastOrNull(): T | null {
+  lastOrNull(): T {
     if (this.isEmpty()) {
       return null;
     }
     return this.elements[this.elements.length - 1];
   }
 
-  map<R>(block: (element: T) => R): ICollection<R> {
+  map<R>(block: (element: T) => R): ICollection<R, number> {
     let mappedElements = [];
     for (const object of this.elements) {
       const mappedElement = block(object);

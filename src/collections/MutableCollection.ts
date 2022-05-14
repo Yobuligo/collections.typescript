@@ -3,7 +3,7 @@ import { IMutableCollection } from "./IMutableCollection";
 
 export class MutableCollection<T>
   extends Collection<T>
-  implements IMutableCollection<T>
+  implements IMutableCollection<T, number>
 {
   add(element: T): void {
     this.elements.push(element);
@@ -32,14 +32,18 @@ export class MutableCollection<T>
   }
 
   removeAll(): void {
-    throw new Error("Method not implemented.");
+    this.elements.splice(0);
+    this._size = 0;
   }
 
   removeFirst(): void {
-    throw new Error("Method not implemented.");
+    this.removeAt(1);
   }
 
   removeLast(): void {
-    throw new Error("Method not implemented.");
+    if (this.isEmpty()) {
+      return;
+    }
+    this.removeAt(this.elements.length - 1);
   }
 }
