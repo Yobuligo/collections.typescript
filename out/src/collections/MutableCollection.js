@@ -39,16 +39,24 @@ var MutableCollection = /** @class */ (function (_super) {
         this._size--;
     };
     MutableCollection.prototype.removeAt = function (index) {
-        throw new Error("Method not implemented.");
+        if (this.isEmpty()) {
+            return;
+        }
+        this.elements.splice(index, 1);
+        this._size--;
     };
     MutableCollection.prototype.removeAll = function () {
-        throw new Error("Method not implemented.");
+        this.elements.splice(0);
+        this._size = 0;
     };
     MutableCollection.prototype.removeFirst = function () {
-        throw new Error("Method not implemented.");
+        this.removeAt(1);
     };
     MutableCollection.prototype.removeLast = function () {
-        throw new Error("Method not implemented.");
+        if (this.isEmpty()) {
+            return;
+        }
+        this.removeAt(this.elements.length - 1);
     };
     return MutableCollection;
 }(Collection_1.Collection));

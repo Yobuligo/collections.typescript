@@ -73,5 +73,52 @@ describe("Collection", function () {
     it("elementAtOrNull for out of range element", function () {
         (0, chai_1.expect)(new Collection_1.Collection(1, 2, 3, 4, 5).elementAtOrNull(10)).equals(null);
     });
+    it("filter not null", function () {
+        (0, chai_1.expect)(new Collection_1.Collection(1, 2, 3, 4, 5).filter(function (element) {
+            return element > 1 && element < 5;
+        })).not.null;
+    });
+    it("filter contains correct values", function () {
+        var resultList = new Collection_1.Collection(1, 2, 3, 4, 5).filter(function (element) {
+            return element > 1 && element < 5;
+        });
+        (0, chai_1.expect)(resultList.contains(2)).true;
+        (0, chai_1.expect)(resultList.contains(3)).true;
+        (0, chai_1.expect)(resultList.contains(4)).true;
+    });
+    it("filter contains not incorrect values", function () {
+        var resultList = new Collection_1.Collection(1, 2, 3, 4, 5).filter(function (element) {
+            return element > 1 && element < 5;
+        });
+        (0, chai_1.expect)(resultList.contains(1)).false;
+        (0, chai_1.expect)(resultList.contains(5)).false;
+    });
+    it("filter for empty list returns list", function () {
+        var resultList = new Collection_1.Collection().filter(function (element) {
+            return element > 1 && element < 5;
+        });
+        (0, chai_1.expect)(resultList).not.null;
+    });
+    it("filter for empty list returns empty list", function () {
+        var resultList = new Collection_1.Collection().filter(function (element) {
+            return element > 1 && element < 5;
+        });
+        (0, chai_1.expect)(resultList.size).equals(0);
+    });
+    it("find", function () {
+        (0, chai_1.expect)(new Collection_1.Collection(1, 2, 3, 4, 5).find(function (element) {
+            return element == 3;
+        })).equals(3);
+    });
+    it("find returns null if no result", function () {
+        (0, chai_1.expect)(new Collection_1.Collection(1, 2, 3, 4, 5).find(function (element) {
+            return element == 6;
+        })).null;
+    });
+    it("find for empty list returns null", function () {
+        (0, chai_1.expect)(new Collection_1.Collection().find(function (element) {
+            return element == 5;
+        })).null;
+    });
 });
 //# sourceMappingURL=CollectionTest.js.map
