@@ -9,10 +9,11 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mapOf = exports.mutableListOf = exports.listOf = void 0;
+exports.mutableMapOf = exports.mapOf = exports.mutableListOf = exports.listOf = void 0;
 var List_1 = require("./lists/List");
 var MutableList_1 = require("./lists/MutableList");
 var Map_1 = require("./maps/Map");
+var MutableMap_1 = require("./maps/MutableMap");
 function listOf() {
     var elements = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -37,4 +38,12 @@ function mapOf() {
     return new (Map_1.Map.bind.apply(Map_1.Map, __spreadArray([void 0], elements, false)))();
 }
 exports.mapOf = mapOf;
+function mutableMapOf() {
+    var elements = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        elements[_i] = arguments[_i];
+    }
+    return new (MutableMap_1.MutableMap.bind.apply(MutableMap_1.MutableMap, __spreadArray([void 0], elements, false)))();
+}
+exports.mutableMapOf = mutableMapOf;
 //# sourceMappingURL=Functions.js.map
