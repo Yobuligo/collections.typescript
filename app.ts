@@ -1,4 +1,5 @@
-import { println } from "./core/functions/Println";
+
+import { println } from "./src/main/core/Println";
 import { mutableMapOf } from "./src/main/Functions";
 import { Pair } from "./src/main/Pair";
 
