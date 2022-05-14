@@ -1,3 +1,3 @@
 import { ICollection } from "../collections/ICollection";
 
-export interface IList<T> extends ICollection<T> {}
+export interface IList<T> extends ICollection<T, number> {}
