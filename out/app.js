@@ -19,15 +19,18 @@ var mutableHashMap = (0, Functions_1.mutableHashMapOf)();
         mutableList.contains("1999999");
     });
 }));
+(0, Println_1.println)("Size of mutableList: ".concat(mutableList.size));
 (0, Println_1.println)((0, MeasureTimeMillis_1.measureTimeMillis)(function () {
     (0, Repeat_1.repeat)(times, function () {
         mutableHashSet.contains("1999999");
     });
 }));
+(0, Println_1.println)("Size of mutableHashSet: ".concat(mutableHashSet.size));
 var lastPair = mutableHashMap.last();
 (0, Println_1.println)((0, MeasureTimeMillis_1.measureTimeMillis)(function () {
     (0, Repeat_1.repeat)(times, function () {
         mutableHashMap.contains(lastPair);
     });
 }));
+(0, Println_1.println)("Size of mutableHashMap: ".concat(mutableHashMap.size));
 //# sourceMappingURL=app.js.map

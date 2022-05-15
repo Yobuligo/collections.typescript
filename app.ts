@@ -25,6 +25,7 @@ println(
     });
   })
 );
+println(`Size of mutableList: ${mutableList.size}`);
 
 println(
   measureTimeMillis(() => {
@@ -33,6 +34,7 @@ println(
     });
   })
 );
+println(`Size of mutableHashSet: ${mutableHashSet.size}`);
 
 const lastPair = mutableHashMap.last();
 println(
@@ -42,3 +44,4 @@ println(
     });
   })
 );
+println(`Size of mutableHashMap: ${mutableHashMap.size}`);
