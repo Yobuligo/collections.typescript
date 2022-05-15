@@ -9,6 +9,14 @@ export class HashSet<T> extends List<T> implements IHashSet<T> {
     this.addElements(elements);
   }
 
+  contains(element: T): boolean {
+    if (this.isEmpty() || this.elements[this.getKey(element)] === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   protected addElement(element: T) {
     this.elements[this.getKey(element)] = element;
     this._size++;

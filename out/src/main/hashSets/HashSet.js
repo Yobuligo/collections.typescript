@@ -30,6 +30,14 @@ var HashSet = /** @class */ (function (_super) {
         _this.addElements(elements);
         return _this;
     }
+    HashSet.prototype.contains = function (element) {
+        if (this.isEmpty() || this.elements[this.getKey(element)] === undefined) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
     HashSet.prototype.addElement = function (element) {
         this.elements[this.getKey(element)] = element;
         this._size++;
