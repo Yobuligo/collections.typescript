@@ -9,7 +9,9 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mutableHashSetOf = exports.hashSetOf = exports.mutableMapOf = exports.mapOf = exports.mutableListOf = exports.listOf = exports.hashGenerator = void 0;
+exports.mutableHashMapOf = exports.hashMapOf = exports.mutableHashSetOf = exports.hashSetOf = exports.mutableMapOf = exports.mapOf = exports.mutableListOf = exports.listOf = exports.hashGenerator = void 0;
+var HashMap_1 = require("./hashMaps/HashMap");
+var MutableHashMap_1 = require("./hashMaps/MutableHashMap");
 var HashGenerator_1 = require("./hashSets/HashGenerator");
 var HashSet_1 = require("./hashSets/HashSet");
 var MutableHashSet_1 = require("./hashSets/MutableHashSet");
@@ -66,4 +68,20 @@ function mutableHashSetOf() {
     return new (MutableHashSet_1.MutableHashSet.bind.apply(MutableHashSet_1.MutableHashSet, __spreadArray([void 0], elements, false)))();
 }
 exports.mutableHashSetOf = mutableHashSetOf;
+function hashMapOf() {
+    var elements = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        elements[_i] = arguments[_i];
+    }
+    return new (HashMap_1.HashMap.bind.apply(HashMap_1.HashMap, __spreadArray([void 0], elements, false)))();
+}
+exports.hashMapOf = hashMapOf;
+function mutableHashMapOf() {
+    var elements = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        elements[_i] = arguments[_i];
+    }
+    return new (MutableHashMap_1.MutableHashMap.bind.apply(MutableHashMap_1.MutableHashMap, __spreadArray([void 0], elements, false)))();
+}
+exports.mutableHashMapOf = mutableHashMapOf;
 //# sourceMappingURL=Functions.js.map
