@@ -1,8 +1,9 @@
 import { IndexOutOfBoundsException } from "../exceptions/IndexOutOfBoundsException";
 import { NoSuchElementException } from "../exceptions/NoSuchElementException";
 import { ICollection } from "./ICollection";
+import { TIndex } from "./Type";
 
-export class Collection<T> implements ICollection<T, number> {
+export class Collection<T> implements ICollection<T> {
   protected _size: number;
   protected elements: T[] = [];
   readonly lastIndex: number;
@@ -38,7 +39,7 @@ export class Collection<T> implements ICollection<T, number> {
     return true;
   }
 
-  elementAt(index: number): T {
+  elementAt(index: TIndex): T {
     if (this.isEmpty() || this.elements[index] === undefined) {
       throw new IndexOutOfBoundsException(
         `Empty list does not contain element at index ${index}`
@@ -47,14 +48,14 @@ export class Collection<T> implements ICollection<T, number> {
     return this.elements[index];
   }
 
-  elementAtOrNull(index: number): T {
+  elementAtOrNull(index: TIndex): T {
     if (this.isEmpty() || this.elements[index] === undefined) {
       return null;
     }
     return this.elements[index];
   }
 
-  filter(block: (element: T) => boolean): ICollection<T, number> {
+  filter(block: (element: T) => boolean): ICollection<T> {
     let resultList: T[] = [];
     for (const object of this.elements) {
       if (block(object)) {
@@ -98,7 +99,7 @@ export class Collection<T> implements ICollection<T, number> {
     return null;
   }
 
-  indexOf(element: T): number {
+  indexOf(element: T): TIndex {
     return this.elements.indexOf(element);
   }
 
@@ -132,7 +133,7 @@ export class Collection<T> implements ICollection<T, number> {
     return this.elements[this.elements.length - 1];
   }
 
-  map<R>(block: (element: T) => R): ICollection<R, number> {
+  map<R>(block: (element: T) => R): ICollection<R> {
     let mappedElements = [];
     for (const object of this.elements) {
       const mappedElement = block(object);

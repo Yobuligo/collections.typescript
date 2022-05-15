@@ -1,9 +1,10 @@
 import { Collection } from "./Collection";
 import { IMutableCollection } from "./IMutableCollection";
+import { TIndex } from "./Type";
 
 export class MutableCollection<T>
   extends Collection<T>
-  implements IMutableCollection<T, number>
+  implements IMutableCollection<T>
 {
   add(element: T): void {
     this.elements.push(element);
@@ -19,15 +20,15 @@ export class MutableCollection<T>
     if (this.isEmpty()) {
       return;
     }
-    this.elements.splice(this.indexOf(element), 1);
+    this.elements.splice(this.indexOf(element) as number, 1);
     this._size--;
   }
 
-  removeAt(index: number): void {
+  removeAt(index: TIndex): void {
     if (this.isEmpty()) {
       return;
     }
-    this.elements.splice(index, 1);
+    this.elements.splice(index as number, 1);
     this._size--;
   }
 

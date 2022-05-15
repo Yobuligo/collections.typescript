@@ -1,6 +1,7 @@
 import { ICollection } from "./ICollection";
+import { TIndex } from "./Type";
 
-export interface IMutableCollection<T, TIndex> extends ICollection<T, TIndex> {
+export interface IMutableCollection<T> extends ICollection<T> {
   add(element: T): void;
   addAll(...elements: T[]): void;
   remove(element: T): void;

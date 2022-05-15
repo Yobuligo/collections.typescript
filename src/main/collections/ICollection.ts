@@ -1,11 +1,13 @@
-export interface ICollection<T, TIndex> {
+import { TIndex } from "./Type";
+
+export interface ICollection<T> {
   readonly size: number;
   readonly lastIndex: number;
   contains(element: T): boolean;
   containsAll(...elements: T[]): boolean;
   elementAt(index: TIndex): T;
   elementAtOrNull(index: TIndex): T | null;
-  filter(block: (element: T) => boolean): ICollection<T, TIndex>;
+  filter(block: (element: T) => boolean): ICollection<T>;
   find(block: (element: T) => boolean): T | null;
   first(): T;
   firstOrNull(): T | null;
@@ -15,5 +17,5 @@ export interface ICollection<T, TIndex> {
   isNotEmpty(): boolean;
   last(): T;
   lastOrNull(): T | null;
-  map<R>(block: (element: T) => R): ICollection<R, TIndex>;
+  map<R>(block: (element: T) => R): ICollection<R>;
 }
