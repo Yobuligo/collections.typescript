@@ -1,19 +1,19 @@
-import { Collection } from "./Collection";
-import { IMutableCollection } from "./IMutableCollection";
-import { TIndex } from "./Type";
+import { TIndex } from "../collections/Type";
+import { HashSet } from "./HashSet";
+import { IMutableHashSet } from "./IMutableHashSet";
 
-export class MutableCollection<T>
-  extends Collection<T>
-  implements IMutableCollection<T>
+export class MutableHashSet<T>
+  extends HashSet<T>
+  implements IMutableHashSet<T>
 {
   add(element: T): void {
-    this.elements.push(element);
-    this._size++;
+    this.addElement(element);
   }
 
   addAll(...elements: T[]): void {
-    this.elements.push(...elements);
-    this._size += elements.length;
+    for (const element of elements) {
+      this.addElement(element);
+    }
   }
 
   remove(element: T): void {

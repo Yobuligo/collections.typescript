@@ -14,13 +14,7 @@ export class HashSet<T> extends List<T> implements IHashSet<T> {
     this._size++;
   }
 
-  private addElements(elements: T[]) {
-    for (const element of elements) {
-      this.addElement(element);
-    }
-  }
-
-  private getKey(element: T): string {
+  protected getKey(element: T): string {
     if (typeof element == "object") {
       if (!IHashable.is(element)) {
         let anyRef = element as any;
@@ -31,6 +25,12 @@ export class HashSet<T> extends List<T> implements IHashSet<T> {
       }
     } else {
       return element.toString();
+    }
+  }
+
+  private addElements(elements: T[]) {
+    for (const element of elements) {
+      this.addElement(element);
     }
   }
 }

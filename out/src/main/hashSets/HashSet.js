@@ -34,12 +34,6 @@ var HashSet = /** @class */ (function (_super) {
         this.elements[this.getKey(element)] = element;
         this._size++;
     };
-    HashSet.prototype.addElements = function (elements) {
-        for (var _i = 0, elements_1 = elements; _i < elements_1.length; _i++) {
-            var element = elements_1[_i];
-            this.addElement(element);
-        }
-    };
     HashSet.prototype.getKey = function (element) {
         if (typeof element == "object") {
             if (!IHashable_1.IHashable.is(element)) {
@@ -53,6 +47,12 @@ var HashSet = /** @class */ (function (_super) {
         }
         else {
             return element.toString();
+        }
+    };
+    HashSet.prototype.addElements = function (elements) {
+        for (var _i = 0, elements_1 = elements; _i < elements_1.length; _i++) {
+            var element = elements_1[_i];
+            this.addElement(element);
         }
     };
     return HashSet;

@@ -30,13 +30,12 @@ var Collection = /** @class */ (function () {
         configurable: true
     });
     Collection.prototype.contains = function (element) {
-        for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
-            var object = _a[_i];
-            if (object == element) {
-                return true;
-            }
+        if (this.isEmpty() || this.elements.indexOf(element) == -1) {
+            return false;
         }
-        return false;
+        else {
+            return true;
+        }
     };
     Collection.prototype.containsAll = function () {
         var elements = [];

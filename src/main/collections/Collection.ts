@@ -18,12 +18,11 @@ export class Collection<T> implements ICollection<T> {
   }
 
   contains(element: T): boolean {
-    for (const object of this.elements) {
-      if (object == element) {
-        return true;
-      }
+    if (this.isEmpty() || this.elements.indexOf(element) == -1) {
+      return false;
+    } else {
+      return true;
     }
-    return false;
   }
 
   containsAll(...elements: T[]): boolean {

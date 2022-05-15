@@ -15,34 +15,34 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MutableCollection = void 0;
-var Collection_1 = require("./Collection");
-var MutableCollection = /** @class */ (function (_super) {
-    __extends(MutableCollection, _super);
-    function MutableCollection() {
+exports.MutableHashSet = void 0;
+var HashSet_1 = require("./HashSet");
+var MutableHashSet = /** @class */ (function (_super) {
+    __extends(MutableHashSet, _super);
+    function MutableHashSet() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    MutableCollection.prototype.add = function (element) {
-        this.elements.push(element);
-        this._size++;
+    MutableHashSet.prototype.add = function (element) {
+        this.addElement(element);
     };
-    MutableCollection.prototype.addAll = function () {
-        var _a;
+    MutableHashSet.prototype.addAll = function () {
         var elements = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             elements[_i] = arguments[_i];
         }
-        (_a = this.elements).push.apply(_a, elements);
-        this._size += elements.length;
+        for (var _a = 0, elements_1 = elements; _a < elements_1.length; _a++) {
+            var element = elements_1[_a];
+            this.addElement(element);
+        }
     };
-    MutableCollection.prototype.remove = function (element) {
+    MutableHashSet.prototype.remove = function (element) {
         if (!this.contains(element)) {
             return;
         }
         this.elements.splice(this.elements.indexOf(element), 1);
         this._size--;
     };
-    MutableCollection.prototype.removeAt = function (index) {
+    MutableHashSet.prototype.removeAt = function (index) {
         if (this.isEmpty() || this.elements[index] === undefined) {
             return;
         }
@@ -50,17 +50,17 @@ var MutableCollection = /** @class */ (function (_super) {
         this.elements.splice(indexInternal, 1);
         this._size--;
     };
-    MutableCollection.prototype.removeAll = function () {
+    MutableHashSet.prototype.removeAll = function () {
         this.elements.splice(0);
         this._size = 0;
     };
-    MutableCollection.prototype.removeFirst = function () {
+    MutableHashSet.prototype.removeFirst = function () {
         this.remove(this.first());
     };
-    MutableCollection.prototype.removeLast = function () {
+    MutableHashSet.prototype.removeLast = function () {
         this.remove(this.last());
     };
-    return MutableCollection;
-}(Collection_1.Collection));
-exports.MutableCollection = MutableCollection;
-//# sourceMappingURL=MutableCollection.js.map
+    return MutableHashSet;
+}(HashSet_1.HashSet));
+exports.MutableHashSet = MutableHashSet;
+//# sourceMappingURL=MutableHashSet.js.map

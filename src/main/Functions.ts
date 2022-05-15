@@ -1,6 +1,8 @@
 import { HashGenerator } from "./hashSets/HashGenerator";
 import { HashSet } from "./hashSets/HashSet";
 import { IHashSet } from "./hashSets/IHashSet";
+import { IMutableHashSet } from "./hashSets/IMutableHashSet";
+import { MutableHashSet } from "./hashSets/MutableHashSet";
 import { IList } from "./lists/IList";
 import { IMutableList } from "./lists/IMutableList";
 import { List } from "./lists/List";
@@ -33,4 +35,8 @@ export function mutableMapOf<K, V>(
 
 export function hashSetOf<T>(...elements: T[]): IHashSet<T> {
   return new HashSet(...elements);
+}
+
+export function mutableHashSetOf<T>(...elements: T[]): IMutableHashSet<T> {
+  return new MutableHashSet(...elements);
 }
