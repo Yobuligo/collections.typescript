@@ -101,8 +101,8 @@ var Collection = /** @class */ (function () {
     };
     Collection.prototype.forEach = function (block) {
         for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
-            var object = _a[_i];
-            var result = block(object);
+            var element = _a[_i];
+            var result = block(element);
             if (result != null) {
                 return result;
             }
@@ -148,6 +148,14 @@ var Collection = /** @class */ (function () {
             mappedElements.push(mappedElement);
         }
         return new (Collection.bind.apply(Collection, __spreadArray([void 0], mappedElements, false)))();
+    };
+    Collection.prototype.toArray = function () {
+        var arrayList = [];
+        for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
+            var element = _a[_i];
+            arrayList.push(element);
+        }
+        return arrayList;
     };
     Collection.prototype.toHashSet = function () {
         return Functions_1.hashSetOf.apply(void 0, this.elements);

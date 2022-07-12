@@ -6,12 +6,13 @@ import {
 } from "./src/main/Functions";
 
 const mutableList = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-mutableList.addAll(listOf(55, 56, 57));
+mutableList.addAll(5, listOf(55, 56, 57));
 console.log(mutableList);
+mutableList.add(5, 54)
 
 const mutableMap = mutableMapOf(pair("1", "1"), pair("2", "2"), pair("3", "3"));
 // mutableMap.add(pair("4", "4"));
-mutableMap.addAll(2, mutableMapOf(pair("4", "4")))
+mutableMap.addAll(2, mutableMapOf(pair("4", "4")));
 console.log(mutableMap);
 
 // import { measureTimeMillis } from "./src/main/core/MeasureTimeMillis";

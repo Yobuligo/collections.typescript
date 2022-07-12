@@ -99,8 +99,8 @@ export class Collection<T> implements ICollection<T> {
   }
 
   forEach(block: (element: T) => any): T {
-    for (const object of this.elements) {
-      const result = block(object);
+    for (const element of this.elements) {
+      const result = block(element);
       if (result != null) {
         return result;
       }
@@ -151,13 +151,21 @@ export class Collection<T> implements ICollection<T> {
     return new Collection(...mappedElements);
   }
 
+  toArray(): T[] {
+    const arrayList: T[] = [];
+    for (const element of this.elements) {
+      arrayList.push(element);
+    }
+    return arrayList;
+  }
+
   toHashSet(): IHashSet<T> {
     return hashSetOf(...this.elements);
   }
 
   toList(): IList<T> {
     return listOf(...this.elements);
-  }  
+  }
 
   toMutableHashSet(): IMutableHashSet<T> {
     return mutableHashSetOf(...this.elements);

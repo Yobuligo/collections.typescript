@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Functions_1 = require("./src/main/Functions");
 var mutableList = (0, Functions_1.mutableListOf)(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-mutableList.addAll((0, Functions_1.listOf)(55, 56, 57));
+mutableList.addAll(5, (0, Functions_1.listOf)(55, 56, 57));
 console.log(mutableList);
+mutableList.add(5, 54);
 var mutableMap = (0, Functions_1.mutableMapOf)((0, Functions_1.pair)("1", "1"), (0, Functions_1.pair)("2", "2"), (0, Functions_1.pair)("3", "3"));
 // mutableMap.add(pair("4", "4"));
 mutableMap.addAll(2, (0, Functions_1.mutableMapOf)((0, Functions_1.pair)("4", "4")));

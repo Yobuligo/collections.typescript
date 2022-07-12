@@ -14,6 +14,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MutableList = void 0;
 var MutableCollection_1 = require("../collections/MutableCollection");
@@ -22,25 +31,29 @@ var MutableList = /** @class */ (function (_super) {
     function MutableList() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    MutableList.prototype.add = function (index, element) {
+        var elementsTemp = [];
+        if (element === undefined) {
+            var elementTemp = index;
+            elementsTemp.push(elementTemp);
+            this.addArray.apply(this, elementsTemp);
+        }
+        else {
+            var indexTemp = index;
+            var elementTemp = element;
+            elementsTemp.push(elementTemp);
+            this.addArray.apply(this, __spreadArray([indexTemp], elementsTemp, false));
+        }
+    };
     MutableList.prototype.addAll = function (index, elements) {
-        var _this = this;
         if (elements === undefined) {
             var elementsTemp = index;
-            elementsTemp.forEach(function (element) {
-                _this.add(element);
-            });
+            this.addArray.apply(this, elementsTemp.toArray());
         }
         else {
             var indexTemp = index;
             var elementsTemp = elements;
-            var elementsToIndex_1 = this.elements.slice(0, indexTemp);
-            var elementsFromIndex = this.elements.slice(indexTemp, this.elements.length);
-            elementsTemp.forEach(function (element) {
-                elementsToIndex_1.push(element);
-            });
-            elementsToIndex_1.push.apply(elementsToIndex_1, elementsFromIndex);
-            this.elements = elementsToIndex_1;
-            this._size = this.elements.length;
+            this.addArray.apply(this, __spreadArray([indexTemp], elementsTemp.toArray(), false));
         }
     };
     MutableList.prototype.addArray = function (index) {
@@ -49,12 +62,19 @@ var MutableList = /** @class */ (function (_super) {
         for (var _i = 1; _i < arguments.length; _i++) {
             elements[_i - 1] = arguments[_i];
         }
-        if (index === undefined) {
-            (_a = this.elements).push.apply(_a, elements);
-            this._size += elements.length;
+        if (elements === undefined) {
+            var elementsTemp = index;
+            (_a = this.elements).push.apply(_a, elementsTemp);
+            this._size += elementsTemp.length;
         }
         else {
-            throw new Error();
+            var indexTemp = index;
+            var elementsTemp = elements;
+            var elementsResult = this.elements.slice(0, indexTemp);
+            elementsResult.push.apply(elementsResult, elementsTemp);
+            elementsResult.push.apply(elementsResult, this.elements.slice(indexTemp, this.elements.length));
+            this.elements = elementsResult;
+            this._size = this.elements.length;
         }
     };
     return MutableList;

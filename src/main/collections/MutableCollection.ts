@@ -1,4 +1,3 @@
-import { IList } from "../lists/IList";
 import { Collection } from "./Collection";
 import { IMutableCollection } from "./IMutableCollection";
 import { TIndex } from "./Type";
@@ -7,11 +6,6 @@ export class MutableCollection<T>
   extends Collection<T>
   implements IMutableCollection<T>
 {
-  add(element: T): void {
-    this.elements.push(element);
-    this._size++;
-  }
-
   remove(element: T): void {
     if (!this.contains(element)) {
       return;

@@ -22,10 +22,6 @@ var MutableCollection = /** @class */ (function (_super) {
     function MutableCollection() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    MutableCollection.prototype.add = function (element) {
-        this.elements.push(element);
-        this._size++;
-    };
     MutableCollection.prototype.remove = function (element) {
         if (!this.contains(element)) {
             return;
