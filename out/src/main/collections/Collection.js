@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Collection = void 0;
 var IndexOutOfBoundsException_1 = require("../exceptions/IndexOutOfBoundsException");
 var NoSuchElementException_1 = require("../exceptions/NoSuchElementException");
+var Functions_1 = require("../Functions");
 var Collection = /** @class */ (function () {
     function Collection() {
         var elements = [];
@@ -147,6 +148,18 @@ var Collection = /** @class */ (function () {
             mappedElements.push(mappedElement);
         }
         return new (Collection.bind.apply(Collection, __spreadArray([void 0], mappedElements, false)))();
+    };
+    Collection.prototype.toHashSet = function () {
+        return Functions_1.hashSetOf.apply(void 0, this.elements);
+    };
+    Collection.prototype.toMutableHashSet = function () {
+        return Functions_1.mutableHashSetOf.apply(void 0, this.elements);
+    };
+    Collection.prototype.toList = function () {
+        return Functions_1.listOf.apply(void 0, this.elements);
+    };
+    Collection.prototype.toMutableList = function () {
+        return Functions_1.mutableListOf.apply(void 0, this.elements);
     };
     return Collection;
 }());

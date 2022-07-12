@@ -1,6 +1,7 @@
+import { ICollectionExtension } from "./ICollectionExtension";
 import { TIndex } from "./Type";
 
-export interface ICollection<T> {
+export interface ICollection<T> extends ICollectionExtension<T> {
   readonly size: number;
   readonly lastIndex: number;
   contains(element: T): boolean;

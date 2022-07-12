@@ -54,3 +54,7 @@ export function mutableHashMapOf<K, V>(
 ): IMutableHashMap<K, V> {
   return new MutableHashMap(...elements);
 }
+
+export function pair<K, V>(first: K, second: V): Pair<K, V> {
+  return new Pair(first, second);
+}

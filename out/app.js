@@ -1,36 +1,53 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var MeasureTimeMillis_1 = require("./src/main/core/MeasureTimeMillis");
-var Println_1 = require("./src/main/core/Println");
-var Repeat_1 = require("./src/main/core/Repeat");
 var Functions_1 = require("./src/main/Functions");
 var Pair_1 = require("./src/main/Pair");
-var times = 10000;
-var mutableList = (0, Functions_1.mutableListOf)();
-var mutableHashSet = (0, Functions_1.mutableHashSetOf)();
-var mutableHashMap = (0, Functions_1.mutableHashMapOf)();
-(0, Repeat_1.repeat)(1000000, function (index) {
-    mutableList.add(index.toString());
-    mutableHashSet.add(index.toString());
-    mutableHashMap.add(new Pair_1.Pair(index.toString(), index.toString()));
-});
-(0, Println_1.println)((0, MeasureTimeMillis_1.measureTimeMillis)(function () {
-    (0, Repeat_1.repeat)(times, function () {
-        mutableList.contains("1999999");
-    });
-}));
-(0, Println_1.println)("Size of mutableList: ".concat(mutableList.size));
-(0, Println_1.println)((0, MeasureTimeMillis_1.measureTimeMillis)(function () {
-    (0, Repeat_1.repeat)(times, function () {
-        mutableHashSet.contains("1999999");
-    });
-}));
-(0, Println_1.println)("Size of mutableHashSet: ".concat(mutableHashSet.size));
-var lastPair = mutableHashMap.last();
-(0, Println_1.println)((0, MeasureTimeMillis_1.measureTimeMillis)(function () {
-    (0, Repeat_1.repeat)(times, function () {
-        mutableHashMap.contains(lastPair);
-    });
-}));
-(0, Println_1.println)("Size of mutableHashMap: ".concat(mutableHashMap.size));
+var myList = (0, Functions_1.mapOf)(new Pair_1.Pair("", ""), new Pair_1.Pair("123", "123"));
+var myMutableMap = myList.toMutableMap();
+myMutableMap.add((0, Functions_1.pair)("abc", "edf"));
+var myDefaultList = myMutableMap.toList();
+console.log(myMutableMap);
+// import { measureTimeMillis } from "./src/main/core/MeasureTimeMillis";
+// import { println } from "./src/main/core/Println";
+// import { repeat } from "./src/main/core/Repeat";
+// import {
+//   mutableHashMapOf,
+//   mutableHashSetOf,
+//   mutableListOf,
+// } from "./src/main/Functions";
+// import { Pair } from "./src/main/Pair";
+// const times = 10000;
+// const mutableList = mutableListOf<string>();
+// const mutableHashSet = mutableHashSetOf<string>();
+// const mutableHashMap = mutableHashMapOf<string, string>();
+// repeat(1000000, (index) => {
+//   mutableList.add(index.toString());
+//   mutableHashSet.add(index.toString());
+//   mutableHashMap.add(new Pair(index.toString(), index.toString()));
+// });
+// println(
+//   measureTimeMillis(() => {
+//     repeat(times, () => {
+//       mutableList.contains("1999999");
+//     });
+//   })
+// );
+// println(`Size of mutableList: ${mutableList.size}`);
+// println(
+//   measureTimeMillis(() => {
+//     repeat(times, () => {
+//       mutableHashSet.contains("1999999");
+//     });
+//   })
+// );
+// println(`Size of mutableHashSet: ${mutableHashSet.size}`);
+// const lastPair = mutableHashMap.last();
+// println(
+//   measureTimeMillis(() => {
+//     repeat(times, () => {
+//       mutableHashMap.contains(lastPair);
+//     });
+//   })
+// );
+// println(`Size of mutableHashMap: ${mutableHashMap.size}`);
 //# sourceMappingURL=app.js.map

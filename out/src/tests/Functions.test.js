@@ -15,4 +15,4 @@ describe("Function", function () {
         (0, chai_1.expect)(list.elementAt(4)).equals(5);
     });
 });
-//# sourceMappingURL=FunctionsTest.js.map
+//# sourceMappingURL=Functions.test.js.map

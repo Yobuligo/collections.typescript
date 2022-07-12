@@ -35,6 +35,12 @@ var MutableCollection = /** @class */ (function (_super) {
         (_a = this.elements).push.apply(_a, elements);
         this._size += elements.length;
     };
+    MutableCollection.prototype.addList = function (elements) {
+        var _this = this;
+        elements.forEach(function (element) {
+            _this.add(element);
+        });
+    };
     MutableCollection.prototype.remove = function (element) {
         if (!this.contains(element)) {
             return;

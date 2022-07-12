@@ -1,5 +1,15 @@
 import { IndexOutOfBoundsException } from "../exceptions/IndexOutOfBoundsException";
 import { NoSuchElementException } from "../exceptions/NoSuchElementException";
+import {
+  hashSetOf,
+  listOf,
+  mutableHashSetOf,
+  mutableListOf,
+} from "../Functions";
+import { IHashSet } from "../hashSets/IHashSet";
+import { IMutableHashSet } from "../hashSets/IMutableHashSet";
+import { IList } from "../lists/IList";
+import { IMutableList } from "../lists/IMutableList";
 import { ICollection } from "./ICollection";
 import { TIndex } from "./Type";
 
@@ -139,5 +149,21 @@ export class Collection<T> implements ICollection<T> {
       mappedElements.push(mappedElement);
     }
     return new Collection(...mappedElements);
+  }
+
+  toHashSet(): IHashSet<T> {
+    return hashSetOf(...this.elements);
+  }
+
+  toList(): IList<T> {
+    return listOf(...this.elements);
+  }  
+
+  toMutableHashSet(): IMutableHashSet<T> {
+    return mutableHashSetOf(...this.elements);
+  }
+
+  toMutableList(): IMutableList<T> {
+    return mutableListOf(...this.elements);
   }
 }

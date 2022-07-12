@@ -251,4 +251,4 @@ describe("Collection", function () {
         (0, chai_1.expect)(resultList.isEmpty()).true;
     });
 });
-//# sourceMappingURL=CollectionTest.js.map
+//# sourceMappingURL=Collection.test.js.map

@@ -1,3 +1,4 @@
+import { IList } from "../lists/IList";
 import { Collection } from "./Collection";
 import { IMutableCollection } from "./IMutableCollection";
 import { TIndex } from "./Type";
@@ -14,6 +15,12 @@ export class MutableCollection<T>
   addAll(...elements: T[]): void {
     this.elements.push(...elements);
     this._size += elements.length;
+  }
+
+  addList(elements: IList<T>): void {
+    elements.forEach((element) => {
+      this.add(element);
+    });
   }
 
   remove(element: T): void {

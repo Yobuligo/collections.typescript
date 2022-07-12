@@ -16,12 +16,25 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Map = void 0;
+var Functions_1 = require("../Functions");
 var List_1 = require("../lists/List");
 var Map = /** @class */ (function (_super) {
     __extends(Map, _super);
     function Map() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Map.prototype.toMap = function () {
+        return Functions_1.mapOf.apply(void 0, this.elements);
+    };
+    Map.prototype.toMutableMap = function () {
+        return Functions_1.mutableMapOf.apply(void 0, this.elements);
+    };
+    Map.prototype.toHashMap = function () {
+        return Functions_1.hashMapOf.apply(void 0, this.elements);
+    };
+    Map.prototype.toMutableHashMap = function () {
+        return Functions_1.mutableHashMapOf.apply(void 0, this.elements);
+    };
     return Map;
 }(List_1.List));
 exports.Map = Map;
