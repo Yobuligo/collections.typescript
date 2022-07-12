@@ -12,17 +12,6 @@ export class MutableCollection<T>
     this._size++;
   }
 
-  addAll(...elements: T[]): void {
-    this.elements.push(...elements);
-    this._size += elements.length;
-  }
-
-  addList(elements: IList<T>): void {
-    elements.forEach((element) => {
-      this.add(element);
-    });
-  }
-
   remove(element: T): void {
     if (!this.contains(element)) {
       return;

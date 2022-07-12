@@ -25,7 +25,13 @@ var MutableHashSet = /** @class */ (function (_super) {
     MutableHashSet.prototype.add = function (element) {
         this.addElement(element);
     };
-    MutableHashSet.prototype.addAll = function () {
+    MutableHashSet.prototype.addAll = function (elements) {
+        var _this = this;
+        elements.forEach(function (element) {
+            _this.add(element);
+        });
+    };
+    MutableHashSet.prototype.addArray = function () {
         var elements = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             elements[_i] = arguments[_i];
@@ -34,12 +40,6 @@ var MutableHashSet = /** @class */ (function (_super) {
             var element = elements_1[_a];
             this.addElement(element);
         }
-    };
-    MutableHashSet.prototype.addList = function (elements) {
-        var _this = this;
-        elements.forEach(function (element) {
-            _this.add(element);
-        });
     };
     MutableHashSet.prototype.remove = function (element) {
         if (!this.contains(element)) {

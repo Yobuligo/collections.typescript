@@ -23,17 +23,17 @@ var Map = /** @class */ (function (_super) {
     function Map() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Map.prototype.toMap = function () {
-        return Functions_1.mapOf.apply(void 0, this.elements);
-    };
-    Map.prototype.toMutableMap = function () {
-        return Functions_1.mutableMapOf.apply(void 0, this.elements);
-    };
     Map.prototype.toHashMap = function () {
         return Functions_1.hashMapOf.apply(void 0, this.elements);
     };
+    Map.prototype.toMap = function () {
+        return Functions_1.mapOf.apply(void 0, this.elements);
+    };
     Map.prototype.toMutableHashMap = function () {
         return Functions_1.mutableHashMapOf.apply(void 0, this.elements);
+    };
+    Map.prototype.toMutableMap = function () {
+        return Functions_1.mutableMapOf.apply(void 0, this.elements);
     };
     return Map;
 }(List_1.List));

@@ -11,16 +11,16 @@ export class MutableHashSet<T>
     this.addElement(element);
   }
 
-  addAll(...elements: T[]): void {
-    for (const element of elements) {
-      this.addElement(element);
-    }
-  }
-
-  addList(elements: IList<T>): void {
+  addAll(elements: IList<T>): void {
     elements.forEach((element) => {
       this.add(element);
     });
+  }
+
+  addArray(...elements: T[]): void {
+    for (const element of elements) {
+      this.addElement(element);
+    }
   }
 
   remove(element: T): void {

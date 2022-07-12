@@ -26,21 +26,6 @@ var MutableCollection = /** @class */ (function (_super) {
         this.elements.push(element);
         this._size++;
     };
-    MutableCollection.prototype.addAll = function () {
-        var _a;
-        var elements = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            elements[_i] = arguments[_i];
-        }
-        (_a = this.elements).push.apply(_a, elements);
-        this._size += elements.length;
-    };
-    MutableCollection.prototype.addList = function (elements) {
-        var _this = this;
-        elements.forEach(function (element) {
-            _this.add(element);
-        });
-    };
     MutableCollection.prototype.remove = function (element) {
         if (!this.contains(element)) {
             return;

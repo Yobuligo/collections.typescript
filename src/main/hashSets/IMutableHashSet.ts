@@ -1,4 +1,6 @@
-import { IMutableList } from "../lists/IMutableList";
+import { IMutableCollection } from "../collections/IMutableCollection";
 import { IHashSet } from "./IHashSet";
 
-export interface IMutableHashSet<T> extends IHashSet<T>, IMutableList<T> {}
+export interface IMutableHashSet<T>
+  extends IHashSet<T>,
+    IMutableCollection<T> {}

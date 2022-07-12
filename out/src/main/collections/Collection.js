@@ -152,11 +152,11 @@ var Collection = /** @class */ (function () {
     Collection.prototype.toHashSet = function () {
         return Functions_1.hashSetOf.apply(void 0, this.elements);
     };
-    Collection.prototype.toMutableHashSet = function () {
-        return Functions_1.mutableHashSetOf.apply(void 0, this.elements);
-    };
     Collection.prototype.toList = function () {
         return Functions_1.listOf.apply(void 0, this.elements);
+    };
+    Collection.prototype.toMutableHashSet = function () {
+        return Functions_1.mutableHashSetOf.apply(void 0, this.elements);
     };
     Collection.prototype.toMutableList = function () {
         return Functions_1.mutableListOf.apply(void 0, this.elements);
