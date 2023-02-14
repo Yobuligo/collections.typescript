@@ -1,1 +1,1 @@
-export type TIndex = number | string;
+export type TIndex = number;

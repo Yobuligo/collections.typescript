@@ -7,16 +7,16 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   contains(element: T): boolean;
   containsAll(...elements: T[]): boolean;
   elementAt(index: TIndex): T;
-  elementAtOrNull(index: TIndex): T | null;
+  elementAtOrNull(index: TIndex): T | undefined;
   filter(block: (element: T) => boolean): ICollection<T>;
-  find(block: (element: T) => boolean): T | null;
+  find(block: (element: T) => boolean): T | undefined;
   first(): T;
-  firstOrNull(): T | null;
-  forEach(block: (element: T) => any | null): T | null;
+  firstOrNull(): T | undefined;
+  forEach(block: (element: T) => any | undefined): T | undefined;
   indexOf(element: T): TIndex;
   isEmpty(): boolean;
   isNotEmpty(): boolean;
   last(): T;
-  lastOrNull(): T | null;
+  lastOrNull(): T | undefined;
   map<R>(block: (element: T) => R): ICollection<R>;
 }

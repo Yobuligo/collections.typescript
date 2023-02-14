@@ -1,6 +1,4 @@
-import { hashGenerator } from "../Functions";
 import { List } from "../lists/List";
-import { IHashable } from "./IHashable";
 import { IHashSet } from "./IHashSet";
 
 export class HashSet<T> extends List<T> implements IHashSet<T> {
@@ -22,18 +20,19 @@ export class HashSet<T> extends List<T> implements IHashSet<T> {
     this._size++;
   }
 
-  protected getKey(element: T): string {
-    if (typeof element == "object") {
-      if (!IHashable.is(element)) {
-        let anyRef = element as any;
-        anyRef.hash = hashGenerator.generate();
-        return anyRef.hash;
-      } else {
-        return element.hash;
-      }
-    } else {
-      return element.toString();
-    }
+  protected getKey(element: T): number {
+    throw new Error();
+    // if (typeof element == "object") {
+    //   if (!IHashable.is(element)) {
+    //     let anyRef = element as any;
+    //     anyRef.hash = hashGenerator.generate();
+    //     return anyRef.hash;
+    //   } else {
+    //     return element.hash;
+    //   }
+    // } else {
+    //   return element.toString();
+    // }
   }
 
   private addElements(elements: T[]) {

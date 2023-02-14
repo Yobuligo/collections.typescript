@@ -16,7 +16,7 @@ import { TIndex } from "./Type";
 export class Collection<T> implements ICollection<T> {
   protected _size: number;
   protected elements: T[] = [];
-  readonly lastIndex: number;
+  readonly lastIndex: number = 0;
 
   constructor(...elements: T[]) {
     this.elements = elements;
@@ -57,9 +57,9 @@ export class Collection<T> implements ICollection<T> {
     return this.elements[index];
   }
 
-  elementAtOrNull(index: TIndex): T {
+  elementAtOrNull(index: TIndex): T | undefined {
     if (this.isEmpty() || this.elements[index] === undefined) {
-      return null;
+      return undefined;
     }
     return this.elements[index];
   }
@@ -74,13 +74,13 @@ export class Collection<T> implements ICollection<T> {
     return new Collection(...resultList);
   }
 
-  find(block: (element: T) => boolean): T {
+  find(block: (element: T) => boolean): T | undefined{
     for (const object of this.elements) {
       if (block(object)) {
         return object;
       }
     }
-    return null;
+    return undefined;
   }
 
   first(): T {
@@ -90,22 +90,22 @@ export class Collection<T> implements ICollection<T> {
     return this.elements[0];
   }
 
-  firstOrNull(): T {
+  firstOrNull(): T | undefined {
     if (this.isEmpty()) {
-      return null;
+      return undefined;
     } else {
       return this.elements[0];
     }
   }
 
-  forEach(block: (element: T) => any): T {
+  forEach(block: (element: T) => any | undefined): T | undefined{
     for (const element of this.elements) {
       const result = block(element);
       if (result != null) {
         return result;
       }
     }
-    return null;
+    return undefined;
   }
 
   indexOf(element: T): TIndex {
@@ -135,9 +135,9 @@ export class Collection<T> implements ICollection<T> {
     return this.elements[this.elements.length - 1];
   }
 
-  lastOrNull(): T {
+  lastOrNull(): T | undefined {
     if (this.isEmpty()) {
-      return null;
+      return undefined;
     }
     return this.elements[this.elements.length - 1];
   }

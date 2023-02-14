@@ -1,12 +1,12 @@
 import { expect } from "chai";
-import { Pair } from "../main/Pair";
+import { Pair } from "../src/main/Pair";
 
 describe("Pair", () => {
-  it("Return first value", () => {
+  it("returns first value", () => {
     expect(new Pair("123", "456").first).equals("123");
   });
 
-  it("Return second value", () => {
+  it("returns second value", () => {
     expect(new Pair("123", "456").second).equals("456");
   });
 });

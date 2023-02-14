@@ -1,15 +1,16 @@
 {
-  "name": "collection",
+  "name": "collection.typescript",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Collection for lists, maps, hashsets and hashmaps inspired by Kotlin syntax",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register src/tests/**/*.ts"
+    "test": "mocha -r ts-node/register tests/**/*.ts"
   },
-  "author": "",
+  "author": "Yobuligo",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.3.1",
@@ -18,5 +19,24 @@
     "mocha": "^10.0.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4"
-  }  
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yobuligo/collections.typescript.git"
+  },
+  "keywords": [
+    "collections",
+    "list",
+    "map",
+    "hashset",
+    "hashmap"
+  ],
+  "bugs": {
+    "url": "https://github.com/Yobuligo/collections.typescript/issues"
+  },
+  "homepage": "https://github.com/Yobuligo/collections.typescript#readme",
+  "files": [
+    "/dist"
+  ]
 }
