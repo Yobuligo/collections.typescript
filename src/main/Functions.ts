@@ -19,42 +19,42 @@ import { Pair } from "./Pair";
 
 export const hashGenerator = new HashGenerator();
 
-export function listOf<T>(...elements: T[]): IList<T> {
+export const listOf = <T>(...elements: T[]): IList<T> => {
   return new List(...elements);
-}
+};
 
-export function mutableListOf<T>(...elements: T[]): IMutableList<T> {
+export const mutableListOf = <T>(...elements: T[]): IMutableList<T> => {
   return new MutableList(...elements);
-}
+};
 
-export function mapOf<K, V>(...elements: Pair<K, V>[]): IMap<K, V> {
+export const mapOf = <K, V>(...elements: Pair<K, V>[]): IMap<K, V> => {
   return new Map(...elements);
-}
+};
 
-export function mutableMapOf<K, V>(
+export const mutableMapOf = <K, V>(
   ...elements: Pair<K, V>[]
-): IMutableMap<K, V> {
+): IMutableMap<K, V> => {
   return new MutableMap(...elements);
-}
+};
 
-export function hashSetOf<T>(...elements: T[]): IHashSet<T> {
+export const hashSetOf = <T>(...elements: T[]): IHashSet<T> => {
   return new HashSet(...elements);
-}
+};
 
-export function mutableHashSetOf<T>(...elements: T[]): IMutableHashSet<T> {
+export const mutableHashSetOf = <T>(...elements: T[]): IMutableHashSet<T> => {
   return new MutableHashSet(...elements);
-}
+};
 
-export function hashMapOf<K, V>(...elements: Pair<K, V>[]): IHashMap<K, V> {
+export const hashMapOf = <K, V>(...elements: Pair<K, V>[]): IHashMap<K, V> => {
   return new HashMap(...elements);
-}
+};
 
-export function mutableHashMapOf<K, V>(
+export const mutableHashMapOf = <K, V>(
   ...elements: Pair<K, V>[]
-): IMutableHashMap<K, V> {
+): IMutableHashMap<K, V> => {
   return new MutableHashMap(...elements);
-}
+};
 
-export function pair<K, V>(first: K, second: V): Pair<K, V> {
+export const pair = <K, V>(first: K, second: V): Pair<K, V> => {
   return new Pair(first, second);
-}
+};
