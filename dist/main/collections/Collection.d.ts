@@ -1,0 +1,33 @@
+import { IHashSet } from "../hashSets/IHashSet";
+import { IMutableHashSet } from "../hashSets/IMutableHashSet";
+import { IList } from "../lists/IList";
+import { IMutableList } from "../lists/IMutableList";
+import { ICollection } from "./ICollection";
+import { TIndex } from "./Type";
+export declare class Collection<T> implements ICollection<T> {
+    protected _size: number;
+    protected elements: T[];
+    readonly lastIndex: number;
+    constructor(...elements: T[]);
+    get size(): number;
+    contains(element: T): boolean;
+    containsAll(...elements: T[]): boolean;
+    elementAt(index: TIndex): T;
+    elementAtOrNull(index: TIndex): T | undefined;
+    filter(block: (element: T) => boolean): ICollection<T>;
+    find(block: (element: T) => boolean): T | undefined;
+    first(): T;
+    firstOrNull(): T | undefined;
+    forEach(block: (element: T) => any | undefined): T | undefined;
+    indexOf(element: T): TIndex;
+    isEmpty(): boolean;
+    isNotEmpty(): boolean;
+    last(): T;
+    lastOrNull(): T | undefined;
+    map<R>(block: (element: T) => R): ICollection<R>;
+    toArray(): T[];
+    toHashSet(): IHashSet<T>;
+    toList(): IList<T>;
+    toMutableHashSet(): IMutableHashSet<T>;
+    toMutableList(): IMutableList<T>;
+}
