@@ -37,5 +37,8 @@
   "homepage": "https://github.com/Yobuligo/collections.typescript#readme",
   "files": [
     "/dist"
-  ]
+  ],
+  "dependencies": {
+    "@yobuligo/core.typescript": "^1.0.7"
+  }
 }

@@ -1,8 +1,8 @@
-export { ICollection } from "./main/collections/ICollection";
-export { ICollectionExtension } from "./main/collections/ICollectionExtension";
-export { IMutableCollection } from "./main/collections/IMutableCollection";
-export { IndexOutOfBoundsException } from "./main/exceptions/IndexOutOfBoundsException";
-export { NoSuchElementException } from "./main/exceptions/NoSuchElementException";
+export { ICollection } from "./collections/ICollection";
+export { ICollectionExtension } from "./collections/ICollectionExtension";
+export { IMutableCollection } from "./collections/IMutableCollection";
+export { IndexOutOfBoundsException } from "./exceptions/IndexOutOfBoundsException";
+export { NoSuchElementException } from "./exceptions/NoSuchElementException";
 export {
   hashMapOf,
   hashSetOf,
@@ -12,15 +12,16 @@ export {
   mutableHashSetOf,
   mutableListOf,
   mutableMapOf,
-  pair,
-} from "./main/Functions";
-export { IHashMap } from "./main/hashMaps/IHashMap";
-export { IMutableHashMap } from "./main/hashMaps/IMutableHashMap";
-export { IHashSet } from "./main/hashSets/IHashSet";
-export { IMutableHashSet } from "./main/hashSets/IMutableHashSet";
-export { IList } from "./main/lists/IList";
-export { IMutableList } from "./main/lists/IMutableList";
-export { IMap } from "./main/maps/IMap";
-export { IMapExtension } from "./main/maps/IMapExtension";
-export { IMutableMap } from "./main/maps/IMutableMap";
-export { Pair } from "./main/Pair";
+  pair
+} from "./Functions";
+export { IHashMap } from "./hashMaps/IHashMap";
+export { IMutableHashMap } from "./hashMaps/IMutableHashMap";
+export { IHashSet } from "./hashSets/IHashSet";
+export { IMutableHashSet } from "./hashSets/IMutableHashSet";
+export { IList } from "./lists/IList";
+export { IMutableList } from "./lists/IMutableList";
+export { IMap } from "./maps/IMap";
+export { IMapExtension } from "./maps/IMapExtension";
+export { IMutableMap } from "./maps/IMutableMap";
+export { Pair } from "./Pair";
+
