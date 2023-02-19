@@ -1,5 +1,5 @@
 {
-  "name": "@yobuligo/collection.typescript",
+  "name": "@yobuligo/collections.typescript",
   "version": "1.0.1",
   "description": "Collection for lists, maps, hashsets and hashmaps inspired by Kotlin syntax",
   "main": "dist/index.js",
