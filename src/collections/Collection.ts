@@ -9,9 +9,10 @@ import { IHashSet } from "../hashSets/IHashSet";
 import { IMutableHashSet } from "../hashSets/IMutableHashSet";
 import { IList } from "../lists/IList";
 import { IMutableList } from "../lists/IMutableList";
+import { List } from "../lists/List";
 import { ICollection } from "./ICollection";
 
-export class Collection<T> implements ICollection<T> {
+export abstract class Collection<T> implements ICollection<T> {
   protected _size: number;
   protected elements: T[] = [];
   readonly lastIndex: number = 0;
@@ -62,14 +63,14 @@ export class Collection<T> implements ICollection<T> {
     return this.elements[index];
   }
 
-  filter(block: (element: T) => boolean): ICollection<T> {
+  filter(block: (element: T) => boolean): IList<T> {
     const resultList: T[] = [];
     for (const element of this.elements) {
       if (block(element)) {
         resultList.push(element);
       }
     }
-    return new Collection(...resultList);
+    return new List(...resultList);
   }
 
   find(block: (element: T) => boolean): T | undefined {
@@ -138,7 +139,7 @@ export class Collection<T> implements ICollection<T> {
       const mappedElement = block(element);
       mappedElements.push(mappedElement);
     }
-    return new Collection(...mappedElements);
+    return new List(...mappedElements);
   }
 
   toArray(): T[] {

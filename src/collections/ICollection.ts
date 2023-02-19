@@ -1,3 +1,4 @@
+import { IList } from "./../lists/IList";
 import { ICollectionExtension } from "./ICollectionExtension";
 
 export interface ICollection<T> extends ICollectionExtension<T> {
@@ -8,7 +9,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   containsNot(element: T): boolean;
   elementAt(index: number): T;
   elementAtOrNull(index: number): T | undefined;
-  filter(block: (element: T) => boolean): ICollection<T>;
+  filter(block: (element: T) => boolean): IList<T>;
   find(block: (element: T) => boolean): T | undefined;
   first(): T;
   firstOrNull(): T | undefined;
@@ -20,5 +21,5 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   isNotEmpty(): boolean;
   last(): T;
   lastOrNull(): T | undefined;
-  map<R>(block: (element: T) => R): ICollection<R>;
+  map<R>(block: (element: T) => R): IList<R>;
 }

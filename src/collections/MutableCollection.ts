@@ -1,7 +1,7 @@
 import { Collection } from "./Collection";
 import { IMutableCollection } from "./IMutableCollection";
 
-export class MutableCollection<T>
+export abstract class MutableCollection<T>
   extends Collection<T>
   implements IMutableCollection<T>
 {

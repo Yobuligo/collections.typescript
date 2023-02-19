@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Collection = void 0;
 var core_typescript_1 = require("@yobuligo/core.typescript");
 var Functions_1 = require("../Functions");
+var List_1 = require("../lists/List");
 var Collection = /** @class */ (function () {
     function Collection() {
         var elements = [];
@@ -72,7 +73,7 @@ var Collection = /** @class */ (function () {
                 resultList.push(element);
             }
         }
-        return new (Collection.bind.apply(Collection, __spreadArray([void 0], resultList, false)))();
+        return new (List_1.List.bind.apply(List_1.List, __spreadArray([void 0], resultList, false)))();
     };
     Collection.prototype.find = function (block) {
         for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
@@ -132,7 +133,7 @@ var Collection = /** @class */ (function () {
             var mappedElement = block(element);
             mappedElements.push(mappedElement);
         }
-        return new (Collection.bind.apply(Collection, __spreadArray([void 0], mappedElements, false)))();
+        return new (List_1.List.bind.apply(List_1.List, __spreadArray([void 0], mappedElements, false)))();
     };
     Collection.prototype.toArray = function () {
         return __spreadArray([], this.elements, true);

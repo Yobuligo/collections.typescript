@@ -3,7 +3,7 @@ import { IMutableHashSet } from "../hashSets/IMutableHashSet";
 import { IList } from "../lists/IList";
 import { IMutableList } from "../lists/IMutableList";
 import { ICollection } from "./ICollection";
-export declare class Collection<T> implements ICollection<T> {
+export declare abstract class Collection<T> implements ICollection<T> {
     protected _size: number;
     protected elements: T[];
     readonly lastIndex: number;
@@ -14,7 +14,7 @@ export declare class Collection<T> implements ICollection<T> {
     containsNot(element: T): boolean;
     elementAt(index: number): T;
     elementAtOrNull(index: number): T | undefined;
-    filter(block: (element: T) => boolean): ICollection<T>;
+    filter(block: (element: T) => boolean): IList<T>;
     find(block: (element: T) => boolean): T | undefined;
     first(): T;
     firstOrNull(): T | undefined;

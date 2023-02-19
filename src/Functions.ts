@@ -51,7 +51,3 @@ export const mutableHashMapOf = <K, V>(
 ): IMutableHashMap<K, V> => {
   return new MutableHashMap(...elements);
 };
-
-export const pair = <K, V>(first: K, second: V): Pair<K, V> => {
-  return new Pair(first, second);
-};

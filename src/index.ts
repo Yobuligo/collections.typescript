@@ -1,3 +1,4 @@
+export { NoSuchElementException, Pair, pair } from "@yobuligo/core.typescript";
 export { ICollection } from "./collections/ICollection";
 export { ICollectionExtension } from "./collections/ICollectionExtension";
 export { IMutableCollection } from "./collections/IMutableCollection";
@@ -10,7 +11,6 @@ export {
   mutableHashSetOf,
   mutableListOf,
   mutableMapOf,
-  pair,
 } from "./Functions";
 export { IHashMap } from "./hashMaps/IHashMap";
 export { IMutableHashMap } from "./hashMaps/IMutableHashMap";
