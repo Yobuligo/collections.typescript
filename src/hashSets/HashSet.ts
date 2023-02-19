@@ -2,42 +2,49 @@ import { List } from "../lists/List";
 import { IHashSet } from "./IHashSet";
 
 export class HashSet<T> extends List<T> implements IHashSet<T> {
+  private hashIndex: number = 0;
+  private hashKeys: Map<T, number> = new Map();
+
   constructor(...elements: T[]) {
     super();
     this.addElements(elements);
   }
 
   contains(element: T): boolean {
-    if (this.isEmpty() || this.elements[this.getKey(element)] === undefined) {
+    if (this.isEmpty()) {
       return false;
-    } else {
-      return true;
     }
+
+    const hashKey = this.findHashKey(element);
+    if (hashKey === undefined || this.elements[hashKey] === undefined) {
+      return false;
+    }
+
+    return true;
   }
 
   protected addElement(element: T) {
-    this.elements[this.getKey(element)] = element;
+    this.elements[this.fetchHashKey(element)] = element;
     this._size++;
-  }
-
-  protected getKey(element: T): number {
-    throw new Error();
-    // if (typeof element == "object") {
-    //   if (!IHashable.is(element)) {
-    //     let anyRef = element as any;
-    //     anyRef.hash = hashGenerator.generate();
-    //     return anyRef.hash;
-    //   } else {
-    //     return element.hash;
-    //   }
-    // } else {
-    //   return element.toString();
-    // }
   }
 
   private addElements(elements: T[]) {
     for (const element of elements) {
       this.addElement(element);
     }
+  }
+
+  private fetchHashKey(element: T): number {
+    return this.findHashKey(element) ?? this.createHashKey(element);
+  }
+
+  private findHashKey(element: T): number | undefined {
+    return this.hashKeys.get(element);
+  }
+
+  private createHashKey(element: T): number {
+    this.hashIndex++;
+    this.hashKeys.set(element, this.hashIndex);
+    return this.hashIndex;
   }
 }

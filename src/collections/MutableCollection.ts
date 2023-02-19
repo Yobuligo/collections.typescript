@@ -1,20 +1,19 @@
 import { Collection } from "./Collection";
 import { IMutableCollection } from "./IMutableCollection";
-import { TIndex } from "./Type";
 
 export class MutableCollection<T>
   extends Collection<T>
   implements IMutableCollection<T>
 {
   remove(element: T): void {
-    if (!this.contains(element)) {
+    if (this.containsNot(element)) {
       return;
     }
     this.elements.splice(this.elements.indexOf(element), 1);
     this._size--;
   }
 
-  removeAt(index: TIndex): void {
+  removeAt(index: number): void {
     if (this.isEmpty() || this.elements[index] === undefined) {
       return;
     }

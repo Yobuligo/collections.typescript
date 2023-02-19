@@ -1,8 +1,6 @@
 export { ICollection } from "./collections/ICollection";
 export { ICollectionExtension } from "./collections/ICollectionExtension";
 export { IMutableCollection } from "./collections/IMutableCollection";
-export { IndexOutOfBoundsException } from "./exceptions/IndexOutOfBoundsException";
-export { NoSuchElementException } from "./exceptions/NoSuchElementException";
 export {
   hashMapOf,
   hashSetOf,
@@ -12,7 +10,7 @@ export {
   mutableHashSetOf,
   mutableListOf,
   mutableMapOf,
-  pair
+  pair,
 } from "./Functions";
 export { IHashMap } from "./hashMaps/IHashMap";
 export { IMutableHashMap } from "./hashMaps/IMutableHashMap";
@@ -23,5 +21,3 @@ export { IMutableList } from "./lists/IMutableList";
 export { IMap } from "./maps/IMap";
 export { IMapExtension } from "./maps/IMapExtension";
 export { IMutableMap } from "./maps/IMutableMap";
-export { Pair } from "./Pair";
-

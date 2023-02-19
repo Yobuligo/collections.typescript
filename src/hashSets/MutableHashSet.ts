@@ -1,4 +1,3 @@
-import { TIndex } from "../collections/Type";
 import { IList } from "../lists/IList";
 import { HashSet } from "./HashSet";
 import { IMutableHashSet } from "./IMutableHashSet";
@@ -31,7 +30,7 @@ export class MutableHashSet<T>
     this._size--;
   }
 
-  removeAt(index: TIndex): void {
+  removeAt(index: number): void {
     if (this.isEmpty() || this.elements[index] === undefined) {
       return;
     }

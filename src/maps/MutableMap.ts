@@ -1,8 +1,8 @@
+import { Pair } from "@yobuligo/core.typescript";
 import { hashMapOf, mapOf, mutableHashMapOf, mutableMapOf } from "../Functions";
 import { IHashMap } from "../hashMaps/IHashMap";
 import { IMutableHashMap } from "../hashMaps/IMutableHashMap";
 import { MutableList } from "../lists/MutableList";
-import { Pair } from "../Pair";
 import { IMap } from "./IMap";
 import { IMutableMap } from "./IMutableMap";
 

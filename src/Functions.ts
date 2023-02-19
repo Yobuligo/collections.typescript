@@ -1,8 +1,8 @@
+import { Pair } from "@yobuligo/core.typescript";
 import { HashMap } from "./hashMaps/HashMap";
 import { IHashMap } from "./hashMaps/IHashMap";
 import { IMutableHashMap } from "./hashMaps/IMutableHashMap";
 import { MutableHashMap } from "./hashMaps/MutableHashMap";
-import { HashGenerator } from "./hashSets/HashGenerator";
 import { HashSet } from "./hashSets/HashSet";
 import { IHashSet } from "./hashSets/IHashSet";
 import { IMutableHashSet } from "./hashSets/IMutableHashSet";
@@ -15,9 +15,6 @@ import { IMap } from "./maps/IMap";
 import { IMutableMap } from "./maps/IMutableMap";
 import { Map } from "./maps/Map";
 import { MutableMap } from "./maps/MutableMap";
-import { Pair } from "./Pair";
-
-export const hashGenerator = new HashGenerator();
 
 export const listOf = <T>(...elements: T[]): IList<T> => {
   return new List(...elements);

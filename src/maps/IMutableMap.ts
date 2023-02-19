@@ -1,5 +1,5 @@
+import { Pair } from "@yobuligo/core.typescript";
 import { IMutableList } from "../lists/IMutableList";
-import { Pair } from "../Pair";
 import { IMapExtension } from "./IMapExtension";
 
 export interface IMutableMap<K, V>

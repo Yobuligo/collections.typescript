@@ -1,0 +1,18 @@
+import { Pair } from "@yobuligo/core.typescript";
+import { IHashMap } from "./hashMaps/IHashMap";
+import { IMutableHashMap } from "./hashMaps/IMutableHashMap";
+import { IHashSet } from "./hashSets/IHashSet";
+import { IMutableHashSet } from "./hashSets/IMutableHashSet";
+import { IList } from "./lists/IList";
+import { IMutableList } from "./lists/IMutableList";
+import { IMap } from "./maps/IMap";
+import { IMutableMap } from "./maps/IMutableMap";
+export declare const listOf: <T>(...elements: T[]) => IList<T>;
+export declare const mutableListOf: <T>(...elements: T[]) => IMutableList<T>;
+export declare const mapOf: <K, V>(...elements: Pair<K, V>[]) => IMap<K, V>;
+export declare const mutableMapOf: <K, V>(...elements: Pair<K, V>[]) => IMutableMap<K, V>;
+export declare const hashSetOf: <T>(...elements: T[]) => IHashSet<T>;
+export declare const mutableHashSetOf: <T>(...elements: T[]) => IMutableHashSet<T>;
+export declare const hashMapOf: <K, V>(...elements: Pair<K, V>[]) => IHashMap<K, V>;
+export declare const mutableHashMapOf: <K, V>(...elements: Pair<K, V>[]) => IMutableHashMap<K, V>;
+export declare const pair: <K, V>(first: K, second: V) => Pair<K, V>;

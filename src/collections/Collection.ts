@@ -1,5 +1,4 @@
-import { IndexOutOfBoundsException } from "../exceptions/IndexOutOfBoundsException";
-import { NoSuchElementException } from "../exceptions/NoSuchElementException";
+import { NoSuchElementException } from "@yobuligo/core.typescript";
 import {
   hashSetOf,
   listOf,
@@ -11,7 +10,6 @@ import { IMutableHashSet } from "../hashSets/IMutableHashSet";
 import { IList } from "../lists/IList";
 import { IMutableList } from "../lists/IMutableList";
 import { ICollection } from "./ICollection";
-import { TIndex } from "./Type";
 
 export class Collection<T> implements ICollection<T> {
   protected _size: number;
@@ -28,11 +26,7 @@ export class Collection<T> implements ICollection<T> {
   }
 
   contains(element: T): boolean {
-    if (this.isEmpty() || this.elements.indexOf(element) == -1) {
-      return false;
-    } else {
-      return true;
-    }
+    return !this.containsNot(element);
   }
 
   containsAll(...elements: T[]): boolean {
@@ -41,23 +35,27 @@ export class Collection<T> implements ICollection<T> {
     }
 
     for (const element of elements) {
-      if (!this.contains(element)) {
+      if (this.containsNot(element)) {
         return false;
       }
     }
     return true;
   }
 
-  elementAt(index: TIndex): T {
+  containsNot(element: T): boolean {
+    return this.isEmpty() || this.elements.indexOf(element) == -1;
+  }
+
+  elementAt(index: number): T {
     if (this.isEmpty() || this.elements[index] === undefined) {
-      throw new IndexOutOfBoundsException(
+      throw new NoSuchElementException(
         `Empty list does not contain element at index ${index}`
       );
     }
     return this.elements[index];
   }
 
-  elementAtOrNull(index: TIndex): T | undefined {
+  elementAtOrNull(index: number): T | undefined {
     if (this.isEmpty() || this.elements[index] === undefined) {
       return undefined;
     }
@@ -65,19 +63,19 @@ export class Collection<T> implements ICollection<T> {
   }
 
   filter(block: (element: T) => boolean): ICollection<T> {
-    let resultList: T[] = [];
-    for (const object of this.elements) {
-      if (block(object)) {
-        resultList.push(object);
+    const resultList: T[] = [];
+    for (const element of this.elements) {
+      if (block(element)) {
+        resultList.push(element);
       }
     }
     return new Collection(...resultList);
   }
 
   find(block: (element: T) => boolean): T | undefined {
-    for (const object of this.elements) {
-      if (block(object)) {
-        return object;
+    for (const element of this.elements) {
+      if (block(element)) {
+        return element;
       }
     }
     return undefined;
@@ -91,16 +89,16 @@ export class Collection<T> implements ICollection<T> {
   }
 
   firstOrNull(): T | undefined {
-    if (this.isEmpty()) {
-      return undefined;
-    } else {
-      return this.elements[0];
-    }
+    return this.elements[0];
   }
 
-  forEach(block: (element: T) => any | undefined): T | undefined {
+  forEach<R>(
+    block: (element: T, index: number) => R | undefined
+  ): R | undefined {
+    let index = 0;
     for (const element of this.elements) {
-      const result = block(element);
+      const result = block(element, index);
+      index++;
       if (result != null) {
         return result;
       }
@@ -108,24 +106,16 @@ export class Collection<T> implements ICollection<T> {
     return undefined;
   }
 
-  indexOf(element: T): TIndex {
+  indexOf(element: T): number {
     return this.elements.indexOf(element);
   }
 
   isEmpty(): boolean {
-    if (this._size == 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return this._size === 0;
   }
 
   isNotEmpty(): boolean {
-    if (this.isEmpty()) {
-      return false;
-    } else {
-      return true;
-    }
+    return !this.isEmpty();
   }
 
   last(): T {
@@ -143,20 +133,16 @@ export class Collection<T> implements ICollection<T> {
   }
 
   map<R>(block: (element: T) => R): ICollection<R> {
-    let mappedElements = [];
-    for (const object of this.elements) {
-      const mappedElement = block(object);
+    const mappedElements = [];
+    for (const element of this.elements) {
+      const mappedElement = block(element);
       mappedElements.push(mappedElement);
     }
     return new Collection(...mappedElements);
   }
 
   toArray(): T[] {
-    const arrayList: T[] = [];
-    for (const element of this.elements) {
-      arrayList.push(element);
-    }
-    return arrayList;
+    return [...this.elements];
   }
 
   toHashSet(): IHashSet<T> {
