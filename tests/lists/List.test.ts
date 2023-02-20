@@ -345,12 +345,15 @@ describe("List", () => {
 
     it("returns hash set with all entries for filled list", () => {
       let index = 0;
+      let called = false;
       const hashSet = listOf(1, 2, 3).toHashSet();
       expect(hashSet.size).equals(3);
       hashSet.forEach((element) => {
         index++;
+        called = true;
         expect(element).equals(index);
       });
+      expect(true).true;
     });
   });
 
@@ -363,12 +366,15 @@ describe("List", () => {
 
     it("returns list with all entries for filled list", () => {
       let index = 0;
+      let called = false;
       const list = listOf(1, 2, 3).toList();
       expect(list.size).equals(3);
       list.forEach((element) => {
         index++;
+        called = true;
         expect(element).equals(index);
       });
+      expect(true).true;
     });
   });
 
@@ -382,12 +388,15 @@ describe("List", () => {
 
     it("returns hash set with all entries for filled list", () => {
       let index = 0;
+      let called = false;
       const mutableHashSet = listOf(1, 2, 3).toMutableHashSet();
       expect(mutableHashSet.size).equals(3);
       mutableHashSet.forEach((element) => {
         index++;
+        called = true;
         expect(element).equals(index);
       });
+      expect(true).true;
     });
   });
 
