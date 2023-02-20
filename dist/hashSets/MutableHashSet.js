@@ -36,35 +36,35 @@ var MutableHashSet = /** @class */ (function (_super) {
         for (var _i = 0; _i < arguments.length; _i++) {
             elements[_i] = arguments[_i];
         }
-        for (var _a = 0, elements_1 = elements; _a < elements_1.length; _a++) {
-            var element = elements_1[_a];
-            this.addElement(element);
-        }
+        this.addElements(elements);
     };
     MutableHashSet.prototype.remove = function (element) {
-        if (!this.contains(element)) {
-            return;
+        var cursor = this.elements.get(element);
+        if (cursor) {
+            this.elements.delete(element);
+            this.keys.splice(cursor, 1);
+            return true;
         }
-        this.elements.splice(this.elements.indexOf(element), 1);
-        this._size--;
+        return false;
     };
     MutableHashSet.prototype.removeAt = function (index) {
-        if (this.isEmpty() || this.elements[index] === undefined) {
-            return;
+        var element = this.keys[index];
+        if (element) {
+            this.elements.delete(element);
+            this.keys.splice(index, 1);
+            return true;
         }
-        var indexInternal = this.elements.indexOf(this.elements[index]);
-        this.elements.splice(indexInternal, 1);
-        this._size--;
+        return false;
     };
     MutableHashSet.prototype.removeAll = function () {
-        this.elements.splice(0);
-        this._size = 0;
+        this.elements = new Map();
+        this.keys = [];
     };
     MutableHashSet.prototype.removeFirst = function () {
-        this.remove(this.first());
+        return this.remove(this.first());
     };
     MutableHashSet.prototype.removeLast = function () {
-        this.remove(this.last());
+        return this.remove(this.last());
     };
     return MutableHashSet;
 }(HashSet_1.HashSet));

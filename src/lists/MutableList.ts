@@ -7,51 +7,36 @@ export class MutableList<T>
   implements IMutableList<T>
 {
   add(element: T): void;
-  add(index: number, element: T): void;
-  add(index: unknown, element?: unknown): void {
-    const elementsTemp: T[] = [];
-    if (element === undefined) {
-      const elementTemp = index as T;
-      elementsTemp.push(elementTemp);
-      this.addArray(...elementsTemp);
+  add(element: T, index: number): void;
+  add(element: unknown, index?: unknown): void {
+    if (index !== undefined) {
+      this.addArray([element as T], index as number);
     } else {
-      const indexTemp = index as number;
-      const elementTemp = element as T;
-      elementsTemp.push(elementTemp);
-      this.addArray(indexTemp, ...elementsTemp);
+      this.addArray([element as T]);
     }
   }
 
   addAll(elements: IList<T>): void;
-  addAll(index: number, elements: IList<T>): void;
-  addAll(index: unknown, elements?: unknown): void {
-    if (elements === undefined) {
-      const elementsTemp = index as IList<T>;
-      this.addArray(...elementsTemp.toArray());
+  addAll(elements: IList<T>, index: number): void;
+  addAll(elements: unknown, index?: unknown): void {
+    if (index !== undefined) {
+      this.addArray((elements as IList<T>).toArray(), index as number);
     } else {
-      const indexTemp = index as number;
-      const elementsTemp = elements as IList<T>;
-      this.addArray(indexTemp, ...elementsTemp.toArray());
+      this.addArray((elements as IList<T>).toArray());
     }
   }
 
-  addArray(...elements: T[]): void;
-  addArray(index: number, ...elements: T[]): void;
-  addArray(index?: unknown, ...elements: T[]): void {
-    if (elements === undefined) {
-      const elementsTemp = index as T[];
-      this.elements.push(...elementsTemp);
-      this._size += elementsTemp.length;
+  addArray(elements: T[]): void;
+  addArray(elements: T[], index: number): void;
+  addArray(elements: unknown, index?: unknown): void {
+    if (index !== undefined) {
+      const cursor = index as number;
+      const leftList = this.elements.slice(0, cursor);
+      const rightList = this.elements.slice(cursor, this.elements.length);
+      this.elements = [...leftList, ...(elements as T[]), ...rightList];
     } else {
-      const indexTemp = index as number;
-      const elementsTemp = elements as T[];
-      const elementsResult = this.elements.slice(0, indexTemp as number);
-      elementsResult.push(...elementsTemp);
-      elementsResult.push(
-        ...this.elements.slice(indexTemp as number, this.elements.length)
-      );
-      this.elements = elementsResult;
-      this._size = this.elements.length;
+      this.elements.push(...(elements as T[]));
     }
+    this._size = this.elements.length;
   }
 }

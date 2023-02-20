@@ -24,28 +24,30 @@ var MutableCollection = /** @class */ (function (_super) {
     }
     MutableCollection.prototype.remove = function (element) {
         if (this.containsNot(element)) {
-            return;
+            return false;
         }
         this.elements.splice(this.elements.indexOf(element), 1);
         this._size--;
+        return true;
     };
     MutableCollection.prototype.removeAt = function (index) {
         if (this.isEmpty() || this.elements[index] === undefined) {
-            return;
+            return false;
         }
         var indexInternal = this.elements.indexOf(this.elements[index]);
         this.elements.splice(indexInternal, 1);
         this._size--;
+        return true;
     };
     MutableCollection.prototype.removeAll = function () {
         this.elements.splice(0);
         this._size = 0;
     };
     MutableCollection.prototype.removeFirst = function () {
-        this.remove(this.first());
+        return this.remove(this.first());
     };
     MutableCollection.prototype.removeLast = function () {
-        this.remove(this.last());
+        return this.remove(this.last());
     };
     return MutableCollection;
 }(Collection_1.Collection));

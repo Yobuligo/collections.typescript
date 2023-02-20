@@ -5,9 +5,9 @@ export declare class MutableHashSet<T> extends HashSet<T> implements IMutableHas
     add(element: T): void;
     addAll(elements: IList<T>): void;
     addArray(...elements: T[]): void;
-    remove(element: T): void;
-    removeAt(index: number): void;
+    remove(element: T): boolean;
+    removeAt(index: number): boolean;
     removeAll(): void;
-    removeFirst(): void;
-    removeLast(): void;
+    removeFirst(): boolean;
+    removeLast(): boolean;
 }

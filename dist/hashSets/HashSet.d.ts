@@ -1,13 +1,35 @@
-import { List } from "../lists/List";
+import { IList } from "../lists/IList";
+import { IMutableList } from "../lists/IMutableList";
 import { IHashSet } from "./IHashSet";
-export declare class HashSet<T> extends List<T> implements IHashSet<T> {
-    private hashIndex;
-    private hashKeys;
+import { IMutableHashSet } from "./IMutableHashSet";
+export declare class HashSet<T> implements IHashSet<T> {
+    protected elements: Map<T, number>;
+    protected keys: T[];
+    private cursor;
+    get size(): number;
+    get lastIndex(): number;
     constructor(...elements: T[]);
     contains(element: T): boolean;
+    containsAll(...elements: T[]): boolean;
+    containsNot(element: T): boolean;
+    elementAt(index: number): T;
+    elementAtOrNull(index: number): T | undefined;
+    filter(block: (element: T) => boolean): IList<T>;
+    find(block: (element: T) => boolean): T | undefined;
+    first(): T;
+    firstOrNull(): T | undefined;
+    forEach<R>(block: (element: T, index: number) => R | undefined): R | undefined;
+    indexOf(element: T): number;
+    isEmpty(): boolean;
+    isNotEmpty(): boolean;
+    last(): T;
+    lastOrNull(): T | undefined;
+    map<R>(block: (element: T) => R): IList<R>;
+    toArray(): T[];
+    toHashSet(): IHashSet<T>;
+    toList(): IList<T>;
+    toMutableHashSet(): IMutableHashSet<T>;
+    toMutableList(): IMutableList<T>;
+    protected addElements(elements: T[]): void;
     protected addElement(element: T): void;
-    private addElements;
-    private fetchHashKey;
-    private findHashKey;
-    private createHashKey;
 }

@@ -1,9 +1,9 @@
 import { Collection } from "./Collection";
 import { IMutableCollection } from "./IMutableCollection";
-export declare class MutableCollection<T> extends Collection<T> implements IMutableCollection<T> {
-    remove(element: T): void;
-    removeAt(index: number): void;
+export declare abstract class MutableCollection<T> extends Collection<T> implements IMutableCollection<T> {
+    remove(element: T): boolean;
+    removeAt(index: number): boolean;
     removeAll(): void;
-    removeFirst(): void;
-    removeLast(): void;
+    removeFirst(): boolean;
+    removeLast(): boolean;
 }

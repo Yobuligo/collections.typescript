@@ -24,7 +24,7 @@ export declare abstract class Collection<T> implements ICollection<T> {
     isNotEmpty(): boolean;
     last(): T;
     lastOrNull(): T | undefined;
-    map<R>(block: (element: T) => R): ICollection<R>;
+    map<R>(block: (element: T) => R): IList<R>;
     toArray(): T[];
     toHashSet(): IHashSet<T>;
     toList(): IList<T>;

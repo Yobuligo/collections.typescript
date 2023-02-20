@@ -54,10 +54,8 @@ var Collection = /** @class */ (function () {
         return this.isEmpty() || this.elements.indexOf(element) == -1;
     };
     Collection.prototype.elementAt = function (index) {
-        if (this.isEmpty() || this.elements[index] === undefined) {
-            throw new core_typescript_1.NoSuchElementException("Empty list does not contain element at index ".concat(index));
-        }
-        return this.elements[index];
+        var _a;
+        return ((_a = this.elementAtOrNull(index)) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("Empty list does not contain element at index ".concat(index))));
     };
     Collection.prototype.elementAtOrNull = function (index) {
         if (this.isEmpty() || this.elements[index] === undefined) {
@@ -85,10 +83,8 @@ var Collection = /** @class */ (function () {
         return undefined;
     };
     Collection.prototype.first = function () {
-        if (this.isEmpty()) {
-            throw new core_typescript_1.NoSuchElementException("List is empty");
-        }
-        return this.elements[0];
+        var _a;
+        return ((_a = this.firstOrNull()) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("List is empty")));
     };
     Collection.prototype.firstOrNull = function () {
         return this.elements[0];
@@ -99,7 +95,7 @@ var Collection = /** @class */ (function () {
             var element = _a[_i];
             var result = block(element, index);
             index++;
-            if (result != null) {
+            if (result !== undefined) {
                 return result;
             }
         }
@@ -115,10 +111,8 @@ var Collection = /** @class */ (function () {
         return !this.isEmpty();
     };
     Collection.prototype.last = function () {
-        if (this.isEmpty()) {
-            throw new core_typescript_1.NoSuchElementException("List is empty");
-        }
-        return this.elements[this.elements.length - 1];
+        var _a;
+        return ((_a = this.lastOrNull()) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("List is empty")));
     };
     Collection.prototype.lastOrNull = function () {
         if (this.isEmpty()) {

@@ -16,7 +16,7 @@ export class MutableHashSet<T>
     });
   }
 
-  addArray(...elements: T[]): void {
+  addArray(elements: T[]): void {
     this.addElements(elements);
   }
 

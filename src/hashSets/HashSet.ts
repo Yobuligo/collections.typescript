@@ -16,7 +16,9 @@ export class HashSet<T> implements IHashSet<T> {
   protected keys: T[] = [];
   private cursor: number = 0;
 
-  size: number = this.elements.size;
+  public get size(): number {
+    return this.elements.size;
+  }
 
   public get lastIndex(): number {
     return this.cursor;

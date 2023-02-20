@@ -1,10 +1,9 @@
-import { listOf } from "./../../src/Functions";
-// import { assert, expect } from "chai";
-// import { Collection } from "../../main/collections/Collection";
-// import { IndexOutOfBoundsException } from "../../main/exceptions/IndexOutOfBoundsException";
-// import { NoSuchElementException } from "../../main/exceptions/NoSuchElementException";
-
 import { expect } from "chai";
+import { listOf } from "./../../src/Functions";
+import { IHashSet } from "./../../src/hashSets/IHashSet";
+import { IMutableHashSet } from "./../../src/hashSets/IMutableHashSet";
+import { IList } from "./../../src/lists/IList";
+import { IMutableList } from "./../../src/lists/IMutableList";
 
 describe("List", () => {
   describe("contains", () => {
@@ -67,7 +66,7 @@ describe("List", () => {
     });
 
     it("returns element at index", () => {
-      expect(listOf(1, 2, 3).elementAt(1)).eq(2);
+      expect(listOf(1, 2, 3).elementAt(1)).equals(2);
     });
   });
 
@@ -81,7 +80,7 @@ describe("List", () => {
     });
 
     it("returns element at index", () => {
-      expect(listOf(1, 2, 3).elementAtOrNull(1)).eq(2);
+      expect(listOf(1, 2, 3).elementAtOrNull(1)).equals(2);
     });
   });
 
@@ -228,101 +227,189 @@ describe("List", () => {
       expect(listOf(1, 2, 3).indexOf(4)).equals(-1);
     });
   });
+
+  describe("isEmpty", () => {
+    it("returns true for empty list", () => {
+      expect(listOf().isEmpty()).true;
+    });
+
+    it("returns false for filled list", () => {
+      expect(listOf(1, 2, 3).isEmpty()).false;
+    });
+  });
+
+  describe("isNotEmpty", () => {
+    it("returns true for filled list", () => {
+      expect(listOf(1, 2, 3).isNotEmpty()).true;
+    });
+
+    it("returns false for empty list", () => {
+      expect(listOf().isNotEmpty()).false;
+    });
+  });
+
+  describe("last", () => {
+    it("returns last element", () => {
+      expect(listOf(1, 2, 3).last()).equals(3);
+    });
+
+    it("throws NoSuchElementException for empty list", () => {
+      let throwsError = false;
+      try {
+        listOf<number>().last();
+      } catch (error) {
+        throwsError = true;
+      }
+      expect(throwsError).true;
+    });
+  });
+
+  describe("lastOrNull", () => {
+    it("returns last element", () => {
+      expect(listOf(1, 2, 3).lastOrNull()).equals(3);
+    });
+
+    it("returns undefined for empty list", () => {
+      expect(listOf<number>().lastOrNull()).undefined;
+    });
+  });
+
+  describe("map", () => {
+    it("returns mapped values", () => {
+      const resultList = listOf(1, 2, 3, 4, 5).map((element) => {
+        return element.toString();
+      });
+
+      expect(resultList.contains("1")).true;
+      expect(resultList.contains("2")).true;
+      expect(resultList.contains("3")).true;
+      expect(resultList.contains("4")).true;
+      expect(resultList.contains("5")).true;
+    });
+
+    it("returns a new initialized list", () => {
+      const list = listOf(1, 2, 3, 4, 5);
+      const resultList = list.map((element) => {
+        return element.toString();
+      });
+
+      expect(resultList).not.equals(list);
+    });
+
+    it("returns a new initialized list for for empty list", () => {
+      const resultList = listOf<number>().map((element) => {
+        return element.toString();
+      });
+      expect(resultList).not.null;
+    });
+
+    it("returns a new initialized but empty list", () => {
+      const resultList = listOf<number>().map((element) => {
+        return element.toString();
+      });
+      expect(resultList.isEmpty()).true;
+    });
+  });
+
+  describe("size", () => {
+    it("returns 0 for empty list", () => {
+      expect(listOf().size).equal(0);
+    });
+
+    it("returns correct size for filled list", () => {
+      expect(listOf(1, 2, 3).size).equals(3);
+    });
+  });
+
+  describe("toArray", () => {
+    it("returns empty array for empty list", () => {
+      const array = listOf<number>().toArray();
+      expect(array).not.undefined;
+    });
+
+    it("returns array with all entries for filled list", () => {
+      const array = listOf(1, 2, 3).toArray();
+      expect(array.length).equals(3);
+      expect(array[0]).equals(1);
+      expect(array[1]).equals(2);
+      expect(array[2]).equals(3);
+    });
+  });
+
+  describe("toHashSet", () => {
+    it("returns empty instance of hash set for empty list", () => {
+      const hashSet: IHashSet<number> = listOf<number>().toHashSet();
+      expect(hashSet).not.undefined;
+      expect(hashSet.size).equals(0);
+    });
+
+    it("returns hash set with all entries for filled list", () => {
+      let index = 0;
+      const hashSet = listOf(1, 2, 3).toHashSet();
+      expect(hashSet.size).equals(3);
+      hashSet.forEach((element) => {
+        index++;
+        expect(element).equals(index);
+      });
+    });
+  });
+
+  describe("toList", () => {
+    it("returns empty instance of list for empty list", () => {
+      const list: IList<number> = listOf<number>().toList();
+      expect(list).not.undefined;
+      expect(list.size).equals(0);
+    });
+
+    it("returns list with all entries for filled list", () => {
+      let index = 0;
+      const list = listOf(1, 2, 3).toList();
+      expect(list.size).equals(3);
+      list.forEach((element) => {
+        index++;
+        expect(element).equals(index);
+      });
+    });
+  });
+
+  describe("toMutableHashSet", () => {
+    it("returns empty instance of mutable hash set for empty list", () => {
+      const mutableHashSet: IMutableHashSet<number> =
+        listOf<number>().toMutableHashSet();
+      expect(mutableHashSet).not.undefined;
+      expect(mutableHashSet.size).equals(0);
+    });
+
+    it("returns hash set with all entries for filled list", () => {
+      let index = 0;
+      const mutableHashSet = listOf(1, 2, 3).toMutableHashSet();
+      expect(mutableHashSet.size).equals(3);
+      mutableHashSet.forEach((element) => {
+        index++;
+        expect(element).equals(index);
+      });
+    });
+  });
+
+  describe("toMutableList", () => {
+    it("returns empty instance of mutable list for empty list", () => {
+      const mutableList: IMutableList<number> =
+        listOf<number>().toMutableList();
+      expect(mutableList).not.undefined;
+      expect(mutableList.size).equals(0);
+    });
+
+    it("returns mutable list with all entries for filled list", () => {
+      let index = 0;
+      let called = false;
+      const mutableList = listOf(1, 2, 3).toMutableList();
+      expect(mutableList.size).equals(3);
+      mutableList.forEach((element) => {
+        index++;
+        called = true;
+        expect(element).equals(index);
+      });
+      expect(true).true;
+    });
+  });
 });
-
-// describe("Collection", () => {
-//   it("Size empty list", () => {
-//     expect(new Collection().size).equals(0);
-//   });
-
-//   it("Size filled list", () => {
-//     expect(new Collection(1, 2, 3, 4, 5).size).equals(5);
-//   });
-
-//   it("IsEmpty for empty list", () => {
-//     expect(new Collection().isEmpty()).true;
-//   });
-
-//   it("IsEmpty for filled list", () => {
-//     expect(new Collection(1, 2, 3, 4, 5).isEmpty()).false;
-//   });
-
-//   it("IsNotEmpty for empty list", () => {
-//     expect(new Collection().isNotEmpty()).false;
-//   });
-
-//   it("IsNotEmpty for filled list", () => {
-//     expect(new Collection(1, 2, 3, 4, 5).isNotEmpty()).true;
-//   });
-
-//   it("isEmpty true", () => {
-//     expect(new Collection().isEmpty()).true;
-//   });
-
-//   it("isEmpty false", () => {
-//     expect(new Collection(1, 2, 3, 4, 5).isEmpty()).false;
-//   });
-
-//   it("isNotEmpty true", () => {
-//     expect(new Collection(1, 2, 3, 4, 5).isNotEmpty()).true;
-//   });
-
-//   it("isNotEmpty false", () => {
-//     expect(new Collection().isNotEmpty()).false;
-//   });
-
-//   it("last", () => {
-//     expect(new Collection(1, 2, 3, 4, 5).last()).equals(5);
-//   });
-
-//   it("last for empty list raises exception", () => {
-//     try {
-//       new Collection().last();
-//     } catch (e) {
-//       expect(e).instanceOf(NoSuchElementException);
-//     }
-//   });
-
-//   it("lastOrNull", () => {
-//     expect(new Collection(1, 2, 3, 4, 5).lastOrNull()).equals(5);
-//   });
-
-//   it("lastOrNull for empty list returns null", () => {
-//     expect(new Collection().lastOrNull()).null;
-//   });
-
-//   it("map", () => {
-//     const resultList = new Collection(1, 2, 3, 4, 5).map((element) => {
-//       return element.toString();
-//     });
-
-//     expect(resultList.contains("1")).true;
-//     expect(resultList.contains("2")).true;
-//     expect(resultList.contains("3")).true;
-//     expect(resultList.contains("4")).true;
-//     expect(resultList.contains("5")).true;
-//   });
-
-//   it("map returned new list", () => {
-//     const collection = new Collection(1, 2, 3, 4, 5);
-//     const resultList = collection.map((element) => {
-//       return element.toString();
-//     });
-
-//     expect(resultList).not.equals(collection);
-//   });
-
-//   it("map for empty list returns list", () => {
-//     const resultList = new Collection().map((element) => {
-//       return element.toString();
-//     });
-//     expect(resultList).not.null;
-//   });
-
-//   it("map for empty list returns empty list", () => {
-//     const resultList = new Collection().map((element) => {
-//       return element.toString();
-//     });
-//     expect(resultList.isEmpty()).true;
-//   });
-// });
