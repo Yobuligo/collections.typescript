@@ -5,21 +5,23 @@ export abstract class MutableCollection<T>
   extends Collection<T>
   implements IMutableCollection<T>
 {
-  remove(element: T): void {
+  remove(element: T): boolean {
     if (this.containsNot(element)) {
-      return;
+      return false;
     }
     this.elements.splice(this.elements.indexOf(element), 1);
     this._size--;
+    return true;
   }
 
-  removeAt(index: number): void {
+  removeAt(index: number): boolean {
     if (this.isEmpty() || this.elements[index] === undefined) {
-      return;
+      return false;
     }
     const indexInternal = this.elements.indexOf(this.elements[index]);
     this.elements.splice(indexInternal, 1);
     this._size--;
+    return true;
   }
 
   removeAll(): void {
@@ -27,11 +29,11 @@ export abstract class MutableCollection<T>
     this._size = 0;
   }
 
-  removeFirst(): void {
-    this.remove(this.first());
+  removeFirst(): boolean {
+    return this.remove(this.first());
   }
 
-  removeLast(): void {
-    this.remove(this.last());
+  removeLast(): boolean {
+    return this.remove(this.last());
   }
 }

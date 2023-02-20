@@ -17,38 +17,39 @@ export class MutableHashSet<T>
   }
 
   addArray(...elements: T[]): void {
-    for (const element of elements) {
-      this.addElement(element);
-    }
+    this.addElements(elements);
   }
 
-  remove(element: T): void {
-    if (!this.contains(element)) {
-      return;
+  remove(element: T): boolean {
+    const cursor = this.elements.get(element);
+    if (cursor) {
+      this.elements.delete(element);
+      this.keys.splice(cursor, 1);
+      return true;
     }
-    this.elements.splice(this.elements.indexOf(element), 1);
-    this._size--;
+    return false;
   }
 
-  removeAt(index: number): void {
-    if (this.isEmpty() || this.elements[index] === undefined) {
-      return;
+  removeAt(index: number): boolean {
+    const element = this.keys[index];
+    if (element) {
+      this.elements.delete(element);
+      this.keys.splice(index, 1);
+      return true;
     }
-    const indexInternal = this.elements.indexOf(this.elements[index]);
-    this.elements.splice(indexInternal, 1);
-    this._size--;
+    return false;
   }
 
   removeAll(): void {
-    this.elements.splice(0);
-    this._size = 0;
+    this.elements = new Map();
+    this.keys = [];
   }
 
-  removeFirst(): void {
-    this.remove(this.first());
+  removeFirst(): boolean {
+    return this.remove(this.first());
   }
 
-  removeLast(): void {
-    this.remove(this.last());
+  removeLast(): boolean {
+    return this.remove(this.last());
   }
 }

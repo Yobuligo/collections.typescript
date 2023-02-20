@@ -1,4 +1,4 @@
-import { NoSuchElementException } from "@yobuligo/core.typescript";
+import { error, NoSuchElementException } from "@yobuligo/core.typescript";
 import {
   hashSetOf,
   listOf,
@@ -48,12 +48,14 @@ export abstract class Collection<T> implements ICollection<T> {
   }
 
   elementAt(index: number): T {
-    if (this.isEmpty() || this.elements[index] === undefined) {
-      throw new NoSuchElementException(
-        `Empty list does not contain element at index ${index}`
-      );
-    }
-    return this.elements[index];
+    return (
+      this.elementAtOrNull(index) ??
+      error(
+        new NoSuchElementException(
+          `Empty list does not contain element at index ${index}`
+        )
+      )
+    );
   }
 
   elementAtOrNull(index: number): T | undefined {
@@ -83,10 +85,9 @@ export abstract class Collection<T> implements ICollection<T> {
   }
 
   first(): T {
-    if (this.isEmpty()) {
-      throw new NoSuchElementException("List is empty");
-    }
-    return this.elements[0];
+    return (
+      this.firstOrNull() ?? error(new NoSuchElementException("List is empty"))
+    );
   }
 
   firstOrNull(): T | undefined {
@@ -100,7 +101,7 @@ export abstract class Collection<T> implements ICollection<T> {
     for (const element of this.elements) {
       const result = block(element, index);
       index++;
-      if (result != null) {
+      if (result !== undefined) {
         return result;
       }
     }
@@ -120,10 +121,9 @@ export abstract class Collection<T> implements ICollection<T> {
   }
 
   last(): T {
-    if (this.isEmpty()) {
-      throw new NoSuchElementException("List is empty");
-    }
-    return this.elements[this.elements.length - 1];
+    return (
+      this.lastOrNull() ?? error(new NoSuchElementException("List is empty"))
+    );
   }
 
   lastOrNull(): T | undefined {
@@ -133,8 +133,8 @@ export abstract class Collection<T> implements ICollection<T> {
     return this.elements[this.elements.length - 1];
   }
 
-  map<R>(block: (element: T) => R): ICollection<R> {
-    const mappedElements = [];
+  map<R>(block: (element: T) => R): IList<R> {
+    const mappedElements: R[] = [];
     for (const element of this.elements) {
       const mappedElement = block(element);
       mappedElements.push(mappedElement);

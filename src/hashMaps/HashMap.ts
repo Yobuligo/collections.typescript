@@ -11,18 +11,18 @@ export class HashMap<K, V>
   implements IHashMap<K, V>
 {
   toHashMap(): IHashMap<K, V> {
-    return hashMapOf(...this.elements);
+    return hashMapOf(...this.toArray());
   }
 
   toMap(): IMap<K, V> {
-    return mapOf(...this.elements);
+    return mapOf(...this.toArray());
   }
 
   toMutableHashMap(): IMutableHashMap<K, V> {
-    return mutableHashMapOf(...this.elements);
+    return mutableHashMapOf(...this.toArray());
   }
 
   toMutableMap(): IMutableMap<K, V> {
-    return mutableMapOf(...this.elements);
+    return mutableMapOf(...this.toArray());
   }
 }
