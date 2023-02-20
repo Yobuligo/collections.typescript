@@ -1,6 +1,7 @@
 import { IList } from "./../lists/IList";
 import { ICollectionExtension } from "./ICollectionExtension";
 
+
 export interface ICollection<T> extends ICollectionExtension<T> {
   readonly size: number;
   readonly lastIndex: number;
