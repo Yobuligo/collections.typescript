@@ -31,51 +31,34 @@ var MutableList = /** @class */ (function (_super) {
     function MutableList() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    MutableList.prototype.add = function (index, element) {
-        var elementsTemp = [];
-        if (element === undefined) {
-            var elementTemp = index;
-            elementsTemp.push(elementTemp);
-            this.addArray.apply(this, elementsTemp);
+    MutableList.prototype.add = function (element, index) {
+        if (index !== undefined) {
+            this.addArray([element], index);
         }
         else {
-            var indexTemp = index;
-            var elementTemp = element;
-            elementsTemp.push(elementTemp);
-            this.addArray.apply(this, __spreadArray([indexTemp], elementsTemp, false));
+            this.addArray([element]);
         }
     };
-    MutableList.prototype.addAll = function (index, elements) {
-        if (elements === undefined) {
-            var elementsTemp = index;
-            this.addArray.apply(this, elementsTemp.toArray());
+    MutableList.prototype.addAll = function (elements, index) {
+        if (index !== undefined) {
+            this.addArray(elements.toArray(), index);
         }
         else {
-            var indexTemp = index;
-            var elementsTemp = elements;
-            this.addArray.apply(this, __spreadArray([indexTemp], elementsTemp.toArray(), false));
+            this.addArray(elements.toArray());
         }
     };
-    MutableList.prototype.addArray = function (index) {
+    MutableList.prototype.addArray = function (elements, index) {
         var _a;
-        var elements = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            elements[_i - 1] = arguments[_i];
-        }
-        if (elements === undefined) {
-            var elementsTemp = index;
-            (_a = this.elements).push.apply(_a, elementsTemp);
-            this._size += elementsTemp.length;
+        if (index !== undefined) {
+            var cursor = index;
+            var leftList = this.elements.slice(0, cursor);
+            var rightList = this.elements.slice(cursor, this.elements.length);
+            this.elements = __spreadArray(__spreadArray(__spreadArray([], leftList, true), elements, true), rightList, true);
         }
         else {
-            var indexTemp = index;
-            var elementsTemp = elements;
-            var elementsResult = this.elements.slice(0, indexTemp);
-            elementsResult.push.apply(elementsResult, elementsTemp);
-            elementsResult.push.apply(elementsResult, this.elements.slice(indexTemp, this.elements.length));
-            this.elements = elementsResult;
-            this._size = this.elements.length;
+            (_a = this.elements).push.apply(_a, elements);
         }
+        this._size = this.elements.length;
     };
     return MutableList;
 }(MutableCollection_1.MutableCollection));

@@ -16,6 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MutableHashSet = void 0;
+var core_typescript_1 = require("@yobuligo/core.typescript");
 var HashSet_1 = require("./HashSet");
 var MutableHashSet = /** @class */ (function (_super) {
     __extends(MutableHashSet, _super);
@@ -31,16 +32,12 @@ var MutableHashSet = /** @class */ (function (_super) {
             _this.add(element);
         });
     };
-    MutableHashSet.prototype.addArray = function () {
-        var elements = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            elements[_i] = arguments[_i];
-        }
+    MutableHashSet.prototype.addArray = function (elements) {
         this.addElements(elements);
     };
     MutableHashSet.prototype.remove = function (element) {
         var cursor = this.elements.get(element);
-        if (cursor) {
+        if (cursor !== undefined) {
             this.elements.delete(element);
             this.keys.splice(cursor, 1);
             return true;
@@ -61,10 +58,20 @@ var MutableHashSet = /** @class */ (function (_super) {
         this.keys = [];
     };
     MutableHashSet.prototype.removeFirst = function () {
-        return this.remove(this.first());
+        var _this = this;
+        var passed = false;
+        (0, core_typescript_1.ifNotNull)(this.firstOrNull(), function (value) {
+            passed = _this.remove(value);
+        });
+        return passed;
     };
     MutableHashSet.prototype.removeLast = function () {
-        return this.remove(this.last());
+        var _this = this;
+        var passed = false;
+        (0, core_typescript_1.ifNotNull)(this.lastOrNull(), function (value) {
+            passed = _this.remove(value);
+        });
+        return passed;
     };
     return MutableHashSet;
 }(HashSet_1.HashSet));

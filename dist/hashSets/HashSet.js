@@ -99,13 +99,15 @@ var HashSet = /** @class */ (function () {
         return undefined;
     };
     HashSet.prototype.forEach = function (block) {
+        var returnValue = undefined;
         this.elements.forEach(function (key, element) {
             var result = block(element, key);
             if (result !== undefined) {
-                return result;
+                returnValue = result;
+                return returnValue;
             }
         });
-        return undefined;
+        return returnValue;
     };
     HashSet.prototype.indexOf = function (element) {
         var _a;
@@ -163,9 +165,9 @@ var HashSet = /** @class */ (function () {
         }
     };
     HashSet.prototype.addElement = function (element) {
-        this.cursor++;
         this.elements.set(element, this.cursor);
         this.keys[this.cursor] = element;
+        this.cursor++;
     };
     return HashSet;
 }());

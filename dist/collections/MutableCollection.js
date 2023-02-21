@@ -16,6 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MutableCollection = void 0;
+var core_typescript_1 = require("@yobuligo/core.typescript");
 var Collection_1 = require("./Collection");
 var MutableCollection = /** @class */ (function (_super) {
     __extends(MutableCollection, _super);
@@ -44,10 +45,20 @@ var MutableCollection = /** @class */ (function (_super) {
         this._size = 0;
     };
     MutableCollection.prototype.removeFirst = function () {
-        return this.remove(this.first());
+        var _this = this;
+        var passed = false;
+        (0, core_typescript_1.ifNotNull)(this.firstOrNull(), function (value) {
+            passed = _this.remove(value);
+        });
+        return passed;
     };
     MutableCollection.prototype.removeLast = function () {
-        return this.remove(this.last());
+        var _this = this;
+        var passed = false;
+        (0, core_typescript_1.ifNotNull)(this.lastOrNull(), function (value) {
+            passed = _this.remove(value);
+        });
+        return passed;
     };
     return MutableCollection;
 }(Collection_1.Collection));
