@@ -10,6 +10,11 @@ import { IMutableList } from "../../src/lists/IMutableList";
 // Test with object
 // Test with object and object changed after registration
 
+class Person {
+  firstname = "Stacey";
+  lastname = "Starfish";
+}
+
 describe("HashSet", () => {
   describe("contains", () => {
     it("returns false for empty hash set", () => {
@@ -426,6 +431,37 @@ describe("HashSet", () => {
         expect(element).equals(index);
       });
       expect(true).true;
+    });
+  });
+
+  describe("integration", () => {
+    it("can add objects of the same type multiple times", () => {
+      const hashSet = hashSetOf(new Person(), new Person(), new Person());
+      expect(hashSet.size).equals(3);
+    });
+
+    it("objects with changed content are still found in the hash set", () => {
+      const second = new Person();
+      const hashSet = hashSetOf(new Person(), second, new Person());
+      second.firstname = "Bertha";
+      expect(hashSet.contains(second)).true;
+    });
+
+    it("objects with changed content still have the same hey in the hash set", () => {
+      const firstname = "Bertha";
+      const second = new Person();
+      const hashSet = hashSetOf(new Person(), second, new Person());
+      second.firstname = firstname;
+      expect(hashSet.elementAt(1) === second).true;
+      expect(hashSet.elementAt(1).firstname === firstname).true;
+    });
+
+    it("a changed string value which was added to the hash set has no effect to the hash set", () => {
+      let two = "two";
+      const hashSet = hashSetOf("one", two, "three");
+      two = "four";
+      expect(hashSet.contains(two)).false;
+      expect(hashSet.elementAt(1) === "two").true;
     });
   });
 });
