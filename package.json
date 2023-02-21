@@ -38,6 +38,6 @@
     "/dist"
   ],
   "dependencies": {
-    "@yobuligo/core.typescript": "^1.0.7"
+    "@yobuligo/core.typescript": "^1.0.9"
   }
 }

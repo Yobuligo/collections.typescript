@@ -185,24 +185,40 @@ describe("MutableList", () => {
   });
 
   describe("removeFirst", () => {
-    it("returns false for empty list", ()=>{
-        expect(mutableList.removeFirst()).false
-        
-    })
+    it("returns false for empty list", () => {
+      expect(mutableList.removeFirst()).false;
+    });
 
-    it("returns true for filled list", ()=>{
-        mutableListOf(1,2,3)
-        expect(mutableList.removeFirst()).true
-    })
+    it("returns true for filled list", () => {
+      mutableList = mutableListOf(1, 2, 3);
+      expect(mutableList.removeFirst()).true;
+    });
 
-    it("removes first element", ()=>{
-        mutableListOf(1,2,3)
-        mutableList.removeFirst()
-        expect(mutableList.contains(1)).false
-        expect(mutableList.contains(2)).true
-        expect(mutableList.contains(3)).true
-    })
+    it("removes first element", () => {
+      mutableList = mutableListOf(1, 2, 3);
+      mutableList.removeFirst();
+      expect(mutableList.contains(1)).false;
+      expect(mutableList.contains(2)).true;
+      expect(mutableList.contains(3)).true;
+    });
   });
 
-  describe("removeLast", () => {});
+  describe("removeLast", () => {
+    it("returns false for empty list", () => {
+      expect(mutableList.removeLast()).false;
+    });
+
+    it("returns true for filled list", () => {
+      mutableList = mutableListOf(1, 2, 3);
+      expect(mutableList.removeLast()).true;
+    });
+
+    it("removes last element", () => {
+      mutableList = mutableListOf(1, 2, 3);
+      mutableList.removeLast();
+      expect(mutableList.contains(1)).true;
+      expect(mutableList.contains(2)).true;
+      expect(mutableList.contains(3)).false;
+    });
+  });
 });

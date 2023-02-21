@@ -1,4 +1,4 @@
-import { TODO } from "@yobuligo/core.typescript";
+import { ifNotNull } from "@yobuligo/core.typescript";
 import { Collection } from "./Collection";
 import { IMutableCollection } from "./IMutableCollection";
 
@@ -31,20 +31,18 @@ export abstract class MutableCollection<T>
   }
 
   removeFirst(): boolean {
-    // ifNotNull(this.firstOrNull(), (element)=>{
-    //   return this.remove()
-    // })
-
-    // return false
-    TODO();
+    let passed = false;
+    ifNotNull(this.firstOrNull(), (value) => {
+      passed = this.remove(value);
+    });
+    return passed;
   }
 
   removeLast(): boolean {
-    // ifNotNull(this.lastOrNull(), (element)=>{
-    //   return this.remove()
-    // })
-
-    // return false
-    TODO();
+    let passed = false;
+    ifNotNull(this.lastOrNull(), (value) => {
+      passed = this.remove(value);
+    });
+    return passed;
   }
 }
