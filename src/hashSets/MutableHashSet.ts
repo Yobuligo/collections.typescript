@@ -1,3 +1,4 @@
+import { ifNotNull } from "@yobuligo/core.typescript";
 import { IList } from "../lists/IList";
 import { HashSet } from "./HashSet";
 import { IMutableHashSet } from "./IMutableHashSet";
@@ -22,7 +23,7 @@ export class MutableHashSet<T>
 
   remove(element: T): boolean {
     const cursor = this.elements.get(element);
-    if (cursor) {
+    if (cursor !== undefined) {
       this.elements.delete(element);
       this.keys.splice(cursor, 1);
       return true;
@@ -46,10 +47,18 @@ export class MutableHashSet<T>
   }
 
   removeFirst(): boolean {
-    return this.remove(this.first());
+    let passed = false;
+    ifNotNull(this.firstOrNull(), (value) => {
+      passed = this.remove(value);
+    });
+    return passed;
   }
 
   removeLast(): boolean {
-    return this.remove(this.last());
+    let passed = false;
+    ifNotNull(this.lastOrNull(), (value) => {
+      passed = this.remove(value);
+    });
+    return passed;
   }
 }

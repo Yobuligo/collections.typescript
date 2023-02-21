@@ -10,9 +10,11 @@ describe("List", () => {
     it("returns false for empty list", () => {
       expect(listOf<number>().contains(1)).false;
     });
+
     it("returns false for unknown element", () => {
       expect(listOf(1, 2, 3).contains(4)).false;
     });
+
     it("returns true for known element", () => {
       expect(listOf(1, 2, 3).contains(2)).true;
     });
@@ -206,7 +208,7 @@ describe("List", () => {
     it("returns value with keyword return and finished iteration", () => {
       expect(
         listOf(1, 2, 3, 4, 5).forEach((element) => {
-          if (element == 3) {
+          if (element === 3) {
             return element;
           }
         })

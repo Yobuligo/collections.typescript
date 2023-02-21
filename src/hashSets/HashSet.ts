@@ -102,13 +102,15 @@ export class HashSet<T> implements IHashSet<T> {
   forEach<R>(
     block: (element: T, index: number) => R | undefined
   ): R | undefined {
+    let returnValue = undefined;
     this.elements.forEach((key, element) => {
       const result = block(element, key);
       if (result !== undefined) {
-        return result;
+        returnValue = result;
+        return returnValue;
       }
     });
-    return undefined;
+    return returnValue;
   }
 
   indexOf(element: T): number {
@@ -178,8 +180,8 @@ export class HashSet<T> implements IHashSet<T> {
   }
 
   protected addElement(element: T) {
-    this.cursor++;
     this.elements.set(element, this.cursor);
     this.keys[this.cursor] = element;
+    this.cursor++;
   }
 }

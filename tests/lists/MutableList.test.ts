@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { listOf, mutableListOf } from "./../../src/Functions";
 import { IMutableList } from "./../../src/lists/IMutableList";
+
 describe("MutableList", () => {
   let mutableList: IMutableList<number>;
 
