@@ -5,7 +5,7 @@ import { IHashMap } from "./../../src/hashMaps/IHashMap";
 import { IMutableHashMap } from "./../../src/hashMaps/IMutableHashMap";
 import { IMap } from "./../../src/maps/IMap";
 
-describe("HashMap", () => {
+describe("MutableHashMap", () => {
   describe("constructor", () => {
     it("creates instance of hash map", () => {
       const hashMap: IMutableHashMap<number, number> = mutableHashMapOf(
@@ -91,12 +91,11 @@ describe("HashMap", () => {
       expect(called).true;
     });
 
-    it("doesn't remove duplicates", () => {
+    it("removes duplicates", () => {
       const element = pair(1, 1);
       const map = mutableHashMapOf(element, element).toMap();
-      expect(map.size).equals(2);
+      expect(map.size).equals(1);
       expect(map.elementAt(0) === element).true;
-      expect(map.elementAt(1) === element).true;
     });
   });
 
@@ -175,12 +174,11 @@ describe("HashMap", () => {
       expect(called).true;
     });
 
-    it("doesn't remove duplicates", () => {
+    it("removes duplicates", () => {
       const element = pair(1, 1);
       const mutableMap = mutableHashMapOf(element, element).toMutableMap();
-      expect(mutableMap.size).equals(2);
+      expect(mutableMap.size).equals(1);
       expect(mutableMap.elementAt(0) === element).true;
-      expect(mutableMap.elementAt(1) === element).true;
     });
   });
 });

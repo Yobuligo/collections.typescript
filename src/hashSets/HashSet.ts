@@ -1,4 +1,4 @@
-import { error, NoSuchElementException } from "@yobuligo/core.typescript";
+import { error, NoSuchElementException, TODO } from "@yobuligo/core.typescript";
 import { IList } from "../lists/IList";
 import { IMutableList } from "../lists/IMutableList";
 import {
@@ -48,6 +48,14 @@ export class HashSet<T> implements IHashSet<T> {
 
   containsNot(element: T): boolean {
     return !this.elements.has(element);
+  }
+
+  distinct(): IList<T> {
+    return TODO();
+  }
+
+  distinctBy<K extends keyof T>(selector: () => K): IList<T> {
+    return TODO();
   }
 
   elementAt(index: number): T {
@@ -180,6 +188,9 @@ export class HashSet<T> implements IHashSet<T> {
   }
 
   protected addElement(element: T) {
+    if (this.elements.has(element)) {
+      return;
+    }
     this.elements.set(element, this.nextCursor);
     this.keys[this.nextCursor] = element;
     this.nextCursor++;

@@ -1,4 +1,4 @@
-import { println } from '@yobuligo/core.typescript';
+import { repeat } from "@yobuligo/core.typescript";
 import { expect } from "chai";
 import { listOf, mutableHashSetOf } from "./../../src/Functions";
 import { IMutableHashSet } from "./../../src/hashSets/IMutableHashSet";
@@ -17,7 +17,7 @@ describe("MutableHashSet", () => {
       expect(mutableHashSet.contains(1)).true;
     });
 
-    it("adds element twice", () => {
+    it("adds same element only once", () => {
       let called = false;
       mutableHashSet.add(1);
       mutableHashSet.add(1);
@@ -27,6 +27,14 @@ describe("MutableHashSet", () => {
         expect(element).equals(1);
       });
       expect(called).true;
+    });
+
+    it("adds element only once without increasing last index", () => {
+      repeat(5, () => {
+        mutableHashSet.add(1);
+      });
+      expect(mutableHashSet.lastIndex).equals(0);
+      expect(mutableHashSet.elementAt(0) === 1).true;
     });
   });
 

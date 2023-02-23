@@ -9,11 +9,12 @@ export interface ICollection<T> extends ICollectionExtension<T> {
    * Returns the number of elements within that list.
    */
   readonly size: number;
-
   readonly lastIndex: number;
   contains(element: T): boolean;
   containsAll(...elements: T[]): boolean;
   containsNot(element: T): boolean;
+  distinct(): IList<T>;
+  distinctBy<K extends keyof T>(selector: () => K): IList<T>;
   elementAt(index: number): T;
   elementAtOrNull(index: number): T | undefined;
   filter(block: (element: T) => boolean): IList<T>;
@@ -29,4 +30,9 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   last(): T;
   lastOrNull(): T | undefined;
   map<R>(block: (element: T) => R): IList<R>;
+  // random(): T;
+  // randomOrNull(): T | undefined;
+  // reversed(): IList<T>;
+  // sortedBy<K extends keyof T>(selector: () => K): IList<T>;
+  // sortedByDescending<K extends keyof T>(selector: () => K): IList<T>;
 }

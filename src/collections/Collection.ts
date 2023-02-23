@@ -1,4 +1,4 @@
-import { error, NoSuchElementException } from "@yobuligo/core.typescript";
+import { error, NoSuchElementException, TODO } from "@yobuligo/core.typescript";
 import {
   hashSetOf,
   listOf,
@@ -40,6 +40,18 @@ export abstract class Collection<T> implements ICollection<T> {
 
   containsNot(element: T): boolean {
     return this.isEmpty() || this.elements.indexOf(element) == -1;
+  }
+
+  distinct(): IList<T> {
+    return TODO();
+    // const mutableHashSet = mutableHashSetOf<T>()
+    // for(const element of this.elements){
+    //   mutableHashSet.add(element)
+    // }
+  }
+
+  distinctBy<K extends keyof T>(selector: () => K): IList<T> {
+    return TODO();
   }
 
   elementAt(index: number): T {
