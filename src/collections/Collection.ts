@@ -159,6 +159,17 @@ export abstract class Collection<T> implements ICollection<T> {
     return new List(...mappedElements);
   }
 
+  random(): T {
+    return (
+      this.randomOrNull() ?? error(new NoSuchElementException("List is empty"))
+    );
+  }
+
+  randomOrNull(): T | undefined {
+    const index = Math.floor(Math.random() * (this.lastIndex + 1));
+    return this.elementAtOrNull(index);
+  }
+
   public get size(): number {
     return this._size;
   }

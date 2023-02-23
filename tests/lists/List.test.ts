@@ -1,3 +1,4 @@
+import { TODO } from "@yobuligo/core.typescript";
 import { expect } from "chai";
 import { listOf } from "./../../src/Functions";
 import { IHashSet } from "./../../src/hashSets/IHashSet";
@@ -363,6 +364,14 @@ describe("List", () => {
       });
       expect(resultList.isEmpty()).true;
     });
+  });
+
+  describe("random", () => {
+    TODO();
+  });
+
+  describe("randomOrNull", () => {
+    TODO();
   });
 
   describe("size", () => {

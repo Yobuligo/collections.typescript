@@ -5,7 +5,7 @@ import {
   hashSetOf,
   listOf,
   mutableHashSetOf,
-  mutableListOf,
+  mutableListOf
 } from "./../Functions";
 import { List } from "./../lists/List";
 import { IHashSet } from "./IHashSet";
@@ -164,6 +164,17 @@ export class HashSet<T> implements IHashSet<T> {
       mappedElements.push(mappedElement);
     });
     return new List(...mappedElements);
+  }
+
+  random(): T {
+    return (
+      this.randomOrNull() ?? error(new NoSuchElementException("List is empty"))
+    );
+  }
+
+  randomOrNull(): T | undefined {
+    const index = Math.floor(Math.random() * (this.lastIndex + 1));
+    return this.elementAtOrNull(index);
   }
 
   toArray(): T[] {
