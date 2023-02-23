@@ -1,15 +1,11 @@
-import { error, NoSuchElementException, TODO } from "@yobuligo/core.typescript";
-import {
-  hashSetOf,
-  listOf,
-  mutableHashSetOf,
-  mutableListOf,
-} from "../Functions";
+import { error, NoSuchElementException } from "@yobuligo/core.typescript";
+import { hashSetOf, listOf, mutableHashSetOf } from "../Functions";
 import { IHashSet } from "../hashSets/IHashSet";
 import { IMutableHashSet } from "../hashSets/IMutableHashSet";
 import { IList } from "../lists/IList";
 import { IMutableList } from "../lists/IMutableList";
 import { List } from "../lists/List";
+import { mutableListOf } from "./../Functions";
 import { ICollection } from "./ICollection";
 
 export abstract class Collection<T> implements ICollection<T> {
@@ -43,15 +39,22 @@ export abstract class Collection<T> implements ICollection<T> {
   }
 
   distinct(): IList<T> {
-    return TODO();
-    // const mutableHashSet = mutableHashSetOf<T>()
-    // for(const element of this.elements){
-    //   mutableHashSet.add(element)
-    // }
+    const mutableHashSet = mutableHashSetOf<T>();
+    mutableHashSet.addArray(this.elements);
+    return mutableHashSet.toList();
   }
 
   distinctBy<K extends keyof T>(selector: () => K): IList<T> {
-    return TODO();
+    const propName = selector();
+    const propIndex = mutableHashSetOf<T[K]>();
+    const mutableList = mutableListOf<T>();
+    for (const element of this.elements) {
+      const prop = element[propName];
+      if (propIndex.add(prop)) {
+        mutableList.add(element);
+      }
+    }
+    return mutableList.toList();
   }
 
   elementAt(index: number): T {

@@ -5,6 +5,13 @@ import { IMutableHashSet } from "./../../src/hashSets/IMutableHashSet";
 import { IList } from "./../../src/lists/IList";
 import { IMutableList } from "./../../src/lists/IMutableList";
 
+class Person {
+  constructor(
+    public firstname: string = "Stacey",
+    public lastname: string = "Starfish"
+  ) {}
+}
+
 describe("List", () => {
   describe("contains", () => {
     it("returns false for empty list", () => {
@@ -43,6 +50,41 @@ describe("List", () => {
     });
     it("returns false for known element", () => {
       expect(listOf(1, 2, 3).containsNot(2)).false;
+    });
+  });
+
+  describe("distinct", () => {
+    it("returns distinct list with literal", () => {
+      const list = listOf(1, 1, 2, 3).distinct();
+      expect(list.size).equals(3);
+      expect(list.contains(1)).true;
+      expect(list.contains(2)).true;
+      expect(list.contains(3)).true;
+    });
+
+    it("returns distinct list with objects", () => {
+      const person1 = new Person();
+      const person2 = new Person();
+      const person3 = new Person();
+      const list = listOf(person1, person1, person2, person3).distinct();
+      expect(list.size).equals(3);
+      expect(list.contains(person1)).true;
+      expect(list.contains(person2)).true;
+      expect(list.contains(person3)).true;
+    });
+  });
+
+  describe("distinctBy", () => {
+    it("returns distinct list by selected property", () => {
+      const person1 = new Person();
+      const person2 = new Person();
+      const person3 = new Person("Bertha", "Bear");
+      const list = listOf(person1, person2, person3).distinctBy(() => {
+        return "firstname";
+      });
+      expect(list.contains(person1)).true;
+      expect(list.contains(person2)).false;
+      expect(list.contains(person3)).true;
     });
   });
 

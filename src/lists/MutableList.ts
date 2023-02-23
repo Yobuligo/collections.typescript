@@ -6,29 +6,29 @@ export class MutableList<T>
   extends MutableCollection<T>
   implements IMutableList<T>
 {
-  add(element: T): void;
-  add(element: T, index: number): void;
-  add(element: unknown, index?: unknown): void {
+  add(element: T): boolean;
+  add(element: T, index: number): boolean;
+  add(element: unknown, index?: unknown): boolean {
     if (index !== undefined) {
-      this.addArray([element as T], index as number);
+      return this.addArray([element as T], index as number);
     } else {
-      this.addArray([element as T]);
+      return this.addArray([element as T]);
     }
   }
 
-  addAll(elements: IList<T>): void;
-  addAll(elements: IList<T>, index: number): void;
-  addAll(elements: unknown, index?: unknown): void {
+  addAll(elements: IList<T>): boolean;
+  addAll(elements: IList<T>, index: number): boolean;
+  addAll(elements: unknown, index?: unknown): boolean {
     if (index !== undefined) {
-      this.addArray((elements as IList<T>).toArray(), index as number);
+      return this.addArray((elements as IList<T>).toArray(), index as number);
     } else {
-      this.addArray((elements as IList<T>).toArray());
+      return this.addArray((elements as IList<T>).toArray());
     }
   }
 
-  addArray(elements: T[]): void;
-  addArray(elements: T[], index: number): void;
-  addArray(elements: unknown, index?: unknown): void {
+  addArray(elements: T[]): boolean;
+  addArray(elements: T[], index: number): boolean;
+  addArray(elements: unknown, index?: unknown): boolean {
     if (index !== undefined) {
       const cursor = index as number;
       const leftList = this.elements.slice(0, cursor);
@@ -38,5 +38,6 @@ export class MutableList<T>
       this.elements.push(...(elements as T[]));
     }
     this._size = this.elements.length;
+    return true;
   }
 }

@@ -17,6 +17,15 @@ describe("MutableHashSet", () => {
       expect(mutableHashSet.contains(1)).true;
     });
 
+    it("returns true", () => {
+      expect(mutableHashSet.add(1)).true;
+    });
+
+    it("returns false for duplicate", () => {
+      mutableHashSet.add(1);
+      expect(mutableHashSet.add(1)).false;
+    });
+
     it("adds same element only once", () => {
       let called = false;
       mutableHashSet.add(1);
@@ -52,6 +61,14 @@ describe("MutableHashSet", () => {
       expect(called).true;
     });
 
+    it("returns true", () => {
+      expect(mutableHashSet.addAll(listOf(1, 2, 3))).true;
+    });
+
+    it("returns false for duplicate", () => {
+      expect(mutableHashSet.addAll(listOf(1, 1, 2, 3))).false;
+    });
+
     it("append entries to filled list", () => {
       let index = 0;
       let called = false;
@@ -79,6 +96,14 @@ describe("MutableHashSet", () => {
         expect(element).equals(index);
       });
       expect(called).true;
+    });
+
+    it("returns true", () => {
+      expect(mutableHashSet.addArray([1, 2, 3])).true;
+    });
+
+    it("returns false for duplicate", () => {
+      expect(mutableHashSet.addArray([1, 1, 2, 3])).false;
     });
 
     it("appends entries to filled list", () => {

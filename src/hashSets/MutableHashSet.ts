@@ -7,18 +7,22 @@ export class MutableHashSet<T>
   extends HashSet<T>
   implements IMutableHashSet<T>
 {
-  add(element: T): void {
-    this.addElement(element);
+  add(element: T): boolean {
+    return this.addElement(element);
   }
 
-  addAll(elements: IList<T>): void {
+  addAll(elements: IList<T>): boolean {
+    let success = true;
     elements.forEach((element) => {
-      this.add(element);
+      if (this.add(element) === false) {
+        success = false;
+      }
     });
+    return success;
   }
 
-  addArray(elements: T[]): void {
-    this.addElements(elements);
+  addArray(elements: T[]): boolean {
+    return this.addElements(elements);
   }
 
   remove(element: T): boolean {

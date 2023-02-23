@@ -1,4 +1,4 @@
-import { error, NoSuchElementException, TODO } from "@yobuligo/core.typescript";
+import { error, NoSuchElementException } from "@yobuligo/core.typescript";
 import { IList } from "../lists/IList";
 import { IMutableList } from "../lists/IMutableList";
 import {
@@ -51,11 +51,20 @@ export class HashSet<T> implements IHashSet<T> {
   }
 
   distinct(): IList<T> {
-    return TODO();
+    return this.toList();
   }
 
   distinctBy<K extends keyof T>(selector: () => K): IList<T> {
-    return TODO();
+    const propName = selector();
+    const propIndex = mutableHashSetOf<T[K]>();
+    const mutableList = mutableListOf<T>();
+    for (const element of this.keys) {
+      const prop = element[propName];
+      if (propIndex.add(prop)) {
+        mutableList.add(element);
+      }
+    }
+    return mutableList.toList();
   }
 
   elementAt(index: number): T {
@@ -181,18 +190,23 @@ export class HashSet<T> implements IHashSet<T> {
     return mutableListOf(...this.toArray());
   }
 
-  protected addElements(elements: T[]) {
+  protected addElements(elements: T[]): boolean {
+    let success = true;
     for (const element of elements) {
-      this.addElement(element);
+      if (this.addElement(element) === false) {
+        success = false;
+      }
     }
+    return success;
   }
 
-  protected addElement(element: T) {
+  protected addElement(element: T): boolean {
     if (this.elements.has(element)) {
-      return;
+      return false;
     }
     this.elements.set(element, this.nextCursor);
     this.keys[this.nextCursor] = element;
     this.nextCursor++;
+    return true;
   }
 }

@@ -16,6 +16,10 @@ describe("MutableList", () => {
       expect(mutableList.contains(1)).true;
     });
 
+    it("returns true", () => {
+      expect(mutableList.add(1)).true;
+    });
+
     it("adds element twice", () => {
       let called = false;
       mutableList.add(1);
@@ -26,6 +30,11 @@ describe("MutableList", () => {
         expect(element).equals(1);
       });
       expect(called).true;
+    });
+
+    it("returns true when adding the same element twice", () => {
+      mutableList.add(1);
+      expect(mutableList.add(1)).true;
     });
 
     it("adds at index", () => {
@@ -55,6 +64,10 @@ describe("MutableList", () => {
         expect(element).equals(index);
       });
       expect(called).true;
+    });
+
+    it("returns true", () => {
+      expect(mutableList.addAll(listOf(1, 2, 3))).true;
     });
 
     it("append entries to filled list", () => {
@@ -112,6 +125,10 @@ describe("MutableList", () => {
         expect(element).equals(index);
       });
       expect(called).true;
+    });
+
+    it("returns true", () => {
+      expect(mutableList.addArray([1, 2, 3])).true;
     });
 
     it("injects entries at index", () => {
