@@ -250,6 +250,16 @@ describe("List", () => {
     });
   });
 
+  describe("lastIndex", () => {
+    it("returns -1 for empty list", () => {
+      expect(listOf().lastIndex).equals(-1);
+    });
+
+    it("returns index for filled list", () => {
+      expect(listOf(1, 2, 3).lastIndex).equals(2);
+    });
+  });
+
   describe("last", () => {
     it("returns last element", () => {
       expect(listOf(1, 2, 3).last()).equals(3);

@@ -15,15 +15,10 @@ import { ICollection } from "./ICollection";
 export abstract class Collection<T> implements ICollection<T> {
   protected _size: number;
   protected elements: T[] = [];
-  readonly lastIndex: number = 0;
 
   constructor(...elements: T[]) {
     this.elements = elements;
     this._size = this.elements.length;
-  }
-
-  public get size(): number {
-    return this._size;
   }
 
   contains(element: T): boolean {
@@ -120,6 +115,13 @@ export abstract class Collection<T> implements ICollection<T> {
     return !this.isEmpty();
   }
 
+  public get lastIndex(): number {
+    if (this.isEmpty()) {
+      return -1;
+    }
+    return this.elements.length - 1;
+  }
+
   last(): T {
     return (
       this.lastOrNull() ?? error(new NoSuchElementException("List is empty"))
@@ -140,6 +142,10 @@ export abstract class Collection<T> implements ICollection<T> {
       mappedElements.push(mappedElement);
     }
     return new List(...mappedElements);
+  }
+
+  public get size(): number {
+    return this._size;
   }
 
   toArray(): T[] {

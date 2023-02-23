@@ -14,14 +14,14 @@ import { IMutableHashSet } from "./IMutableHashSet";
 export class HashSet<T> implements IHashSet<T> {
   protected elements: Map<T, number> = new Map();
   protected keys: T[] = [];
-  private cursor: number = 0;
+  private nextCursor: number = 0;
 
   public get size(): number {
     return this.elements.size;
   }
 
   public get lastIndex(): number {
-    return this.cursor;
+    return this.nextCursor - 1;
   }
 
   constructor(...elements: T[]) {
@@ -132,7 +132,7 @@ export class HashSet<T> implements IHashSet<T> {
   }
 
   lastOrNull(): T | undefined {
-    for (let i = this.cursor; i > 0; i--) {
+    for (let i = this.nextCursor - 1; i > 0; i--) {
       if (this.keys[i] !== undefined) {
         return this.keys[i];
       }
@@ -180,8 +180,8 @@ export class HashSet<T> implements IHashSet<T> {
   }
 
   protected addElement(element: T) {
-    this.elements.set(element, this.cursor);
-    this.keys[this.cursor] = element;
-    this.cursor++;
+    this.elements.set(element, this.nextCursor);
+    this.keys[this.nextCursor] = element;
+    this.nextCursor++;
   }
 }

@@ -1,9 +1,15 @@
 import { IList } from "./../lists/IList";
 import { ICollectionExtension } from "./ICollectionExtension";
 
-
+/**
+ * An implementation of this interface represents a list that keeps list elements of a specific type.
+ */
 export interface ICollection<T> extends ICollectionExtension<T> {
+  /**
+   * Returns the number of elements within that list.
+   */
   readonly size: number;
+
   readonly lastIndex: number;
   contains(element: T): boolean;
   containsAll(...elements: T[]): boolean;

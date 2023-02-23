@@ -276,6 +276,16 @@ describe("HashSet", () => {
     });
   });
 
+  describe("lastIndex", () => {
+    it("returns -1 for empty list", () => {
+      expect(hashSetOf().lastIndex).equals(-1);
+    });
+
+    it("returns index for filled list", () => {
+      expect(hashSetOf(1, 2, 3).lastIndex).equals(2);
+    });
+  });
+
   describe("lastOrNull", () => {
     it("returns last element", () => {
       expect(hashSetOf(1, 2, 3).lastOrNull()).equals(3);
