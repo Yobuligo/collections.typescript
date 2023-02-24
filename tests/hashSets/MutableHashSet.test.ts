@@ -214,4 +214,16 @@ describe("MutableHashSet", () => {
       expect(mutableHashSet.contains(3)).false;
     });
   });
+
+  describe("sortBy", () => {
+    it("sorts elements after removing an element (removing corrects indices", () => {
+      mutableHashSet = mutableHashSetOf(1, 2, 3, 4, 5);
+      mutableHashSet.removeAt(2)
+      const list = mutableHashSet.sortedBy()
+      expect(list.elementAt(0)).equals(1)
+      expect(list.elementAt(1)).equals(2)
+      expect(list.elementAt(2)).equals(4)
+      expect(list.elementAt(3)).equals(5)
+    });
+  });
 });
