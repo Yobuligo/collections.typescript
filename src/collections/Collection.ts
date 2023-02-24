@@ -7,6 +7,8 @@ import { IMutableList } from "../lists/IMutableList";
 import { List } from "../lists/List";
 import { mutableListOf } from "./../Functions";
 import { ICollection } from "./ICollection";
+import { SortDirection } from "./SortDirection";
+import { Sorter } from "./Sorter";
 
 export abstract class Collection<T> implements ICollection<T> {
   protected _size: number;
@@ -45,12 +47,12 @@ export abstract class Collection<T> implements ICollection<T> {
   }
 
   distinctBy<K extends keyof T>(selector: () => K): IList<T> {
-    const propName = selector();
+    const distinctProp = selector();
     const propIndex = mutableHashSetOf<T[K]>();
     const mutableList = mutableListOf<T>();
     for (const element of this.elements) {
-      const prop = element[propName];
-      if (propIndex.add(prop)) {
+      const propValue = element[distinctProp];
+      if (propIndex.add(propValue)) {
         mutableList.add(element);
       }
     }
@@ -176,6 +178,14 @@ export abstract class Collection<T> implements ICollection<T> {
       mutableList.add(this.elements[index]);
     }
     return mutableList.toList();
+  }
+
+  sortedBy<K extends keyof T>(selector?: () => K): IList<T> {
+    return listOf(...Sorter.sort(this.elements, SortDirection.ASC, selector));
+  }
+
+  sortedByDescending<K extends keyof T>(selector: () => K): IList<T> {
+    return listOf(...Sorter.sort(this.elements, SortDirection.DESC, selector));
   }
 
   public get size(): number {

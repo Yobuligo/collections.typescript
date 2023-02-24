@@ -487,6 +487,100 @@ describe("HashSet", () => {
     });
   });
 
+  describe("sort", () => {
+    it("returns empty list of empty list", () => {
+      const list: IList<number> = hashSetOf<number>().sortedBy();
+      expect(list).not.undefined;
+    });
+
+    it("sorts scalar types", () => {
+      const list = hashSetOf<number>(3, 2, 5, 1).sortedBy();
+      expect(list.elementAt(0)).equals(1);
+      expect(list.elementAt(1)).equals(2);
+      expect(list.elementAt(2)).equals(3);
+      expect(list.elementAt(3)).equals(5);
+    });
+
+    it("sorts objects without prop in the same order as their were added to the origin list", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = hashSetOf(person1, person2, person3, person4).sortedBy();
+      expect(list.elementAt(0)).equals(person1);
+      expect(list.elementAt(1)).equals(person2);
+      expect(list.elementAt(2)).equals(person3);
+      expect(list.elementAt(3)).equals(person4);
+    });
+
+    it("sorts objects by property", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = hashSetOf(person1, person2, person3, person4).sortedBy(
+        () => {
+          return "firstname";
+        }
+      );
+      expect(list.elementAt(0)).equals(person4);
+      expect(list.elementAt(1)).equals(person2);
+      expect(list.elementAt(2)).equals(person1);
+      expect(list.elementAt(3)).equals(person3);
+    });
+  });
+
+  describe("sortByDescending", () => {
+    it("returns empty list of empty list", () => {
+      const list: IList<number> = hashSetOf<number>().sortedByDescending();
+      expect(list).not.undefined;
+    });
+
+    it("sorts scalar types", () => {
+      const list = hashSetOf<number>(3, 2, 5, 1).sortedByDescending();
+      expect(list.elementAt(0)).equals(5);
+      expect(list.elementAt(1)).equals(3);
+      expect(list.elementAt(2)).equals(2);
+      expect(list.elementAt(3)).equals(1);
+    });
+
+    it("sorts objects without prop in the same order as their were added to the origin list", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = hashSetOf(
+        person1,
+        person2,
+        person3,
+        person4
+      ).sortedByDescending();
+      expect(list.elementAt(0)).equals(person1);
+      expect(list.elementAt(1)).equals(person2);
+      expect(list.elementAt(2)).equals(person3);
+      expect(list.elementAt(3)).equals(person4);
+    });
+
+    it("sorts objects by property", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = hashSetOf(
+        person1,
+        person2,
+        person3,
+        person4
+      ).sortedByDescending(() => {
+        return "firstname";
+      });
+      expect(list.elementAt(0)).equals(person3);
+      expect(list.elementAt(1)).equals(person1);
+      expect(list.elementAt(2)).equals(person2);
+      expect(list.elementAt(3)).equals(person4);
+    });
+  });
+
   describe("toArray", () => {
     it("returns empty array for empty hash set", () => {
       const array = hashSetOf<number>().toArray();

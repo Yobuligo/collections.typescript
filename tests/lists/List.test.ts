@@ -487,6 +487,114 @@ describe("List", () => {
     });
   });
 
+  describe("sort", () => {
+    it("returns empty list of empty list", () => {
+      const list: IList<number> = listOf<number>().sortedBy();
+      expect(list).not.undefined;
+    });
+
+    it("sorts scalar types", () => {
+      const list = listOf<number>(3, 2, 5, 1, 2).sortedBy();
+      expect(list.elementAt(0)).equals(1);
+      expect(list.elementAt(1)).equals(2);
+      expect(list.elementAt(2)).equals(2);
+      expect(list.elementAt(3)).equals(3);
+      expect(list.elementAt(4)).equals(5);
+    });
+
+    it("sorts objects without prop in the same order as their were added to the origin list", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = listOf(
+        person1,
+        person2,
+        person3,
+        person4,
+        person2
+      ).sortedBy();
+      expect(list.elementAt(0)).equals(person1);
+      expect(list.elementAt(1)).equals(person2);
+      expect(list.elementAt(2)).equals(person3);
+      expect(list.elementAt(3)).equals(person4);
+      expect(list.elementAt(4)).equals(person2);
+    });
+
+    it("sorts objects by property", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = listOf(person1, person2, person3, person4, person2).sortedBy(
+        () => {
+          return "firstname";
+        }
+      );
+      expect(list.elementAt(0)).equals(person4);
+      expect(list.elementAt(1)).equals(person2);
+      expect(list.elementAt(2)).equals(person2);
+      expect(list.elementAt(3)).equals(person1);
+      expect(list.elementAt(4)).equals(person3);
+    });
+  });
+
+  describe("sortByDescending", () => {
+    it("returns empty list of empty list", () => {
+      const list: IList<number> = listOf<number>().sortedByDescending();
+      expect(list).not.undefined;
+    });
+
+    it("sorts scalar types", () => {
+      const list = listOf<number>(3, 2, 5, 1, 2).sortedByDescending();
+      expect(list.elementAt(0)).equals(5);
+      expect(list.elementAt(1)).equals(3);
+      expect(list.elementAt(2)).equals(2);
+      expect(list.elementAt(3)).equals(2);
+      expect(list.elementAt(4)).equals(1);
+    });
+
+    it("sorts objects without prop in the same order as their were added to the origin list", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = listOf(
+        person1,
+        person2,
+        person3,
+        person4,
+        person2
+      ).sortedByDescending();
+      expect(list.elementAt(0)).equals(person1);
+      expect(list.elementAt(1)).equals(person2);
+      expect(list.elementAt(2)).equals(person3);
+      expect(list.elementAt(3)).equals(person4);
+      expect(list.elementAt(4)).equals(person2);
+    });
+
+    it("sorts objects by property", () => {
+      const person1 = new Person("Donald");
+      const person2 = new Person("Bertha");
+      const person3 = new Person("Stacey");
+      const person4 = new Person("Adam");
+      const list = listOf(
+        person1,
+        person2,
+        person3,
+        person4,
+        person2
+      ).sortedByDescending(() => {
+        return "firstname";
+      });
+      expect(list.elementAt(0)).equals(person3);
+      expect(list.elementAt(1)).equals(person1);
+      expect(list.elementAt(2)).equals(person2);
+      expect(list.elementAt(3)).equals(person2);
+      expect(list.elementAt(4)).equals(person4);
+    });
+  });
+
   describe("toArray", () => {
     it("returns empty array for empty list", () => {
       const array = listOf<number>().toArray();

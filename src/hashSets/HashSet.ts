@@ -1,4 +1,6 @@
 import { error, NoSuchElementException } from "@yobuligo/core.typescript";
+import { SortDirection } from "../collections/SortDirection";
+import { Sorter } from "../collections/Sorter";
 import { IList } from "../lists/IList";
 import { IMutableList } from "../lists/IMutableList";
 import {
@@ -55,12 +57,12 @@ export class HashSet<T> implements IHashSet<T> {
   }
 
   distinctBy<K extends keyof T>(selector: () => K): IList<T> {
-    const propName = selector();
+    const distinctProp = selector();
     const propIndex = mutableHashSetOf<T[K]>();
     const mutableList = mutableListOf<T>();
     for (const element of this.keys) {
-      const prop = element[propName];
-      if (propIndex.add(prop)) {
+      const propValue = element[distinctProp];
+      if (propIndex.add(propValue)) {
         mutableList.add(element);
       }
     }
@@ -183,6 +185,14 @@ export class HashSet<T> implements IHashSet<T> {
       mutableList.add(this.keys[index]);
     }
     return mutableList.toList();
+  }
+
+  sortedBy<K extends keyof T>(selector?: () => K): IList<T> {
+    return listOf(...Sorter.sort(this.keys, SortDirection.ASC, selector));
+  }
+
+  sortedByDescending<K extends keyof T>(selector: () => K): IList<T> {
+    return listOf(...Sorter.sort(this.keys, SortDirection.DESC, selector));
   }
 
   toArray(): T[] {

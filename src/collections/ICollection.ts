@@ -33,6 +33,6 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   random(): T;
   randomOrNull(): T | undefined;
   reversed(): IList<T>;
-  // sortedBy<K extends keyof T>(selector: () => K): IList<T>;
-  // sortedByDescending<K extends keyof T>(selector: () => K): IList<T>;
+  sortedBy<K extends keyof T>(selector?: () => K): IList<T>;
+  sortedByDescending<K extends keyof T>(selector?: () => K): IList<T>;
 }
