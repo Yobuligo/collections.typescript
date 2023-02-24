@@ -1,4 +1,4 @@
-import { TODO } from "@yobuligo/core.typescript";
+import { repeat } from "@yobuligo/core.typescript";
 import { expect } from "chai";
 import { listOf } from "./../../src/Functions";
 import { IHashSet } from "./../../src/hashSets/IHashSet";
@@ -367,11 +367,100 @@ describe("List", () => {
   });
 
   describe("random", () => {
-    TODO();
+    it("throws NoSuchElementException for empty list", () => {
+      const list = listOf<number>();
+      expect(list.random.bind(list)).throw(`List is empty`);
+    });
+
+    it("returns first element for only one element", ()=>{
+      expect(listOf(1).random() === 1).true;
+    })
+
+    it("returns all contained elements", () => {
+      let contains1 = false;
+      let contains2 = false;
+      let contains3 = false;
+      let containsUndefined = false;
+      let containsOthers = false;
+      const list = listOf(1, 2, 3);
+      repeat(100, () => {
+        switch (list.randomOrNull()) {
+          case undefined: {
+            containsUndefined = true;
+            break;
+          }
+          case 1: {
+            contains1 = true;
+            break;
+          }
+          case 2: {
+            contains2 = true;
+            break;
+          }
+          case 3: {
+            contains3 = true;
+            break;
+          }
+          default: {
+            containsOthers = true;
+            break;
+          }
+        }
+      });
+      expect(contains1).true;
+      expect(contains2).true;
+      expect(contains3).true;
+      expect(containsUndefined).false;
+      expect(containsOthers).false;
+    });    
   });
 
   describe("randomOrNull", () => {
-    TODO();
+    it("returns undefined for empty list", () => {
+      expect(listOf<number>().randomOrNull()).undefined;
+    });
+
+    it("returns first element for only one element", () => {
+      expect(listOf(1).randomOrNull() === 1).true;
+    });
+
+    it("returns all contained elements", () => {
+      let contains1 = false;
+      let contains2 = false;
+      let contains3 = false;
+      let containsUndefined = false;
+      let containsOthers = false;
+      const list = listOf(1, 2, 3);
+      repeat(100, () => {
+        switch (list.randomOrNull()) {
+          case undefined: {
+            containsUndefined = true;
+            break;
+          }
+          case 1: {
+            contains1 = true;
+            break;
+          }
+          case 2: {
+            contains2 = true;
+            break;
+          }
+          case 3: {
+            contains3 = true;
+            break;
+          }
+          default: {
+            containsOthers = true;
+            break;
+          }
+        }
+      });
+      expect(contains1).true;
+      expect(contains2).true;
+      expect(contains3).true;
+      expect(containsUndefined).false;
+      expect(containsOthers).false;
+    });
   });
 
   describe("size", () => {
