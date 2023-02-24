@@ -463,6 +463,20 @@ describe("HashSet", () => {
     });
   });
 
+  describe("reversed", () => {
+    it("returns empty list for empty list", () => {
+      const list: IList<number> = hashSetOf<number>().reversed();
+      expect(list).not.undefined;
+    });
+
+    it("returns reversed list", () => {
+      const list = hashSetOf<number>(1, 2, 3).reversed();
+      expect(list.elementAt(2)).equals(1);
+      expect(list.elementAt(1)).equals(2);
+      expect(list.elementAt(0)).equals(3);
+    });
+  });
+
   describe("size", () => {
     it("returns 0 for empty hash set", () => {
       expect(hashSetOf().size).equal(0);

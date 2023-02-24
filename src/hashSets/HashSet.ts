@@ -5,7 +5,7 @@ import {
   hashSetOf,
   listOf,
   mutableHashSetOf,
-  mutableListOf
+  mutableListOf,
 } from "./../Functions";
 import { List } from "./../lists/List";
 import { IHashSet } from "./IHashSet";
@@ -175,6 +175,14 @@ export class HashSet<T> implements IHashSet<T> {
   randomOrNull(): T | undefined {
     const index = Math.floor(Math.random() * (this.lastIndex + 1));
     return this.elementAtOrNull(index);
+  }
+
+  reversed(): IList<T> {
+    const mutableList = mutableListOf<T>();
+    for (let index = this.lastIndex; index >= 0; index--) {
+      mutableList.add(this.keys[index]);
+    }
+    return mutableList.toList();
   }
 
   toArray(): T[] {

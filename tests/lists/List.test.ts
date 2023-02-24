@@ -372,9 +372,9 @@ describe("List", () => {
       expect(list.random.bind(list)).throw(`List is empty`);
     });
 
-    it("returns first element for only one element", ()=>{
+    it("returns first element for only one element", () => {
       expect(listOf(1).random() === 1).true;
-    })
+    });
 
     it("returns all contained elements", () => {
       let contains1 = false;
@@ -412,7 +412,7 @@ describe("List", () => {
       expect(contains3).true;
       expect(containsUndefined).false;
       expect(containsOthers).false;
-    });    
+    });
   });
 
   describe("randomOrNull", () => {
@@ -460,6 +460,20 @@ describe("List", () => {
       expect(contains3).true;
       expect(containsUndefined).false;
       expect(containsOthers).false;
+    });
+  });
+
+  describe("reversed", () => {
+    it("returns empty list for empty list", () => {
+      const list: IList<number> = listOf<number>().reversed();
+      expect(list).not.undefined;
+    });
+
+    it("returns reversed list", () => {
+      const list = listOf<number>(1, 2, 3).reversed();
+      expect(list.elementAt(2)).equals(1);
+      expect(list.elementAt(1)).equals(2);
+      expect(list.elementAt(0)).equals(3);
     });
   });
 

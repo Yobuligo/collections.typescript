@@ -32,7 +32,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   map<R>(block: (element: T) => R): IList<R>;
   random(): T;
   randomOrNull(): T | undefined;
-  // reversed(): IList<T>;
+  reversed(): IList<T>;
   // sortedBy<K extends keyof T>(selector: () => K): IList<T>;
   // sortedByDescending<K extends keyof T>(selector: () => K): IList<T>;
 }

@@ -170,6 +170,14 @@ export abstract class Collection<T> implements ICollection<T> {
     return this.elementAtOrNull(index);
   }
 
+  reversed(): IList<T> {
+    const mutableList = mutableListOf<T>();
+    for (let index = this.lastIndex; index >= 0; index--) {
+      mutableList.add(this.elements[index]);
+    }
+    return mutableList.toList();
+  }
+
   public get size(): number {
     return this._size;
   }
