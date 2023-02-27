@@ -1,18 +1,31 @@
 # collections.typescript
+
 Collection for lists, maps, hashsets and hashmaps inspired by Kotlin syntax.
 
 ## Installation
+
 Install the library via:
+
 ```
 npm install --save @yobuligo/collections.typescript
 ```
 
 ## Usage
-There are 4 basic types of lists and each basic type is split into an immutable and mutable variant:
-1. list
-2. map
-3. hashSet
-4. hashMap
+
+There are 4 basic types of lists and each basic type is split into an immutable and mutable variant. The following table shows the list types and the functions to create each variant.
+| **type** | **immutable** | **mutable**  
+|-------------|---------------|--------------------
+| **list** | listOf() | mutableListOf()  
+| **map** | mapOf() | mutableMapOf()  
+| **hashSet** | hashSetOf() | mutableHashSetOf()
+| **hashMap** | hashMapOf() | mutableHashMapOf()
+
+### General functions
+```
+contains
+elementAt
+...
+```
 
 ```
 const list = listOf(1, 2, 3);
@@ -51,6 +64,7 @@ mutableHashMap.add(pair(2, 2));
 ```
 
 ## Immutable and Mutable functions
+
 ```
 readonly size: number;
 readonly lastIndex: number;
@@ -75,6 +89,7 @@ map<R>(block: (element: T) => R): IList<R>;
 ```
 
 ## Mutable Functions
+
 ```
   add(element: T): void;
   addAll(elements: IList<T>): void;
