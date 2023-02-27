@@ -50,6 +50,32 @@ describe("MutableList", () => {
       });
       expect(called).true;
     });
+
+    it("adds at index end", () => {
+      let index = 0;
+      let called = false;
+      mutableList = mutableListOf(1, 2, 3);
+      mutableList.add(4, 3);
+      expect(mutableList.size).equals(4);
+      mutableList.forEach((element) => {
+        index++;
+        called = true;
+        expect(element).equals(index);
+      });
+      expect(called).true;
+    });
+
+    it("adding at out of bounce index throws an IllegalArgumentException", () => {
+      let throwsError = false;
+      mutableList = mutableListOf(1, 2, 3);
+      try {
+        mutableList.add(4, 4);
+      } catch (error) {
+        throwsError = true;
+      }
+      expect(throwsError).true;
+      expect(mutableList.size).equals(3);
+    });
   });
 
   describe("addAll", () => {
@@ -153,6 +179,10 @@ describe("MutableList", () => {
 
     it("returns false when removing unknown element", () => {
       expect(mutableListOf(1, 2, 3).remove(4)).false;
+    });
+
+    it("returns false when removing unknown element from empty list", () => {
+      expect(mutableListOf<number>().remove(1)).false;
     });
 
     it("removes the element from the elements list", () => {

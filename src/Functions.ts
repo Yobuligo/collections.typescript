@@ -54,7 +54,7 @@ export const mutableMapOf = <K, V>(
 
 /**
  * Creates a readonly hash set list for elements of type {@link T}.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
  * The contained elements are passed in via parameter {@link elements}.
  */
 export const hashSetOf = <T>(...elements: T[]): IHashSet<T> => {
@@ -63,7 +63,7 @@ export const hashSetOf = <T>(...elements: T[]): IHashSet<T> => {
 
 /**
  * Creates a hash set list for elements of type {@link T} whose content is changeable.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
  * The hash set list elements can be initialized by parameter {@link elements}.
  */
 export const mutableHashSetOf = <T>(...elements: T[]): IMutableHashSet<T> => {
@@ -73,7 +73,7 @@ export const mutableHashSetOf = <T>(...elements: T[]): IMutableHashSet<T> => {
 /**
  * Creates a readonly hash map list for elements of type {@link T}.
  * The elements are of type {@link Pair}. A {@link Pair} is a mapping from the first property to the second property.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
  * The contained elements are passed in via parameter {@link elements}.
  */
 export const hashMapOf = <K, V>(...elements: Pair<K, V>[]): IHashMap<K, V> => {
@@ -83,7 +83,7 @@ export const hashMapOf = <K, V>(...elements: Pair<K, V>[]): IHashMap<K, V> => {
 /**
  * Creates a hash map list for elements of type {@link T} whose content is changeable.
  * The elements are of type {@link Pair}. A {@link Pair} is a mapping from the first property to the second property.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
  * The hash map list elements can be initialized by parameter {@link elements}.
  */
 export const mutableHashMapOf = <K, V>(

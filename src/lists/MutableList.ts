@@ -1,3 +1,4 @@
+import { IllegalArgumentException } from "@yobuligo/core.typescript";
 import { MutableCollection } from "../collections/MutableCollection";
 import { IList } from "./IList";
 import { IMutableList } from "./IMutableList";
@@ -29,7 +30,14 @@ export class MutableList<T>
   addArray(elements: T[]): boolean;
   addArray(elements: T[], index: number): boolean;
   addArray(elements: unknown, index?: unknown): boolean {
-    if (index !== undefined) {
+    if (index !== undefined && index !== null) {
+      if (index > this.lastIndex + 1) {
+        throw new IllegalArgumentException(
+          `Error when adding elements. The index is out of bounce. The index must be smaller than ${
+            this.lastIndex + 1
+          }`
+        );
+      }
       const cursor = index as number;
       const leftList = this.elements.slice(0, cursor);
       const rightList = this.elements.slice(cursor, this.elements.length);

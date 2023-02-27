@@ -25,8 +25,7 @@ export abstract class MutableCollection<T>
     if (this.isEmpty() || this.elements[index] === undefined) {
       return false;
     }
-    const indexInternal = this.elements.indexOf(this.elements[index]);
-    this.elements.splice(indexInternal, 1);
+    this.elements.splice(index, 1);
     this._size--;
     return true;
   }
