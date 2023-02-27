@@ -52,28 +52,90 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   elementAtOrNull(index: number): T | undefined;
 
   /**
-   * Returns a new created list, which contains all elements who match the filter provided by function *{@link block}*. If no element matches the filter an empty list is returned.
+   * Returns a new created list, which contains all elements who match the required conditions. The conditions have to be evaluated by function *{@link block}*.
+   * For a matching element the function *{@link block}* returns *true* otherwise *false*. If no element matches the filter an empty list is returned.
    */
   filter(block: (element: T) => boolean): IList<T>;
 
   /**
-   * Returns the first element, which matches the filter provided by function *{@link block}*. If no element matches the filter *undefined* is returned.
+   * Returns the first element, which matches the required conditions. The conditions have to be evaluated by function *{@link block}*.
+   * For a matching element the function *{@link block}* returns *true* otherwise *false*. If no element matches the filter *undefined* is returned.
    */
   find(block: (element: T) => boolean): T | undefined;
+
+  /**
+   * Returns the first element of that list or throws a *{@link NoSuchElementException}* exception if the list is empty.
+   */
   first(): T;
+
+  /**
+   * Returns the first element of that list or returns *undefined* if the list is empty.
+   */
   firstOrNull(): T | undefined;
+
+  /**
+   * Iterates over all elements of that list and calls the function *{@link block}* for each element.
+   * If *{@link block}* returns a value the iteration is stopped and the value will be returned.
+   */
   forEach<R>(
     block: (element: T, index: number) => R | undefined
   ): R | undefined;
+
+  /**
+   * Returns the index of the given *{@link element}* or -1 if the element is not part of the list.
+   */
   indexOf(element: T): number;
+
+  /**
+   * Returns *true* if the list is empty or *false* if the list contains at least one element.
+   */
   isEmpty(): boolean;
+
+  /**
+   * Returns *true* if the list contains at least one element or *false* if the list is empty.
+   */
   isNotEmpty(): boolean;
+
+  /**
+   * Returns the last element of that list or throws a *{@link NoSuchElementException}* exception if the list is empty.
+   */
   last(): T;
+
+  /**
+   * Returns the last element of that list or returns *undefined* if the list is empty.
+   */
   lastOrNull(): T | undefined;
+
+  /**
+   * Returns a new created list, which contains elements of type *{@link R}*, which were mapped by calling function *{@link block}* for each list element and returning an element of type *{@link R}* instead.
+   * If no element matches the filter an empty list is returned.
+   */
   map<R>(block: (element: T) => R): IList<R>;
+
+  /**
+   * Returns a various element from the list or throws a *{@link NoSuchElementException}* exception if the list is empty.
+   */
   random(): T;
+
+  /**
+   * Returns a various element from the list or returns *undefined* if the list is empty.
+   */
   randomOrNull(): T | undefined;
+
+  /**
+   * Returns a new created list, which contains all elements but sorted in a reverse order.
+   */
   reversed(): IList<T>;
+
+  /**
+   * Returns a new created, ascending sorted list. The sort criteria, which must be a key of *{@link T}*, can be provided via function *{@link selector}*.
+   * If no sort criteria was specified the list element itself is used as sort criteria.
+   */
   sortedBy<K extends keyof T>(selector?: () => K): IList<T>;
+
+  /**
+   * Returns a new created, descending sorted list. The sort criteria, which must be a key of *{@link T}*, can be provided via function *{@link selector}*.
+   * If no sort criteria was specified the list element itself is used as sort criteria.
+   */
   sortedByDescending<K extends keyof T>(selector?: () => K): IList<T>;
 }
