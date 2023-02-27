@@ -25,7 +25,7 @@ export const listOf = <T>(...elements: T[]): IList<T> => {
 };
 
 /**
- * Creates a list for elements of type *{@link T}* whose content is changeable.
+ * Creates a list for elements of type *{@link T}*, whose content is changeable.
  * The list elements can be initialized by parameter *{@link elements}*.
  */
 export const mutableListOf = <T>(...elements: T[]): IMutableList<T> => {
@@ -42,7 +42,7 @@ export const mapOf = <K, V>(...elements: Pair<K, V>[]): IMap<K, V> => {
 };
 
 /**
- * Creates a mapping list for elements whose content is changeable.
+ * Creates a mapping list for elements, whose content is changeable.
  * The elements are of type *{@link Pair}*. A *{@link Pair}* is a mapping from the key *{@link K}* property to the value *{@link V}* property.
  * The mapping list elements can be initialized by parameter *{@link elements}*.
  */
@@ -62,7 +62,7 @@ export const hashSetOf = <T>(...elements: T[]): IHashSet<T> => {
 };
 
 /**
- * Creates a hash set list for elements of type *{@link T}* whose content is changeable.
+ * Creates a hash set list for elements of type *{@link T}*, whose content is changeable.
  * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
  * The hash set list elements can be initialized by parameter *{@link elements}*.
  */
@@ -81,7 +81,7 @@ export const hashMapOf = <K, V>(...elements: Pair<K, V>[]): IHashMap<K, V> => {
 };
 
 /**
- * Creates a hash map list for elements whose content is changeable.
+ * Creates a hash map list for elements, whose content is changeable.
  * The elements are of type *{@link Pair}*. A *{@link Pair}* is a mapping from the key *{@link K}* property to the value *{@link V}* property.
  * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
  * The hash map list elements can be initialized by parameter *{@link elements}*.

@@ -17,32 +17,34 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   readonly lastIndex: number;
 
   /**
-   * Returns *true* if the passed in *{@link element}* is part of the list. Otherwise it returns false.
+   * Returns *true* if the passed in *{@link element}* is part of the list. Otherwise it returns *false*.
    */
   contains(element: T): boolean;
 
   /**
-   * Returns *true* if all passed in *{@link elements}* are part of the list. Otherwise it returns false.
+   * Returns *true* if all passed in *{@link elements}* are part of the list. Otherwise it returns *false*.
    */
   containsAll(...elements: T[]): boolean;
 
   /**
-   * Returns *true* if the passed in *{@link element}* is not part of the list. Otherwise it returns true.
+   * Returns *true* if the passed in *{@link element}* is not part of the list. Otherwise it returns *false*.
    */
   containsNot(element: T): boolean;
 
   /**
-   * Returns a new created list, which contains all elements of the origin list beside duplicates, no matter if *{@link T}* is a scalar type or a reference type.
+   * Returns a newly created list, which contains all elements of the origin list except for duplicates.
+   * Duplicates are identified by comparing the line type *{@link T}*, no matter if it is a scalar type or a reference type.
    */
   distinct(): IList<T>;
 
   /**
-   * Returns a new created list, which contains all elements of the origin list beside duplicates. Duplicates are identified by comparing the property key of *{@link T}*, which is returned by the *{@link selector}*.
+   * Returns a newly created list, which contains all elements of the origin list except for duplicates.
+   * Duplicates are identified by comparing the property key *{@link K}* of the line type *{@link T}*, which is returned by the *{@link selector}*.
    */
   distinctBy<K extends keyof T>(selector: () => K): IList<T>;
 
   /**
-   * Returns the element at position *{@link index}* or throws a *{@link NoSuchElementException}* exception if *{@link index}* is not assigned.
+   * Returns the element at position *{@link index}* or throws a *{@link NoSuchElementException}* if *{@link index}* is not assigned.
    */
   elementAt(index: number): T;
 
@@ -52,7 +54,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   elementAtOrNull(index: number): T | undefined;
 
   /**
-   * Returns a new created list, which contains all elements who match the required conditions. The conditions have to be evaluated by function *{@link block}*.
+   * Returns a newly created list, which contains all elements who match the required conditions. The conditions have to be evaluated by function *{@link block}*.
    * For a matching element the function *{@link block}* returns *true* otherwise *false*. If no element matches the filter an empty list is returned.
    */
   filter(block: (element: T) => boolean): IList<T>;
@@ -64,7 +66,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   find(block: (element: T) => boolean): T | undefined;
 
   /**
-   * Returns the first element of that list or throws a *{@link NoSuchElementException}* exception if the list is empty.
+   * Returns the first element of that list or throws a *{@link NoSuchElementException}* if the list is empty.
    */
   first(): T;
 
@@ -82,7 +84,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   ): R | undefined;
 
   /**
-   * Returns the index of the given *{@link element}* or -1 if the element is not part of the list.
+   * Returns the index of the given *{@link element}* or *-1* if the element is not part of the list.
    */
   indexOf(element: T): number;
 
@@ -97,7 +99,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   isNotEmpty(): boolean;
 
   /**
-   * Returns the last element of that list or throws a *{@link NoSuchElementException}* exception if the list is empty.
+   * Returns the last element of that list or throws a *{@link NoSuchElementException}* if the list is empty.
    */
   last(): T;
 
@@ -107,34 +109,35 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   lastOrNull(): T | undefined;
 
   /**
-   * Returns a new created list, which contains elements of type *{@link R}*, which were mapped by calling function *{@link block}* for each list element and returning an element of type *{@link R}* instead.
-   * If no element matches the filter an empty list is returned.
+   * Returns a newly created list, which contains elements of type *{@link R}*, which were mapped by calling function *{@link block}* for each list element and returning an element of type *{@link R}* instead.
+   * If the list is empty an empty list is returned.
    */
   map<R>(block: (element: T) => R): IList<R>;
 
   /**
-   * Returns a various element from the list or throws a *{@link NoSuchElementException}* exception if the list is empty.
+   * Returns a random element from the list or throws a *{@link NoSuchElementException}* if the list is empty.
    */
   random(): T;
 
   /**
-   * Returns a various element from the list or returns *undefined* if the list is empty.
+   * Returns a random element from the list or returns *undefined* if the list is empty.
    */
   randomOrNull(): T | undefined;
 
   /**
-   * Returns a new created list, which contains all elements but sorted in a reverse order.
+   * Returns a newly created list, which contains all elements in a reversed order.
+   * If the list is empty an empty list is returned.
    */
   reversed(): IList<T>;
 
   /**
-   * Returns a new created, ascending sorted list. The sort criteria, which must be a key of *{@link T}*, can be provided via function *{@link selector}*.
+   * Returns a newly created, ascendingly sorted list. The sort criteria, which must be a key *{@link K}* of the line type *{@link T}*, can be provided via function *{@link selector}*.
    * If no sort criteria was specified the list element itself is used as sort criteria.
    */
   sortedBy<K extends keyof T>(selector?: () => K): IList<T>;
 
   /**
-   * Returns a new created, descending sorted list. The sort criteria, which must be a key of *{@link T}*, can be provided via function *{@link selector}*.
+   * Returns a newly created, descendingly sorted list. The sort criteria, which must be a key *{@link K}* of the line type *{@link T}*, can be provided via function *{@link selector}*.
    * If no sort criteria was specified the list element itself is used as sort criteria.
    */
   sortedByDescending<K extends keyof T>(selector?: () => K): IList<T>;
