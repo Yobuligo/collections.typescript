@@ -7,12 +7,18 @@ export abstract class MutableCollection<T>
   implements IMutableCollection<T>
 {
   remove(element: T): boolean {
-    if (this.containsNot(element)) {
-      return false;
+    let removed = false;
+    while (true) {
+      const index = this.elements.indexOf(element);
+      if (index !== -1) {
+        removed = true;
+        this.elements.splice(index, 1);
+        this._size--;
+      } else {
+        break;
+      }
     }
-    this.elements.splice(this.elements.indexOf(element), 1);
-    this._size--;
-    return true;
+    return removed;
   }
 
   removeAt(index: number): boolean {

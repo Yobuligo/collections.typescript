@@ -163,6 +163,12 @@ describe("MutableList", () => {
       expect(mutableList.contains(2)).false;
       expect(mutableList.contains(3)).true;
     });
+
+    it("removes duplicates from the list", () => {
+      mutableList = mutableListOf(1, 2, 3, 2);
+      mutableList.remove(2);
+      expect(mutableList.contains(2)).false;
+    });
   });
 
   describe("removeAt", () => {
@@ -243,12 +249,12 @@ describe("MutableList", () => {
   describe("sortBy", () => {
     it("sorts elements after removing an element (removing corrects indices", () => {
       mutableList = mutableListOf(1, 2, 3, 4, 5);
-      mutableList.removeAt(2)
-      const list = mutableList.sortedBy()
-      expect(list.elementAt(0)).equals(1)
-      expect(list.elementAt(1)).equals(2)
-      expect(list.elementAt(2)).equals(4)
-      expect(list.elementAt(3)).equals(5)
+      mutableList.removeAt(2);
+      const list = mutableList.sortedBy();
+      expect(list.elementAt(0)).equals(1);
+      expect(list.elementAt(1)).equals(2);
+      expect(list.elementAt(2)).equals(4);
+      expect(list.elementAt(3)).equals(5);
     });
   });
 });
