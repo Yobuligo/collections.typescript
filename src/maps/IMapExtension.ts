@@ -8,7 +8,7 @@ import { IMutableMap } from "./IMutableMap";
  */
 export interface IMapExtension<K, V> {
   /**
-   * Returns a hash map, which contains all elements, beside duplicates, of that list.
+   * Returns a hash map, which contains all elements, except for duplicates, of that list.
    */
   toHashMap(): IHashMap<K, V>;
 
@@ -18,7 +18,7 @@ export interface IMapExtension<K, V> {
   toMap(): IMap<K, V>;
 
   /**
-   * Returns a mutable hash map, which contains all elements, beside duplicates, of that list.
+   * Returns a mutable hash map, which contains all elements, except for duplicates, of that list.
    */
   toMutableHashMap(): IMutableHashMap<K, V>;
 

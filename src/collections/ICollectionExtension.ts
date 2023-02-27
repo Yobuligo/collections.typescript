@@ -13,7 +13,7 @@ export interface ICollectionExtension<T> {
   toArray(): T[];
 
   /**
-   * Returns a hash set, which contains all elements, beside duplicates, of that list.
+   * Returns a hash set, which contains all elements, except for duplicates, of that list.
    */
   toHashSet(): IHashSet<T>;
 
@@ -23,7 +23,7 @@ export interface ICollectionExtension<T> {
   toList(): IList<T>;
 
   /**
-   * Returns a mutable hash set, which contains all elements, beside duplicates, of that list.
+   * Returns a mutable hash set, which contains all elements, except for duplicates, of that list.
    */
   toMutableHashSet(): IMutableHashSet<T>;
 

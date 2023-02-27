@@ -8,17 +8,17 @@ import { IHashSet } from "./IHashSet";
  */
 export interface IMutableHashSet<T> extends IHashSet<T>, IMutableCollection<T> {
   /**
-   * Adds the given *{@link element}* to the list and returns *true*. Returns *false* if the element couldn't added (e.g. in case of hash sets).
+   * Adds the given *{@link element}* to the list and returns *true*. Returns *false* if the element couldn't be added.
    */
   add(element: T): boolean;
 
   /**
-   * Adds all given *{@link elements}* of *{@link IList}* to the current list and returns *true*. Returns *false* if at least one element couldn't added (e.g. in case of hash sets).
+   * Adds all given *{@link elements}* of *{@link IList}* to the current list and returns *true*. Returns *false* if at least one element couldn't be added.
    */
   addAll(elements: IList<T>): boolean;
 
   /**
-   * Adds all given *{@link elements}* of the array to the current list and returns *true*. Returns *false* if at least one element couldn't added (e.g. in case of hash sets).
+   * Adds all given *{@link elements}* of the array to the current list and returns *true*. Returns *false* if at least one element couldn't be added.
    */
   addArray(elements: T[]): boolean;
 }
