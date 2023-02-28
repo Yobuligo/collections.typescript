@@ -12,7 +12,7 @@ export interface IMutableList<T> extends IMutableCollection<T> {
   add(element: T): boolean;
 
   /**
-   * Adds the given *{@link element}* at position *{@link index}* to the list and returns *true*. Returns *false* if the element couldn't be added.
+   * Adds the given *{@link element}* at position *{@link index}* to the list and returns *true*. Returns *false* if the element couldn't be added.  
    * Throws an *{@link IllegalArgumentException}* if the index is out of bounce (greater than lastIndex + 1).
    */
   add(element: T, index: number): boolean;
@@ -23,7 +23,7 @@ export interface IMutableList<T> extends IMutableCollection<T> {
   addAll(elements: IList<T>): boolean;
 
   /**
-   * Adds all given *{@link elements}* of *{@link IList}* at position *{@link index}* to the current list and returns *true*. Returns *false* if at least one element couldn't be added.
+   * Adds all given *{@link elements}* of *{@link IList}* at position *{@link index}* to the current list and returns *true*. Returns *false* if at least one element couldn't be added.  
    * Throws an *{@link IllegalArgumentException}* if the index is out of bounce (greater than lastIndex + 1).
    */
   addAll(elements: IList<T>, index: number): boolean;
@@ -34,7 +34,7 @@ export interface IMutableList<T> extends IMutableCollection<T> {
   addArray(elements: T[]): boolean;
 
   /**
-   * Adds all given *{@link elements}* of the array at position *{@link index}* to the current list and returns *true*. Returns *false* if at least one element couldn't be added.
+   * Adds all given *{@link elements}* of the array at position *{@link index}* to the current list and returns *true*. Returns *false* if at least one element couldn't be added.  
    * Throws an *{@link IllegalArgumentException}* if the index is out of bounce (greater than lastIndex + 1).
    */
   addArray(elements: T[], index: number): boolean;

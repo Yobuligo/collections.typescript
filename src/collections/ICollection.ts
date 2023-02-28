@@ -109,7 +109,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   lastOrNull(): T | undefined;
 
   /**
-   * Returns a newly created list, which contains elements of type *{@link R}*, which were mapped by calling function *{@link block}* for each list element and returning an element of type *{@link R}* instead.
+   * Returns a newly created list, which contains elements of type *{@link R}*, which were mapped by calling function *{@link block}* for each list element and returning an element of type *{@link R}* instead.  
    * If the list is empty an empty list is returned.
    */
   map<R>(block: (element: T) => R): IList<R>;
