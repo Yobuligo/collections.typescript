@@ -38,7 +38,7 @@ const variant1 = listOf(1, 2, 3);
 
 const variant2 = listOf(...["First", "Second", "Third"]);
 
-const initialElements = [{ firstname: "Stacey" , { firstname: "Jimmy" ];
+const initialElements = [{ firstname: "Stacey" } , { firstname: "Jimmy" } ];
 const variant3 = listOf(initialElements);
 ```
 

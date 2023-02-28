@@ -1,6 +1,6 @@
 {
   "name": "@yobuligo/collections.typescript",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Collection for lists, maps, hashsets and hashmaps inspired by Kotlin syntax",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
