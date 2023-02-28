@@ -13,7 +13,7 @@ npm install --save @yobuligo/collections.typescript
 ## List types
 
 There are 2 basic types, the general list and the hash set.  
-While the general list can have redundant elements, the hash set can contain each element only once, as a hash is generated for each element, which is used as key to add the element to the list. That allows a much faster access especially for lists with many elements.
+While the general list can have duplicated elements, the hash set can contain each element only once, as a hash is generated for each element, which is used as key to add the element to the list. That allows a much faster access especially for lists with many elements.
 
 Each basic type has a specialization to handle any type of data or map specific data, which means key value pairs. Therefore special sub types where introduced.
 
@@ -32,103 +32,153 @@ In addition, a list can have more specific methods depending on the list type. E
 ## Instantiation
 
 A list can be created by giving the list type followed by the word _Of_. To initialize the list while creating it, it is possible to hand over elements.
+
 ```
 const variant1 = listOf(1, 2, 3);
 
 const variant2 = listOf(...["First", "Second", "Third"]);
 
 const initialElements = [{ firstname: "Stacey" }, { firstname: "Jimmy" }];
-const variant3 = mutableListOf(initialElements);
+const variant3 = listOf(initialElements);
 ```
 
-## list
+## Basic functions
 
-The list is the simplest
+Basic functions are those functions, which are provided by each list.  
+**Available for: All list types**
 
-## map
+### contains
 
-## hashSet
-
-## hashMap
-
-### General functions
+Returns _true_ if the passed in _element_ is part of the list. Otherwise it returns _false_.
 
 ```
-contains
-elementAt
-...
+contains(element: T): boolean
 ```
 
-```
-const list = listOf(1, 2, 3);
-```
+### containsAll
+
+Returns _true_ if all passed in _elements_ are part of the list. Otherwise it returns _false_.
 
 ```
-const mutableList = mutableListOf(1, 2, 3);
-mutableList.add(4);
+containsAll(...elements: T[]): boolean
 ```
 
+### containsNot
+Returns *true* if the passed in *{@link element}* is not part of the list. Otherwise it returns *false*.
 ```
-const hashSet = hashSetOf(1, 2, 3);
-```
-
-```
-const mutableHashList = mutableHashSetOf(1, 2, 3);
-mutableHashList.add(4);
+containsNot(element: T): boolean
 ```
 
+### distinct
+Returns a newly created list, which contains all elements of the origin list except for duplicates.  
+Duplicates are identified by comparing the line type *{@link T}*, no matter if it is a scalar type or a reference type.
 ```
-const map = mapOf(pair(1, 1));
-```
-
-```
-const mutableMap = mutableMapOf(pair(1, 1));
-mutableMap.add(pair(2, 2));
+distinct(): IList<T>
 ```
 
+### distinctBy
+Returns a newly created list, which contains all elements of the origin list except for duplicates.  
+Duplicates are identified by comparing the property key *{@link K}* of the line type *{@link T}*, which is returned by the *{@link selector}*.
 ```
-const hashMap = hashMapOf(pair(1, 1));
-```
-
-```
-const mutableHashMap = mutableHashMapOf(pair(1, 1));
-mutableHashMap.add(pair(2, 2));
+distinctBy<K extends keyof T>(selector: () => K): IList<T>
 ```
 
-## Immutable and Mutable functions
-
+### elementAt
 ```
-readonly size: number;
-readonly lastIndex: number;
-contains(element: T): boolean;
-containsAll(...elements: T[]): boolean;
-containsNot(element: T): boolean;
-elementAt(index: number): T;
-elementAtOrNull(index: number): T | undefined;
-filter(block: (element: T) => boolean): IList<T>;
-find(block: (element: T) => boolean): T | undefined;
-first(): T;
-firstOrNull(): T | undefined;
-forEach<R>(
-  block: (element: T, index: number) => R | undefined
-): R | undefined;
-indexOf(element: T): number;
-isEmpty(): boolean;
-isNotEmpty(): boolean;
-last(): T;
-lastOrNull(): T | undefined;
-map<R>(block: (element: T) => R): IList<R>;
 ```
 
-## Mutable Functions
+### elementAtOrNull
+```
+```
 
+### filter
 ```
-  add(element: T): void;
-  addAll(elements: IList<T>): void;
-  addArray(elements: T[]): void;
-  remove(element: T): boolean;
-  removeAt(index: number): boolean;
-  removeAll(): void;
-  removeFirst(): boolean;
-  removeLast(): boolean;
 ```
+
+### find
+```
+```
+
+### first
+```
+```
+
+### firstOrNull
+```
+```
+
+### forEach
+```
+```
+
+### indexOf
+```
+```
+
+### isEmpty
+```
+```
+
+### isNotEmpty
+```
+```
+
+### last
+```
+```
+
+### lastOrNull
+```
+```
+
+### lastIndex
+```
+```
+
+### map
+```
+```
+
+### random
+```
+```
+
+### randomOrNull
+```
+```
+
+### reversed
+```
+```
+
+### size
+```
+```
+
+### sortedBy
+```
+```
+
+### sortedByDescending
+```
+```
+
+## Basic Mutable functions
+
+Basic mutable functions are those functions, which are provided by each mutable list.  
+**Available for: mutableListOf(), mutableMapOf(), mutableHashSetOf(), mutableHashMapOf()**
+
+## Mutable List functions
+
+Mutable list functions are specific for the general list which can have duplicates.  
+**Available for: mutableListOf(), mutableMapOf()**
+
+## Mutable HashSet functions
+
+Mutable hash set functions are specific for hash list which can't have duplicates.  
+**Available for: mutableHashSetOf(), mutableHashMapOf()**
+
+## Map functions
+
+Map functions are specific for each map list type.  
+**Available for: mapOf(), mutableMapOf(), hashMapOf(), mutableHashMapOf()**

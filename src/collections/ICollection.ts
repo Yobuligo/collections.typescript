@@ -54,16 +54,16 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   elementAtOrNull(index: number): T | undefined;
 
   /**
-   * Returns a newly created list, which contains all elements who match the required conditions. The conditions have to be evaluated by function *{@link block}*.
-   * For a matching element the function *{@link block}* returns *true* otherwise *false*. If no element matches the filter an empty list is returned.
+   * Returns a newly created list, which contains all elements who match the required conditions. The conditions have to be evaluated by function *{@link predicate}*.  
+   * For a matching element the function *{@link predicate}* returns *true* otherwise *false*. If no element matches the filter an empty list is returned.
    */
-  filter(block: (element: T) => boolean): IList<T>;
+  filter(predicate: (element: T) => boolean): IList<T>;
 
   /**
-   * Returns the first element, which matches the required conditions. The conditions have to be evaluated by function *{@link block}*.
-   * For a matching element the function *{@link block}* returns *true* otherwise *false*. If no element matches the filter *undefined* is returned.
+   * Returns the first element, which matches the required conditions. The conditions have to be evaluated by function *{@link predicate}*.  
+   * For a matching element the function *{@link predicate}* returns *true* otherwise *false*. If no element matches the filter *undefined* is returned.
    */
-  find(block: (element: T) => boolean): T | undefined;
+  find(predicate: (element: T) => boolean): T | undefined;
 
   /**
    * Returns the first element of that list or throws a *{@link NoSuchElementException}* if the list is empty.
@@ -76,7 +76,7 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   firstOrNull(): T | undefined;
 
   /**
-   * Iterates over all elements of that list and calls the function *{@link block}* for each element.
+   * Iterates over all elements of that list and calls the function *{@link block}* for each element.  
    * If *{@link block}* returns a value the iteration is stopped and the value will be returned.
    */
   forEach<R>(
@@ -125,19 +125,19 @@ export interface ICollection<T> extends ICollectionExtension<T> {
   randomOrNull(): T | undefined;
 
   /**
-   * Returns a newly created list, which contains all elements in a reversed order.
+   * Returns a newly created list, which contains all elements in a reversed order.  
    * If the list is empty an empty list is returned.
    */
   reversed(): IList<T>;
 
   /**
-   * Returns a newly created, ascendingly sorted list. The sort criteria, which must be a key *{@link K}* of the line type *{@link T}*, can be provided via function *{@link selector}*.
+   * Returns a newly created, ascendingly sorted list. The sort criteria, which must be a key *{@link K}* of the line type *{@link T}*, can be provided via function *{@link selector}*.  
    * If no sort criteria was specified the list element itself is used as sort criteria.
    */
   sortedBy<K extends keyof T>(selector?: () => K): IList<T>;
 
   /**
-   * Returns a newly created, descendingly sorted list. The sort criteria, which must be a key *{@link K}* of the line type *{@link T}*, can be provided via function *{@link selector}*.
+   * Returns a newly created, descendingly sorted list. The sort criteria, which must be a key *{@link K}* of the line type *{@link T}*, can be provided via function *{@link selector}*.  
    * If no sort criteria was specified the list element itself is used as sort criteria.
    */
   sortedByDescending<K extends keyof T>(selector?: () => K): IList<T>;

@@ -84,19 +84,19 @@ export class HashSet<T> implements IHashSet<T> {
     return this.keys[index];
   }
 
-  filter(block: (element: T) => boolean): IList<T> {
+  filter(predicate: (element: T) => boolean): IList<T> {
     const resultList: T[] = [];
     this.keys.forEach((element) => {
-      if (block(element)) {
+      if (predicate(element)) {
         resultList.push(element);
       }
     });
     return new List(...resultList);
   }
 
-  find(block: (element: T) => boolean): T | undefined {
+  find(predicate: (element: T) => boolean): T | undefined {
     for (const element of this.keys) {
-      if (element !== undefined && block(element)) {
+      if (element !== undefined && predicate(element)) {
         return element;
       }
     }
