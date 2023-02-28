@@ -15,9 +15,9 @@ npm install --save @yobuligo/collections.typescript
 There are 2 basic types, the general list and the hash set.  
 While the general list can have duplicated elements, the hash set can contain each element only once, as a hash is generated for each element, which is used as key to add the element to the list. That allows a much faster access especially for lists with many elements.
 
-Each basic type has a specialization to handle any type of data or map specific data, which means key value pairs. Therefore special sub types where introduced.
+Each basic type has a specialization to handle either any type of data or map specific data (key value pairs). Therefore special sub types were introduced.
 
-Last but not least these types are split into an immutable and a mutable variant. Finally there are the following list types and its creation functions:
+Additionally these types are split into an immutable and a mutable variant. Finally there are the following list types and their creation functions:
 
 | **type**    | **immutable** | **mutable**        |
 | ----------- | ------------- | ------------------ |
@@ -42,7 +42,7 @@ const initialElements = [{ firstname: "Stacey" , { firstname: "Jimmy" ];
 const variant3 = listOf(initialElements);
 ```
 
-To initialize elements of map types, an instance of type _Pair_ has to be passed into, which can be created by function _pair()_
+To initialize elements of map types, an instance of type _Pair_ has to be passed into, which can be created by function _pair()_.
 
 ```
 const map = mapOf(pair(1, 2), pair(3, 4));
@@ -52,7 +52,7 @@ const hashMap = hashMapOf(pair("one", "two"), pair("three", "four"));
 
 ## Basic functions
 
-Basic functions are those functions, which are provided by each list.  
+Basic functions are those functions, which are provided by every list.  
 **Available for: All list types**
 
 ### contains
@@ -306,12 +306,12 @@ toMutableList(): IMutableList<T>
 
 ## Basic Mutable functions
 
-Basic mutable functions are those functions, which are provided by each mutable list.  
+Basic mutable functions are those functions, which are provided by every mutable list.  
 **Available for: mutableListOf(), mutableMapOf(), mutableHashSetOf(), mutableHashMapOf()**
 
 ### remove
 
-Removes all instances of the given _{@link element}_ from the list and returns _true_. Returns _false_ if the given element is not part of the list.
+Removes all instances of the given _element_ from the list and returns _true_. Returns _false_ if the given element is not part of the list.
 
 ```
 remove(element: T): boolean
@@ -319,7 +319,7 @@ remove(element: T): boolean
 
 ### removeAt
 
-Removes the element at the given _{@link index}_ from the list and returns _true_. Returns _false_ if the element at _{@link index}_ doesn't exist.
+Removes the element at the given _index_ from the list and returns _true_. Returns _false_ if the element at _index_ doesn't exist.
 
 ```
 removeAt(index: number): boolean
@@ -356,14 +356,14 @@ Mutable list functions are specific for the general list which can have duplicat
 
 ### add
 
-Adds the given _{@link element}_ to the list and returns _true_. Returns _false_ if the element couldn't be added.
+Adds the given _element_ to the list and returns _true_. Returns _false_ if the element couldn't be added.
 
 ```
 add(element: T): boolean
 ```
 
-Adds the given _{@link element}_ at position _{@link index}_ to the list and returns _true_. Returns _false_ if the element couldn't be added.  
-Throws an _{@link IllegalArgumentException}_ if the index is out of bounce (greater than lastIndex + 1).
+Adds the given _element_ at position _index_ to the list and returns _true_. Returns _false_ if the element couldn't be added.  
+Throws an _IllegalArgumentException_ if the index is out of bounce (greater than lastIndex + 1).
 
 ```
 add(element: T, index: number): boolean
@@ -371,14 +371,14 @@ add(element: T, index: number): boolean
 
 ### addAll
 
-Adds all given _{@link elements}_ of _{@link IList}_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
+Adds all given _elements_ of _IList_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
 
 ```
 addAll(elements: IList<T>): boolean
 ```
 
-Adds all given _{@link elements}_ of _{@link IList}_ at position _{@link index}_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.  
-Throws an _{@link IllegalArgumentException}_ if the index is out of bounce (greater than lastIndex + 1).
+Adds all given _elements_ of _IList_ at position _index_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.  
+Throws an _IllegalArgumentException_ if the index is out of bounce (greater than lastIndex + 1).
 
 ```
 addAll(elements: IList<T>, index: number): boolean
@@ -386,14 +386,14 @@ addAll(elements: IList<T>, index: number): boolean
 
 ### addArray
 
-Adds all given _{@link elements}_ of the array to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
+Adds all given _elements_ of the array to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
 
 ```
 addArray(elements: T[]): boolean
 ```
 
-Adds all given _{@link elements}_ of the array at position _{@link index}_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.  
-Throws an _{@link IllegalArgumentException}_ if the index is out of bounce (greater than lastIndex + 1).
+Adds all given _elements_ of the array at position _index_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.  
+Throws an _IllegalArgumentException_ if the index is out of bounce (greater than lastIndex + 1).
 
 ```
 addArray(elements: T[], index: number): boolean
@@ -401,12 +401,12 @@ addArray(elements: T[], index: number): boolean
 
 ## Mutable HashSet functions
 
-Mutable hash set functions are specific for hash list which can't have duplicates.  
+Mutable hash set functions are specific for hash lists which can't have duplicates.  
 **Available for: mutableHashSetOf(), mutableHashMapOf()**
 
 ### add
 
-Adds the given _{@link element}_ to the list and returns _true_. Returns _false_ if the element couldn't be added.
+Adds the given _element_ to the list and returns _true_. Returns _false_ if the element couldn't be added.
 
 ```
 add(element: T): boolean
@@ -414,7 +414,7 @@ add(element: T): boolean
 
 ### addAll
 
-Adds all given _{@link elements}_ of _{@link IList}_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
+Adds all given _elements_ of _IList_ to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
 
 ```
 addAll(elements: IList<T>): boolean
@@ -422,7 +422,7 @@ addAll(elements: IList<T>): boolean
 
 ### addArray
 
-Adds all given _{@link elements}_ of the array to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
+Adds all given _elements_ of the array to the current list and returns _true_. Returns _false_ if at least one element couldn't be added.
 
 ```
 addArray(elements: T[]): boolean
@@ -430,7 +430,7 @@ addArray(elements: T[]): boolean
 
 ## Map functions
 
-Map functions are specific for each map list type.  
+Map functions are specific for every map list type.  
 **Available for: mapOf(), mutableMapOf(), hashMapOf(), mutableHashMapOf()**
 
 ### toHashMap
