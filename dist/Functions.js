@@ -19,8 +19,8 @@ var MutableList_1 = require("./lists/MutableList");
 var Map_1 = require("./maps/Map");
 var MutableMap_1 = require("./maps/MutableMap");
 /**
- * Creates a readonly list for elements of type {@link T}.
- * The contained elements are passed in via parameter {@link elements}.
+ * Creates a readonly list for elements of type *{@link T}*.
+ * The contained elements are passed in via parameter *{@link elements}*.
  */
 var listOf = function () {
     var elements = [];
@@ -31,8 +31,8 @@ var listOf = function () {
 };
 exports.listOf = listOf;
 /**
- * Creates a list for elements of type {@link T} whose content is changeable.
- * The list elements can be initialized by parameter {@link elements}.
+ * Creates a list for elements of type *{@link T}*, whose content is changeable.
+ * The list elements can be initialized by parameter *{@link elements}*.
  */
 var mutableListOf = function () {
     var elements = [];
@@ -43,9 +43,9 @@ var mutableListOf = function () {
 };
 exports.mutableListOf = mutableListOf;
 /**
- * Creates a readonly mapping list for elements of type {@link T}.
- * The elements are of type {@link Pair}. A {@link Pair} is a mapping from the first property to the second property.
- * The contained elements are passed in via parameter {@link elements}.
+ * Creates a readonly mapping list.
+ * The elements are of type {@link Pair}. A {@link Pair} is a mapping from the key *{@link K}* property to the value *{@link V}* property.
+ * The contained elements are passed in via parameter *{@link elements}*.
  */
 var mapOf = function () {
     var elements = [];
@@ -56,9 +56,9 @@ var mapOf = function () {
 };
 exports.mapOf = mapOf;
 /**
- * Creates a mapping list for elements of type {@link T} whose content is changeable.
- * The elements are of type {@link Pair}. A {@link Pair} is a mapping from the first property to the second property.
- * The mapping list elements can be initialized by parameter {@link elements}.
+ * Creates a mapping list for elements, whose content is changeable.
+ * The elements are of type *{@link Pair}*. A *{@link Pair}* is a mapping from the key *{@link K}* property to the value *{@link V}* property.
+ * The mapping list elements can be initialized by parameter *{@link elements}*.
  */
 var mutableMapOf = function () {
     var elements = [];
@@ -69,9 +69,9 @@ var mutableMapOf = function () {
 };
 exports.mutableMapOf = mutableMapOf;
 /**
- * Creates a readonly hash set list for elements of type {@link T}.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
- * The contained elements are passed in via parameter {@link elements}.
+ * Creates a readonly hash set list for elements of type *{@link T}*.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
+ * The contained elements are passed in via parameter *{@link elements}*.
  */
 var hashSetOf = function () {
     var elements = [];
@@ -82,9 +82,9 @@ var hashSetOf = function () {
 };
 exports.hashSetOf = hashSetOf;
 /**
- * Creates a hash set list for elements of type {@link T} whose content is changeable.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
- * The hash set list elements can be initialized by parameter {@link elements}.
+ * Creates a hash set list for elements of type *{@link T}*, whose content is changeable.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
+ * The hash set list elements can be initialized by parameter *{@link elements}*.
  */
 var mutableHashSetOf = function () {
     var elements = [];
@@ -95,10 +95,10 @@ var mutableHashSetOf = function () {
 };
 exports.mutableHashSetOf = mutableHashSetOf;
 /**
- * Creates a readonly hash map list for elements of type {@link T}.
- * The elements are of type {@link Pair}. A {@link Pair} is a mapping from the first property to the second property.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
- * The contained elements are passed in via parameter {@link elements}.
+ * Creates a readonly hash map list.
+ * The elements are of type *{@link Pair}*. A *{@link Pair}* is a mapping from the key *{@link K}* property to the value *{@link V}* property.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
+ * The contained elements are passed in via parameter *{@link elements}*.
  */
 var hashMapOf = function () {
     var elements = [];
@@ -109,10 +109,10 @@ var hashMapOf = function () {
 };
 exports.hashMapOf = hashMapOf;
 /**
- * Creates a hash map list for elements of type {@link T} whose content is changeable.
- * The elements are of type {@link Pair}. A {@link Pair} is a mapping from the first property to the second property.
- * The access to the elements is faster but on the other hand the list is not sorted and needs more memory.
- * The hash map list elements can be initialized by parameter {@link elements}.
+ * Creates a hash map list for elements, whose content is changeable.
+ * The elements are of type *{@link Pair}*. A *{@link Pair}* is a mapping from the key *{@link K}* property to the value *{@link V}* property.
+ * The elements are organized via hash which provides a much faster access, but with more memory consumption and without sorting.
+ * The hash map list elements can be initialized by parameter *{@link elements}*.
  */
 var mutableHashMapOf = function () {
     var elements = [];

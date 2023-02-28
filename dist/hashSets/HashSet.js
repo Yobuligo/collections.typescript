@@ -11,6 +11,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HashSet = void 0;
 var core_typescript_1 = require("@yobuligo/core.typescript");
+var SortDirection_1 = require("../collections/SortDirection");
+var Sorter_1 = require("../collections/Sorter");
 var Functions_1 = require("./../Functions");
 var List_1 = require("./../lists/List");
 var HashSet = /** @class */ (function () {
@@ -21,7 +23,7 @@ var HashSet = /** @class */ (function () {
         }
         this.elements = new Map();
         this.keys = [];
-        this.cursor = 0;
+        this.nextCursor = 0;
         this.addElements(elements);
     }
     Object.defineProperty(HashSet.prototype, "size", {
@@ -33,7 +35,7 @@ var HashSet = /** @class */ (function () {
     });
     Object.defineProperty(HashSet.prototype, "lastIndex", {
         get: function () {
-            return this.cursor;
+            return this.nextCursor - 1;
         },
         enumerable: false,
         configurable: true
@@ -60,6 +62,22 @@ var HashSet = /** @class */ (function () {
     HashSet.prototype.containsNot = function (element) {
         return !this.elements.has(element);
     };
+    HashSet.prototype.distinct = function () {
+        return this.toList();
+    };
+    HashSet.prototype.distinctBy = function (selector) {
+        var distinctProp = selector();
+        var propIndex = (0, Functions_1.mutableHashSetOf)();
+        var mutableList = (0, Functions_1.mutableListOf)();
+        for (var _i = 0, _a = this.keys; _i < _a.length; _i++) {
+            var element = _a[_i];
+            var propValue = element[distinctProp];
+            if (propIndex.add(propValue)) {
+                mutableList.add(element);
+            }
+        }
+        return mutableList.toList();
+    };
     HashSet.prototype.elementAt = function (index) {
         var _a;
         return ((_a = this.elementAtOrNull(index)) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("List does not contain element at index ".concat(index))));
@@ -67,19 +85,19 @@ var HashSet = /** @class */ (function () {
     HashSet.prototype.elementAtOrNull = function (index) {
         return this.keys[index];
     };
-    HashSet.prototype.filter = function (block) {
+    HashSet.prototype.filter = function (predicate) {
         var resultList = [];
         this.keys.forEach(function (element) {
-            if (block(element)) {
+            if (predicate(element)) {
                 resultList.push(element);
             }
         });
         return new (List_1.List.bind.apply(List_1.List, __spreadArray([void 0], resultList, false)))();
     };
-    HashSet.prototype.find = function (block) {
+    HashSet.prototype.find = function (predicate) {
         for (var _i = 0, _a = this.keys; _i < _a.length; _i++) {
             var element = _a[_i];
-            if (element !== undefined && block(element)) {
+            if (element !== undefined && predicate(element)) {
                 return element;
             }
         }
@@ -124,7 +142,7 @@ var HashSet = /** @class */ (function () {
         return ((_a = this.lastOrNull()) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("List is empty")));
     };
     HashSet.prototype.lastOrNull = function () {
-        for (var i = this.cursor; i > 0; i--) {
+        for (var i = this.nextCursor - 1; i > 0; i--) {
             if (this.keys[i] !== undefined) {
                 return this.keys[i];
             }
@@ -138,6 +156,27 @@ var HashSet = /** @class */ (function () {
             mappedElements.push(mappedElement);
         });
         return new (List_1.List.bind.apply(List_1.List, __spreadArray([void 0], mappedElements, false)))();
+    };
+    HashSet.prototype.random = function () {
+        var _a;
+        return ((_a = this.randomOrNull()) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("List is empty")));
+    };
+    HashSet.prototype.randomOrNull = function () {
+        var index = Math.floor(Math.random() * (this.lastIndex + 1));
+        return this.elementAtOrNull(index);
+    };
+    HashSet.prototype.reversed = function () {
+        var mutableList = (0, Functions_1.mutableListOf)();
+        for (var index = this.lastIndex; index >= 0; index--) {
+            mutableList.add(this.keys[index]);
+        }
+        return mutableList.toList();
+    };
+    HashSet.prototype.sortedBy = function (selector) {
+        return Functions_1.listOf.apply(void 0, Sorter_1.Sorter.sort(this.keys, SortDirection_1.SortDirection.ASC, selector));
+    };
+    HashSet.prototype.sortedByDescending = function (selector) {
+        return Functions_1.listOf.apply(void 0, Sorter_1.Sorter.sort(this.keys, SortDirection_1.SortDirection.DESC, selector));
     };
     HashSet.prototype.toArray = function () {
         var resultList = [];
@@ -159,15 +198,23 @@ var HashSet = /** @class */ (function () {
         return Functions_1.mutableListOf.apply(void 0, this.toArray());
     };
     HashSet.prototype.addElements = function (elements) {
+        var success = true;
         for (var _i = 0, elements_2 = elements; _i < elements_2.length; _i++) {
             var element = elements_2[_i];
-            this.addElement(element);
+            if (this.addElement(element) === false) {
+                success = false;
+            }
         }
+        return success;
     };
     HashSet.prototype.addElement = function (element) {
-        this.elements.set(element, this.cursor);
-        this.keys[this.cursor] = element;
-        this.cursor++;
+        if (this.elements.has(element)) {
+            return false;
+        }
+        this.elements.set(element, this.nextCursor);
+        this.keys[this.nextCursor] = element;
+        this.nextCursor++;
+        return true;
     };
     return HashSet;
 }());

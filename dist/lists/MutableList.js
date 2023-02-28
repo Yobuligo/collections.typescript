@@ -25,6 +25,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MutableList = void 0;
+var core_typescript_1 = require("@yobuligo/core.typescript");
 var MutableCollection_1 = require("../collections/MutableCollection");
 var MutableList = /** @class */ (function (_super) {
     __extends(MutableList, _super);
@@ -33,23 +34,26 @@ var MutableList = /** @class */ (function (_super) {
     }
     MutableList.prototype.add = function (element, index) {
         if (index !== undefined) {
-            this.addArray([element], index);
+            return this.addArray([element], index);
         }
         else {
-            this.addArray([element]);
+            return this.addArray([element]);
         }
     };
     MutableList.prototype.addAll = function (elements, index) {
         if (index !== undefined) {
-            this.addArray(elements.toArray(), index);
+            return this.addArray(elements.toArray(), index);
         }
         else {
-            this.addArray(elements.toArray());
+            return this.addArray(elements.toArray());
         }
     };
     MutableList.prototype.addArray = function (elements, index) {
         var _a;
-        if (index !== undefined) {
+        if (index !== undefined && index !== null) {
+            if (index > this.lastIndex + 1) {
+                throw new core_typescript_1.IllegalArgumentException("Error when adding elements. The index is out of bounce. The index must be smaller than ".concat(this.lastIndex + 1));
+            }
             var cursor = index;
             var leftList = this.elements.slice(0, cursor);
             var rightList = this.elements.slice(cursor, this.elements.length);
@@ -59,6 +63,7 @@ var MutableList = /** @class */ (function (_super) {
             (_a = this.elements).push.apply(_a, elements);
         }
         this._size = this.elements.length;
+        return true;
     };
     return MutableList;
 }(MutableCollection_1.MutableCollection));

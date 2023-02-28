@@ -24,16 +24,20 @@ var MutableHashSet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MutableHashSet.prototype.add = function (element) {
-        this.addElement(element);
+        return this.addElement(element);
     };
     MutableHashSet.prototype.addAll = function (elements) {
         var _this = this;
+        var success = true;
         elements.forEach(function (element) {
-            _this.add(element);
+            if (_this.add(element) === false) {
+                success = false;
+            }
         });
+        return success;
     };
     MutableHashSet.prototype.addArray = function (elements) {
-        this.addElements(elements);
+        return this.addElements(elements);
     };
     MutableHashSet.prototype.remove = function (element) {
         var cursor = this.elements.get(element);

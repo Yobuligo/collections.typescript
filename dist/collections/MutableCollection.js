@@ -24,19 +24,25 @@ var MutableCollection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MutableCollection.prototype.remove = function (element) {
-        if (this.containsNot(element)) {
-            return false;
+        var removed = false;
+        while (true) {
+            var index = this.elements.indexOf(element);
+            if (index !== -1) {
+                removed = true;
+                this.elements.splice(index, 1);
+                this._size--;
+            }
+            else {
+                break;
+            }
         }
-        this.elements.splice(this.elements.indexOf(element), 1);
-        this._size--;
-        return true;
+        return removed;
     };
     MutableCollection.prototype.removeAt = function (index) {
         if (this.isEmpty() || this.elements[index] === undefined) {
             return false;
         }
-        var indexInternal = this.elements.indexOf(this.elements[index]);
-        this.elements.splice(indexInternal, 1);
+        this.elements.splice(index, 1);
         this._size--;
         return true;
     };

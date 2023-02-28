@@ -13,6 +13,9 @@ exports.Collection = void 0;
 var core_typescript_1 = require("@yobuligo/core.typescript");
 var Functions_1 = require("../Functions");
 var List_1 = require("../lists/List");
+var Functions_2 = require("./../Functions");
+var SortDirection_1 = require("./SortDirection");
+var Sorter_1 = require("./Sorter");
 var Collection = /** @class */ (function () {
     function Collection() {
         var elements = [];
@@ -20,17 +23,9 @@ var Collection = /** @class */ (function () {
             elements[_i] = arguments[_i];
         }
         this.elements = [];
-        this.lastIndex = 0;
         this.elements = elements;
         this._size = this.elements.length;
     }
-    Object.defineProperty(Collection.prototype, "size", {
-        get: function () {
-            return this._size;
-        },
-        enumerable: false,
-        configurable: true
-    });
     Collection.prototype.contains = function (element) {
         return !this.containsNot(element);
     };
@@ -53,6 +48,24 @@ var Collection = /** @class */ (function () {
     Collection.prototype.containsNot = function (element) {
         return this.isEmpty() || this.elements.indexOf(element) == -1;
     };
+    Collection.prototype.distinct = function () {
+        var mutableHashSet = (0, Functions_1.mutableHashSetOf)();
+        mutableHashSet.addArray(this.elements);
+        return mutableHashSet.toList();
+    };
+    Collection.prototype.distinctBy = function (selector) {
+        var distinctProp = selector();
+        var propIndex = (0, Functions_1.mutableHashSetOf)();
+        var mutableList = (0, Functions_2.mutableListOf)();
+        for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
+            var element = _a[_i];
+            var propValue = element[distinctProp];
+            if (propIndex.add(propValue)) {
+                mutableList.add(element);
+            }
+        }
+        return mutableList.toList();
+    };
     Collection.prototype.elementAt = function (index) {
         var _a;
         return ((_a = this.elementAtOrNull(index)) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("Empty list does not contain element at index ".concat(index))));
@@ -63,20 +76,20 @@ var Collection = /** @class */ (function () {
         }
         return this.elements[index];
     };
-    Collection.prototype.filter = function (block) {
+    Collection.prototype.filter = function (predicate) {
         var resultList = [];
         for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
             var element = _a[_i];
-            if (block(element)) {
+            if (predicate(element)) {
                 resultList.push(element);
             }
         }
         return new (List_1.List.bind.apply(List_1.List, __spreadArray([void 0], resultList, false)))();
     };
-    Collection.prototype.find = function (block) {
+    Collection.prototype.find = function (predicate) {
         for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
             var element = _a[_i];
-            if (block(element)) {
+            if (predicate(element)) {
                 return element;
             }
         }
@@ -110,6 +123,16 @@ var Collection = /** @class */ (function () {
     Collection.prototype.isNotEmpty = function () {
         return !this.isEmpty();
     };
+    Object.defineProperty(Collection.prototype, "lastIndex", {
+        get: function () {
+            if (this.isEmpty()) {
+                return -1;
+            }
+            return this.elements.length - 1;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Collection.prototype.last = function () {
         var _a;
         return ((_a = this.lastOrNull()) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("List is empty")));
@@ -129,6 +152,34 @@ var Collection = /** @class */ (function () {
         }
         return new (List_1.List.bind.apply(List_1.List, __spreadArray([void 0], mappedElements, false)))();
     };
+    Collection.prototype.random = function () {
+        var _a;
+        return ((_a = this.randomOrNull()) !== null && _a !== void 0 ? _a : (0, core_typescript_1.error)(new core_typescript_1.NoSuchElementException("List is empty")));
+    };
+    Collection.prototype.randomOrNull = function () {
+        var index = Math.floor(Math.random() * (this.lastIndex + 1));
+        return this.elementAtOrNull(index);
+    };
+    Collection.prototype.reversed = function () {
+        var mutableList = (0, Functions_2.mutableListOf)();
+        for (var index = this.lastIndex; index >= 0; index--) {
+            mutableList.add(this.elements[index]);
+        }
+        return mutableList.toList();
+    };
+    Collection.prototype.sortedBy = function (selector) {
+        return Functions_1.listOf.apply(void 0, Sorter_1.Sorter.sort(this.elements, SortDirection_1.SortDirection.ASC, selector));
+    };
+    Collection.prototype.sortedByDescending = function (selector) {
+        return Functions_1.listOf.apply(void 0, Sorter_1.Sorter.sort(this.elements, SortDirection_1.SortDirection.DESC, selector));
+    };
+    Object.defineProperty(Collection.prototype, "size", {
+        get: function () {
+            return this._size;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Collection.prototype.toArray = function () {
         return __spreadArray([], this.elements, true);
     };
@@ -142,7 +193,7 @@ var Collection = /** @class */ (function () {
         return Functions_1.mutableHashSetOf.apply(void 0, this.elements);
     };
     Collection.prototype.toMutableList = function () {
-        return Functions_1.mutableListOf.apply(void 0, this.elements);
+        return Functions_2.mutableListOf.apply(void 0, this.elements);
     };
     return Collection;
 }());
