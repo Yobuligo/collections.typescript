@@ -10,17 +10,49 @@ Install the library via:
 npm install --save @yobuligo/collections.typescript
 ```
 
-## Usage
+## List types
 
-There are 4 basic types of lists and each basic type is split into an immutable and mutable variant. The following table shows the list types and the functions to create each variant.
-| **type** | **immutable** | **mutable**  
-|-------------|---------------|--------------------
-| **list** | listOf() | mutableListOf()  
-| **map** | mapOf() | mutableMapOf()  
-| **hashSet** | hashSetOf() | mutableHashSetOf()
-| **hashMap** | hashMapOf() | mutableHashMapOf()
+There are 2 basic types, the general list and the hash set.  
+While the general list can have redundant elements, the hash set can contain each element only once, as a hash is generated for each element, which is used as key to add the element to the list. That allows a much faster access especially for lists with many elements.
+
+Each basic type has a specialization to handle any type of data or map specific data, which means key value pairs. Therefore special sub types where introduced.
+
+Last but not least these types are split into an immutable and a mutable variant. Finally there are the following list types and its creation functions:
+
+| **type**    | **immutable** | **mutable**        |
+| ----------- | ------------- | ------------------ |
+| **list**    | listOf()      | mutableListOf()    |
+| **map**     | mapOf()       | mutableMapOf()     |
+| **hashSet** | hashSetOf()   | mutableHashSetOf() |
+| **hashMap** | hashMapOf()   | mutableHashMapOf() |
+
+Each list type has the same basic set of methods to request information about the list elements, like contains, distinct, filter, isEmpty, etc.  
+In addition, a list can have more specific methods depending on the list type. E.g. mutable lists have methods to add and remove elements, hash lists have no method to add an element at a given index and map lists can be converted to other map types.
+
+## Instantiation
+
+A list can be created by giving the list type followed by the word _Of_. To initialize the list while creating it, it is possible to hand over elements.
+```
+const variant1 = listOf(1, 2, 3);
+
+const variant2 = listOf(...["First", "Second", "Third"]);
+
+const initialElements = [{ firstname: "Stacey" }, { firstname: "Jimmy" }];
+const variant3 = mutableListOf(initialElements);
+```
+
+## list
+
+The list is the simplest
+
+## map
+
+## hashSet
+
+## hashMap
 
 ### General functions
+
 ```
 contains
 elementAt
