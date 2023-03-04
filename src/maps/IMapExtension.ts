@@ -7,6 +7,11 @@ import { IMutableMap } from "./IMutableMap";
  * An implementation of this interface provides extension functions for maps.
  */
 export interface IMapExtension<K, V> {
+  containsKey(key: K): boolean;
+  containsNotKey(key: K): boolean;
+  get(key: K): V;
+  getOrNull(key: K): V | undefined;
+
   /**
    * Returns a hash map, which contains all elements, except for duplicates, of that list.
    */

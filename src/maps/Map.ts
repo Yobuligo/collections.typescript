@@ -7,6 +7,22 @@ import { IMap } from "./IMap";
 import { IMutableMap } from "./IMutableMap";
 
 export class Map<K, V> extends List<Pair<K, V>> implements IMap<K, V> {
+  containsKey(key: K): boolean {
+    throw new Error("Method not implemented.");
+  }
+  
+  containsNotKey(key: K): boolean {
+    throw new Error("Method not implemented.");
+  }
+
+  get(key: K): V {
+    throw new Error("Method not implemented.");
+  }
+
+  getOrNull(key: K): V | undefined {
+    throw new Error("Method not implemented.");
+  }
+
   toHashMap(): IHashMap<K, V> {
     return hashMapOf(...this.elements);
   }

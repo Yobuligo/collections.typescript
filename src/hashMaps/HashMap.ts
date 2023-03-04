@@ -31,7 +31,7 @@ export class HashMap<K, V>
 
   getOrNull(key: K): V | undefined {
     throw new Error("Method not implemented.");
-  }
+  }  
 
   toHashMap(): IHashMap<K, V> {
     return hashMapOf(...this.toArray());

@@ -7,9 +7,4 @@ import { IMapExtension } from "../maps/IMapExtension";
  */
 export interface IHashMap<K, V>
   extends IHashSet<Pair<K, V>>,
-    IMapExtension<K, V> {
-  containsKey(key: K): boolean;
-  containsNotKey(key: K): boolean;
-  get(key: K): V;
-  getOrNull(key: K): V | undefined;
-}
+    IMapExtension<K, V> {}
